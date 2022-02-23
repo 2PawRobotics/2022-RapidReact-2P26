@@ -27,7 +27,7 @@ public final class Constants {
     public static final int leftshooterport = 8;
     public static final int rightshooterport = 9;
 
-    //Controller 
+    //Controllers 
     public static final int XContPort = 1;
     public static final int ButtonPanelPort = 0;
 
