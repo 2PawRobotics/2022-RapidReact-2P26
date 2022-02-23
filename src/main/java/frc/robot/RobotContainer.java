@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.PotReadCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final DriveCommand driveCommand;
   private final PotReadCommand potReadCommand;
   private final ShooterCommand shooterCommand;
+  private final IntakeCommand intakeCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -58,11 +60,13 @@ public class RobotContainer {
     driveCommand = new DriveCommand(driveSubsystem);
     potReadCommand = new PotReadCommand(climbSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
+    intakeCommand = new IntakeCommand(intakeSubsystem);
 
     // Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
+    intakeCommand.addRequirements(intakeSubsystem);
 
     //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
@@ -93,12 +97,12 @@ public class RobotContainer {
     JoystickButton Button7 = new JoystickButton(ButtonPanel, Constants.ButtonPort7);
     JoystickButton Button8 = new JoystickButton(ButtonPanel, Constants.ButtonPort8);
 
-    //Tie buttons to Commands and Subsystems 
+    //Bind buttons to Commands and Subsystems 
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
-    //Button2.whileHeld(new )
-    //Button3.whileHeld(new )
-    //Button4.whileHeld(new )
+    Button2.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button3.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button4.whileHeld(new IntakeCommand(intakeSubsystem));
 
     //Below are some examples of doing so
 

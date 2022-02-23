@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -21,13 +22,13 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void RunBothIntake() {
-    intakeMotors.setVoltage(Constants.bothIntakeVolts);
-  }
-  public void RunLowIntake() {
-    lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
-  }
-  public void RunTopIntake() {
-    topIntakeMotor.setVoltage(Constants.tIntakeVolts);
+  public void RunIntake() {
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort2)){
+      intakeMotors.setVoltage(Constants.bothIntakeVolts);}
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort3)){
+      lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort4)){
+      topIntakeMotor.setVoltage(Constants.tIntakeVolts);}
   }
 }
+

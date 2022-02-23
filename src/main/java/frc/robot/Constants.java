@@ -34,6 +34,8 @@ public final class Constants {
     //Drive Variables
     public static final double speedY = 0.83;
     public static final double speedX = -0.83;
+    public static final double RspeedY = -0.83;
+    public static final double RspeedX = 0.83;
 
     //Voltage Constants
     public static final int shooterVolts = 10;
