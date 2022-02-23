@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.PotReadCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.SolenoidCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final DriveCommand driveCommand;
   private final PotReadCommand potReadCommand;
   private final ShooterCommand shooterCommand;
+  private final SolenoidCommand solenoidCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -58,11 +60,13 @@ public class RobotContainer {
     driveCommand = new DriveCommand(driveSubsystem);
     potReadCommand = new PotReadCommand(climbSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
+    solenoidCommand = new SolenoidCommand(climbSubsystem);
 
     // Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
+    solenoidCommand.addRequirements(climbSubsystem);
 
     //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
@@ -93,12 +97,16 @@ public class RobotContainer {
     JoystickButton Button7 = new JoystickButton(ButtonPanel, Constants.ButtonPort7);
     JoystickButton Button8 = new JoystickButton(ButtonPanel, Constants.ButtonPort8);
 
-    //Tie buttons to Commands and Subsystems 
+    //Bind buttons to Commands and Subsystems 
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
-    //Button2.whileHeld(new )
-    //Button3.whileHeld(new )
-    //Button4.whileHeld(new )
+    //Button2.whileHeld(new );
+    //Button3.whileHeld(new );
+    //Button4.whileHeld(new );
+    Button5.whenPressed(new SolenoidCommand(climbSubsystem));
+    Button6.whenPressed(new SolenoidCommand(climbSubsystem));
+    //Button7.whenPressed(new );
+    //Button8.whenPressed(new );
 
     //Below are some examples of doing so
 
