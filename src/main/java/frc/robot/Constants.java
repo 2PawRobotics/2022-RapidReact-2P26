@@ -22,7 +22,7 @@ public final class Constants {
 
     //Other Motors
     public static final int actuatorport = 5;
-    public static final int intakelowerport = 6;
+    public static final int intakelowport = 6;
     public static final int intakehighport = 7;
     public static final int leftshooterport = 8;
     public static final int rightshooterport = 9;
@@ -35,9 +35,17 @@ public final class Constants {
     public static final double speedY = 0.83;
     public static final double speedX = -0.83;
 
+    //Shooter Constants
+    public static final int shooterVolts = 10;
+
     //Button Panel Ports
-    public static final int lBarrelButton = 1;
-    public static final int mBarrelButton = 2;
-    public static final int rBarrelButton = 3;
+    public static final int ButtonPort1 = 1;
+    public static final int ButtonPort2 = 2;
+    public static final int ButtonPort3 = 3;
+    public static final int ButtonPort4 = 4;
+    public static final int ButtonPort5 = 5;
+    public static final int ButtonPort6 = 6;
+    public static final int ButtonPort7 = 7;
+    public static final int ButtonPort8 = 8;
 
 }

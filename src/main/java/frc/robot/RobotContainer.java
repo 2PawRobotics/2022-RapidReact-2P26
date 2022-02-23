@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.PotentiometerRead;
-import frc.robot.commands.ShootShirtCommand;
-//import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PotReadCommand;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.tShirtSubsystem;
-//import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+//import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -30,26 +30,44 @@ public class RobotContainer {
  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem );
 
+  //Name Subsystems Here
   private final DriveSubsystem driveSubsystem;
+  private final ClimbSubsystem climbSubsystem;
+  private final IntakeSubsystem intakeSubsystem;
+  private final ShooterSubsystem shooterSubsystem;
+  
+  //Name Commands Here
   private final DriveCommand driveCommand;
-  private final tShirtSubsystem tSubsystem;
-  private final ShootShirtCommand shootShirtCommand;
+  private final PotReadCommand potReadCommand;
+  private final ShooterCommand shooterCommand;
 
+  //Name Controllers Here
   public static XboxController XCont;
   public static Joystick ButtonPanel;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
+    //Instantilize Subsystems Here
     driveSubsystem = new DriveSubsystem();
+    climbSubsystem = new ClimbSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
+    shooterSubsystem = new ShooterSubsystem();
+
+    //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
+    potReadCommand = new PotReadCommand(climbSubsystem);
+    shooterCommand = new ShooterCommand(shooterSubsystem);
+
+    // Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
+    potReadCommand.addRequirements(climbSubsystem);
+    shooterCommand.addRequirements(shooterSubsystem);
+
+    //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
 
-    tSubsystem = new tShirtSubsystem();
-    shootShirtCommand = new ShootShirtCommand(tSubsystem);
-    shootShirtCommand.addRequirements(tSubsystem);
-
+    //Make Controllers Here
     XCont = new XboxController(Constants.XContPort);
     ButtonPanel = new Joystick(Constants.ButtonPanelPort);
 
@@ -65,14 +83,22 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    JoystickButton LBarrelButton = new JoystickButton(ButtonPanel, Constants.lBarrelButton);
-    JoystickButton MBarrelButton = new JoystickButton(ButtonPanel, Constants.mBarrelButton);
-    JoystickButton RBarrelButton = new JoystickButton(ButtonPanel, Constants.rBarrelButton);
+    //Make Button names and tie them to port numbers from Constants.
+    JoystickButton Button1 = new JoystickButton(ButtonPanel, Constants.ButtonPort1);
+    JoystickButton Button2 = new JoystickButton(ButtonPanel, Constants.ButtonPort2);
+    JoystickButton Button3 = new JoystickButton(ButtonPanel, Constants.ButtonPort3);
+    JoystickButton Button4 = new JoystickButton(ButtonPanel, Constants.ButtonPort4);
+    JoystickButton Button5 = new JoystickButton(ButtonPanel, Constants.ButtonPort5);
+    JoystickButton Button6 = new JoystickButton(ButtonPanel, Constants.ButtonPort6);
+    JoystickButton Button7 = new JoystickButton(ButtonPanel, Constants.ButtonPort7);
+    JoystickButton Button8 = new JoystickButton(ButtonPanel, Constants.ButtonPort8);
 
-   //LBarrelButton.whenPressed(new ShootShirtCommand(tSubsystem));
-   // LBarrelButton.whileHeld(new PotentiometerRead(tSubsystem));
+    //Tie buttons to Commands ans Subsystems 
+    //Below are some examples of doing so
 
-  
+    //Button1.whenPressed(new ShootShirtCommand(tSubsystem));
+    //Button1.whileHeld(new PotentiometerRead(tSubsystem));
+
   }
 
   /**
