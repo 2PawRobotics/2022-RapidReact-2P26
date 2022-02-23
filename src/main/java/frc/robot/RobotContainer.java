@@ -11,6 +11,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.PotReadCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.SolenoidCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -42,6 +43,7 @@ public class RobotContainer {
   private final PotReadCommand potReadCommand;
   private final ShooterCommand shooterCommand;
   private final IntakeCommand intakeCommand;
+  private final SolenoidCommand solenoidCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -61,12 +63,14 @@ public class RobotContainer {
     potReadCommand = new PotReadCommand(climbSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
     intakeCommand = new IntakeCommand(intakeSubsystem);
+    solenoidCommand = new SolenoidCommand(climbSubsystem);
 
     // Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
     intakeCommand.addRequirements(intakeSubsystem);
+    solenoidCommand.addRequirements(climbSubsystem);
 
     //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
@@ -103,12 +107,18 @@ public class RobotContainer {
     Button2.whileHeld(new IntakeCommand(intakeSubsystem));
     Button3.whileHeld(new IntakeCommand(intakeSubsystem));
     Button4.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button5.whenPressed(new SolenoidCommand(climbSubsystem));
+    Button6.whenPressed(new SolenoidCommand(climbSubsystem));
 
     //Below are some examples of doing so
 
-    //Button1.whenPressed(new ShootShirtCommand(tSubsystem));
-    //Button1.whileHeld(new PotentiometerRead(tSubsystem));
-
+    //Button1.whenPressed(new ExampleCommand(exampleSubsystem));
+    //Button1.whileHeld(new ExampleCommand(exampleSubsystem));
+    
+    /*XCont.getRightStickButtonPressed();{
+      new SolenoidCommand(climbSubsystem);
+    }
+    */
   }
 
   /**
