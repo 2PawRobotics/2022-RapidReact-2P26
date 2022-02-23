@@ -93,7 +93,13 @@ public class RobotContainer {
     JoystickButton Button7 = new JoystickButton(ButtonPanel, Constants.ButtonPort7);
     JoystickButton Button8 = new JoystickButton(ButtonPanel, Constants.ButtonPort8);
 
-    //Tie buttons to Commands ans Subsystems 
+    //Tie buttons to Commands and Subsystems 
+
+    Button1.whileHeld(new ShooterCommand(shooterSubsystem));
+    //Button2.whileHeld(new )
+    //Button3.whileHeld(new )
+    //Button4.whileHeld(new )
+
     //Below are some examples of doing so
 
     //Button1.whenPressed(new ShootShirtCommand(tSubsystem));

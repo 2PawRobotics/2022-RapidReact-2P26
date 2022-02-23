@@ -35,8 +35,11 @@ public final class Constants {
     public static final double speedY = 0.83;
     public static final double speedX = -0.83;
 
-    //Shooter Constants
+    //Voltage Constants
     public static final int shooterVolts = 10;
+    public static final int bothIntakeVolts = 3;
+    public static final int lIntakeVolts = 8;
+    public static final int tIntakeVolts = 3;
 
     //Button Panel Ports
     public static final int ButtonPort1 = 1;
