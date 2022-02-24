@@ -6,15 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class AutoCommandGroup extends SequentialCommandGroup {
   /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(AutonShootCommand command, AutoDriveCommand command2) {
+  public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive) {
     addCommands(
 
-
-
-    );
+      new AutonShootCommand(shoot),
+      new AutoDriveCommand(drive));
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

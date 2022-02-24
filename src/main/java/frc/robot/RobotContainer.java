@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoCommandGroup;
+import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
@@ -135,8 +136,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public DriveCommand getAutonomousCommand() {
+  public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return driveCommand;
+    return new AutoCommandGroup(shooterSubsystem, driveSubsystem);
   }
 }

@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class AutoDriveCommand extends CommandBase {
@@ -24,8 +25,8 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    
 
+    
   }
 
   // Called once the command ends or is interrupted.
