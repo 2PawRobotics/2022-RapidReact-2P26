@@ -14,8 +14,10 @@ public class AutoCommandGroup extends SequentialCommandGroup {
   public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive) {
     addCommands(
 
-      new AutonShootCommand(shoot),
-      new AutoDriveCommand(drive));
+      new AutoDriveCommand(drive),
+      new AutonShootCommand(shoot)
+
+    );
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
