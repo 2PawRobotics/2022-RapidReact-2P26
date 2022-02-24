@@ -18,7 +18,6 @@ import frc.robot.RobotContainer;
 public class ClimbSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
-  private final CANSparkMax actuatorMotor = new CANSparkMax(Constants.actuatorport, MotorType.kBrushed);
   private final AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
 
   private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
