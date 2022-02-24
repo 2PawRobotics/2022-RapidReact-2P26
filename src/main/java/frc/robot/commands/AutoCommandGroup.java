@@ -5,16 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class AutoShootCommand extends CommandBase {
-  private final ShooterSubsystem shooterSubsystem;
-  /** Creates a new AutoShoot. */
-  public AutoShootCommand(ShooterSubsystem subsystem) {
-    shooterSubsystem = subsystem;
+public class AutoCommandGroup extends SequentialCommandGroup {
+  /** Creates a new AutoCommandGroup. */
+  public AutoCommandGroup(AutonShootCommand command, AutoDriveCommand command2) {
+    addCommands(
+
+
+
+    );
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,11 +24,7 @@ public class AutoShootCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-
-    shooterSubsystem.AutonShooter();
-
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
