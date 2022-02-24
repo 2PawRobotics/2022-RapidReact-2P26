@@ -42,6 +42,9 @@ public final class Constants {
     public static final int bothIntakeVolts = 3;
     public static final int lIntakeVolts = 8;
     public static final int tIntakeVolts = 3;
+    public static final int fastAngleVolts = 4;
+    public static final int slowAngleVolts = 2;
+    public static final int zeroAngleVolts = 0;
 
     //Button Panel Ports
     public static final int ButtonPort1 = 1;

@@ -12,6 +12,7 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.PotReadCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SolenoidCommand;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -37,6 +38,7 @@ public class RobotContainer {
   private final ClimbSubsystem climbSubsystem;
   private final IntakeSubsystem intakeSubsystem;
   private final ShooterSubsystem shooterSubsystem;
+  private final ArmSubsystem armSubsystem;
   
   //Name Commands Here
   private final DriveCommand driveCommand;
@@ -57,6 +59,7 @@ public class RobotContainer {
     climbSubsystem = new ClimbSubsystem();
     intakeSubsystem = new IntakeSubsystem();
     shooterSubsystem = new ShooterSubsystem();
+    armSubsystem = new ArmSubsystem();
 
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
@@ -114,7 +117,7 @@ public class RobotContainer {
 
     //Button1.whenPressed(new ExampleCommand(exampleSubsystem));
     //Button1.whileHeld(new ExampleCommand(exampleSubsystem));
-    
+
     /*XCont.getRightStickButtonPressed();{
       new SolenoidCommand(climbSubsystem);
     }
