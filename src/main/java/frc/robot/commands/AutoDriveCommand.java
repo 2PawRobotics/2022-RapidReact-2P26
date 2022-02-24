@@ -25,8 +25,8 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void execute() {
 
+    driveSubsystem.AutonDrive();
 
-    
   }
 
   // Called once the command ends or is interrupted.

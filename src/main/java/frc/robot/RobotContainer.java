@@ -51,6 +51,7 @@ public class RobotContainer {
   private final IntakeCommand intakeCommand;
   private final SolenoidCommand solenoidCommand;
   private final AutonShootCommand autonShootCommand;
+  private final AutoDriveCommand autoDriveCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -72,15 +73,21 @@ public class RobotContainer {
     shooterCommand = new ShooterCommand(shooterSubsystem);
     intakeCommand = new IntakeCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
-    autonShootCommand = new AutonShootCommand(shooterSubsystem);
 
-    // Add Requirements Here
+    //Instantilize Autonomous Commands Here
+    autonShootCommand = new AutonShootCommand(shooterSubsystem);
+    autoDriveCommand = new AutoDriveCommand(driveSubsystem);
+
+    //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
     intakeCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
+
+    //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
+    autoDriveCommand.addRequirements(driveSubsystem);
 
     //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);

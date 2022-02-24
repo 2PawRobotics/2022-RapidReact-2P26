@@ -4,8 +4,12 @@
 
 package frc.robot.subsystems;
 
+
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -26,6 +30,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive arcadeDrive = new DifferentialDrive(leftCims, rightCims);
 
+  private final Timer driveTimer = new Timer();
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -39,7 +45,16 @@ public class DriveSubsystem extends SubsystemBase {
 
   }
 
-  public void AutonArcadeDrive(){
-    
+  public void AutonDrive(){
+
+    driveTimer.reset();
+    driveTimer.start();
+    while(driveTimer.get() < 1){
+      arcadeDrive.tankDrive(.5, .5);
+    }
+    if(driveTimer.get() >= 1){
+      arcadeDrive.tankDrive(0, 0);
+    }
+  driveTimer.stop();
   }
 }
