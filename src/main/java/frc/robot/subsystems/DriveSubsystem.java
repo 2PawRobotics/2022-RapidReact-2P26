@@ -38,4 +38,8 @@ public class DriveSubsystem extends SubsystemBase {
     arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*speedY);
 
   }
+
+  public void AutonArcadeDrive(){
+    
+  }
 }
