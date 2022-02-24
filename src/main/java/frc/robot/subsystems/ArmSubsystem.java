@@ -35,6 +35,9 @@ public class ArmSubsystem extends SubsystemBase {
     while(pot.get() >= 300);{
       actuatorMotor.setVoltage(Constants.zeroAngleVolts);
     }
+    if(actuatorMotor.getOutputCurrent() > 5);{
+      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
+    }
   }
 
   public void ArmAngleUp(){
