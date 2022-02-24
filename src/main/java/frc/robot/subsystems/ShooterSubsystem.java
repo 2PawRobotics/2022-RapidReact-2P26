@@ -26,7 +26,12 @@ public class ShooterSubsystem extends SubsystemBase {
     shooter.setVoltage(Constants.shooterVolts);
     System.out.println(shooter.get());
 
-    
   }
 
+  public void AutonShooter(){
+
+    shooter.setVoltage(Constants.autonShooterVolts);
+    System.out.println(shooter.get());
+
+  }
 }

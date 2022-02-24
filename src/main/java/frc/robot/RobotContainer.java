@@ -7,6 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AutoCommandGroup;
+import frc.robot.commands.AutoDriveCommand;
+import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.PotReadCommand;
@@ -17,6 +20,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -46,6 +50,8 @@ public class RobotContainer {
   private final ShooterCommand shooterCommand;
   private final IntakeCommand intakeCommand;
   private final SolenoidCommand solenoidCommand;
+  private final AutonShootCommand autonShootCommand;
+  private final AutoDriveCommand autoDriveCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -68,12 +74,20 @@ public class RobotContainer {
     intakeCommand = new IntakeCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
 
-    // Add Requirements Here
+    //Instantilize Autonomous Commands Here
+    autonShootCommand = new AutonShootCommand(shooterSubsystem);
+    autoDriveCommand = new AutoDriveCommand(driveSubsystem);
+
+    //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
     intakeCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
+
+    //Add Autonomous Requirements Here
+    autonShootCommand.addRequirements(shooterSubsystem);
+    autoDriveCommand.addRequirements(driveSubsystem);
 
     //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
@@ -129,8 +143,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public DriveCommand getAutonomousCommand() {
+  public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return driveCommand;
+    return new AutoCommandGroup(shooterSubsystem, driveSubsystem);
   }
 }
