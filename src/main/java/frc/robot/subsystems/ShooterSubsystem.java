@@ -24,6 +24,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void RunShooter(){
 
     leftShooterMotor.setInverted(true);
+    rightShooterMotor.setInverted(false);
     shooter.setVoltage(Constants.shooterVolts);
     System.out.println(shooter.get());
 

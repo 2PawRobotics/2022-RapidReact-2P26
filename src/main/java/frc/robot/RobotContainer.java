@@ -120,7 +120,7 @@ public class RobotContainer {
     //Make Button names and tie them to port numbers from Constants.
     JoystickButton Button1 = new JoystickButton(ButtonPanel, Constants.ButtonPort1);
     JoystickButton Button2 = new JoystickButton(ButtonPanel, Constants.ButtonPort2);
-    JoystickButton Button3 = new JoystickButton(ButtonPanel, Constants.ButtonPort3);
+    //JoystickButton Button3 = new JoystickButton(ButtonPanel, Constants.ButtonPort3);
     JoystickButton Button4 = new JoystickButton(ButtonPanel, Constants.ButtonPort4);
     JoystickButton Button5 = new JoystickButton(ButtonPanel, Constants.ButtonPort5);
     JoystickButton Button6 = new JoystickButton(ButtonPanel, Constants.ButtonPort6);

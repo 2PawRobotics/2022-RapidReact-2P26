@@ -26,29 +26,33 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void ArmAngleDown(){
 
-    while(pot.get() < 200);{
+    actuatorMotor.setInverted(true);
+
+    while(pot.get() < 300);{
       actuatorMotor.setVoltage(Constants.fastAngleVolts);
     }
-    while(pot.get() >= 200 && pot.get() <300);{
+    while(pot.get() >= 300 && pot.get() <350);{
       actuatorMotor.setVoltage(Constants.slowAngleVolts);
     }
-    while(pot.get() >= 300);{
+    while(pot.get() >= 350);{
       actuatorMotor.setVoltage(Constants.zeroAngleVolts);
     }
     if(actuatorMotor.getOutputCurrent() > 5);{
       actuatorMotor.setVoltage(Constants.zeroAngleVolts);
     }
-  }
+  }                                                         //ranges are from aprox 150 at top and 350
 
   public void ArmAngleUp(){
 
-    while(pot.get() > 100);{
+    actuatorMotor.setInverted(false);
+
+    while(pot.get() > 200);{
       actuatorMotor.setVoltage(Constants.fastAngleVolts);
     }
-    while(pot.get() <= 100 && pot.get() >5);{
+    while(pot.get() <= 200 && pot.get() > 150);{
       actuatorMotor.setVoltage(Constants.slowAngleVolts);
     }
-    while(pot.get() <= 5);{
+    while(pot.get() <= 150);{
       actuatorMotor.setVoltage(Constants.zeroAngleVolts);
     }
     if(actuatorMotor.getOutputCurrent() > 5);{
