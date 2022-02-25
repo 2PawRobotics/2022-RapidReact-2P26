@@ -119,8 +119,10 @@ public class RobotContainer {
     JoystickButton Button4 = new JoystickButton(ButtonPanel, Constants.ButtonPort4);
     JoystickButton Button5 = new JoystickButton(ButtonPanel, Constants.ButtonPort5);
     JoystickButton Button6 = new JoystickButton(ButtonPanel, Constants.ButtonPort6);
-    JoystickButton Button7 = new JoystickButton(ButtonPanel, Constants.ButtonPort7);
-    JoystickButton Button8 = new JoystickButton(ButtonPanel, Constants.ButtonPort8);
+    JoystickButton button9 = new JoystickButton(ButtonPanel, Constants.ButtonPort9);
+    JoystickButton Button10 = new JoystickButton(ButtonPanel, Constants.ButtonPort10);
+    JoystickButton Button11 = new JoystickButton(ButtonPanel, Constants.ButtonPort11);
+    JoystickButton Button12 = new JoystickButton(ButtonPanel, Constants.ButtonPort12);
 
     //Bind buttons to Commands and Subsystems 
 

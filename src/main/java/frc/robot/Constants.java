@@ -65,7 +65,11 @@ public final class Constants {
     public static final int ButtonPort4 = 4;
     public static final int ButtonPort5 = 5;
     public static final int ButtonPort6 = 6;
-    public static final int ButtonPort7 = 7;
-    public static final int ButtonPort8 = 8;
+    //public static final int ButtonPort7 = 7; These two are not wired on the button panel.
+    //public static final int ButtonPort8 = 8;
+    public static final int ButtonPort9 = 9;
+    public static final int ButtonPort10 = 10;
+    public static final int ButtonPort11 = 11;
+    public static final int ButtonPort12 = 12;
 
 }
