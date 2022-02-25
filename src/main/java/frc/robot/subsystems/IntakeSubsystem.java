@@ -23,12 +23,18 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void RunIntake() {
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort2)){
-      intakeMotors.setVoltage(Constants.bothIntakeVolts);}
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort3)){
-      lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort4)){
+      intakeMotors.setVoltage(Constants.bothIntakeVolts);}
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort6)){
+      lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort5)){
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);}
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
+        lowIntakeMotor.setInverted(true);
+        lowIntakeMotor.setVoltage(Constants.tIntakeVolts);}
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort11)){
+        topIntakeMotor.setInverted(true);
+        topIntakeMotor.setVoltage(Constants.tIntakeVolts);}
   }
 }
 

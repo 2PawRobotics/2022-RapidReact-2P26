@@ -13,8 +13,8 @@ import frc.robot.Constants;
 public class ShooterSubsystem extends SubsystemBase {
 
   private final CANSparkMax leftShooterMotor = new CANSparkMax(Constants.intakelowport, MotorType.kBrushed);
-  private final CANSparkMax highShooterMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
-  private final MotorControllerGroup shooter = new MotorControllerGroup(highShooterMotor, leftShooterMotor);
+  private final CANSparkMax rightShooterMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
+  private final MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
 
   @Override
   public void periodic() {
@@ -23,8 +23,17 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void RunShooter(){
 
+    leftShooterMotor.setInverted(true);
     shooter.setVoltage(Constants.shooterVolts);
     System.out.println(shooter.get());
+
+  }
+
+  public void ReverseShooter(){
+
+    leftShooterMotor.setInverted(false);
+    rightShooterMotor.setInverted(true);
+    shooter.setVoltage(Constants.rShooterVolts);
 
   }
 
