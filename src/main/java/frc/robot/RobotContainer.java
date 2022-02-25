@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
+import frc.robot.commands.AutoGyroCommand;
 import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
@@ -52,6 +53,7 @@ public class RobotContainer {
   private final SolenoidCommand solenoidCommand;
   private final AutonShootCommand autonShootCommand;
   private final AutoDriveCommand autoDriveCommand;
+  private final AutoGyroCommand autoGyroCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -77,6 +79,7 @@ public class RobotContainer {
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
     autoDriveCommand = new AutoDriveCommand(driveSubsystem);
+    autoGyroCommand = new AutoGyroCommand(driveSubsystem);
 
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
@@ -88,6 +91,7 @@ public class RobotContainer {
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
     autoDriveCommand.addRequirements(driveSubsystem);
+    autoGyroCommand.addRequirements(driveSubsystem);
 
     //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
@@ -145,6 +149,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new AutoCommandGroup(shooterSubsystem, driveSubsystem);
+    return new AutoCommandGroup(shooterSubsystem, driveSubsystem, driveSubsystem);
   }
 }

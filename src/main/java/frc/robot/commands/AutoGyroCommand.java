@@ -4,21 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 
-public class AutoCommandGroup extends SequentialCommandGroup {
-  /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive, DriveSubsystem gyro) {
-    addCommands(
-
-      new AutoGyroCommand(gyro),
-      new AutoDriveCommand(drive),
-      new AutonShootCommand(shoot)
-
-    );
+public class AutoGyroCommand extends CommandBase {
+  private final DriveSubsystem driveSubsystem;
+  /** Creates a new AutoGyro. */
+  public AutoGyroCommand(DriveSubsystem subsystem) {
+    driveSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -27,7 +22,11 @@ public class AutoCommandGroup extends SequentialCommandGroup {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    driveSubsystem.resetGyro();
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
