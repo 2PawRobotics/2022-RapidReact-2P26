@@ -25,10 +25,10 @@ public class ArmCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort7));{
+    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort9));{
       armSubsystem.ArmAngleDown();
     }
-    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort8));{
+    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10));{
       armSubsystem.ArmAngleUp();
     }
   }

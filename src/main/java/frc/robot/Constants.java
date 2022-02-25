@@ -20,6 +20,17 @@ public final class Constants {
     public static final int rightCimPort1 = 2;
     public static final int rightCimPort2 = 4;
 
+    //Encoder Ports THIS IS NEW STUFF
+    public static final int[] kLeftEncoderPorts = new int[] {0, 1};
+    public static final int[] krightEncoderPorts = new int[] {2, 3};
+    public static final boolean kLeftEncoderReversed = true;
+    public static final boolean kRightEncoderReversed = true;
+
+    //Other Encoder Stuff
+    public static final int kEncoderCPR = 720;
+    public static final double kWheelDiameterMeters = 0.15;
+    public static final double kEncoderDistancePerPulse = (kWheelDiameterMeters * Math.PI) / (kEncoderCPR);
+
     //Other Motors
     public static final int actuatorport = 5;
     public static final int intakelowport = 6;
@@ -54,7 +65,11 @@ public final class Constants {
     public static final int ButtonPort4 = 4;
     public static final int ButtonPort5 = 5;
     public static final int ButtonPort6 = 6;
-    public static final int ButtonPort7 = 7;
-    public static final int ButtonPort8 = 8;
+    //public static final int ButtonPort7 = 7; These two are not wired on the button panel.
+    //public static final int ButtonPort8 = 8;
+    public static final int ButtonPort9 = 9;
+    public static final int ButtonPort10 = 10;
+    public static final int ButtonPort11 = 11;
+    public static final int ButtonPort12 = 12;
 
 }

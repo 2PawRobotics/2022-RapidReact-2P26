@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SerialPort;
 
 
 public class DriveSubsystem extends SubsystemBase {
@@ -32,6 +35,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final Timer driveTimer = new Timer();
 
+  private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -44,7 +49,6 @@ public class DriveSubsystem extends SubsystemBase {
     arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*speedY);
 
   }
-
   public void AutonDrive(){
 
     driveTimer.reset();
@@ -56,5 +60,9 @@ public class DriveSubsystem extends SubsystemBase {
       arcadeDrive.tankDrive(0, 0);
     }
   driveTimer.stop();
-  }
+   }
+
+   public void resetGyro(){
+     navXGyro.reset();
+   }
 }
