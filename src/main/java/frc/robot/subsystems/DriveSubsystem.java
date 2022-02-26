@@ -51,16 +51,60 @@ public class DriveSubsystem extends SubsystemBase {
   }
   public void AutonDrive(){
 
+  
     driveTimer.reset();
     driveTimer.start();
-    while(driveTimer.get() < 1){
-      arcadeDrive.tankDrive(.5, .5);
+
+//Auton Path 1
+    if(Constants.AutonPath1 = true){
+      while(driveTimer.get() < .5){
+        arcadeDrive.tankDrive(.3, .0);
+      }
+      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1.5){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
     }
-    if(driveTimer.get() >= 1){
-      arcadeDrive.tankDrive(0, 0);
+//Auton Path 2
+    if(Constants.AutonPath2 = true){
+      while(driveTimer.get() < .5){
+        arcadeDrive.tankDrive(.3, .0);
+      }
+      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1.5){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
     }
-  driveTimer.stop();
-   }
+//Auton Path 3
+    if(Constants.AutonPath3 = true){
+      while(driveTimer.get() < 1){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
+    }
+//Auton Path 4
+    if(Constants.AutonPath4 = true){
+      while(driveTimer.get() < .5){
+        arcadeDrive.tankDrive(.0, .3);
+      }
+      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1.5){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      } 
+    }
+}
 
    public void resetGyro(){
      navXGyro.reset();

@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+
+import edu.wpi.first.wpilibj.Timer;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -15,6 +17,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax leftShooterMotor = new CANSparkMax(Constants.intakelowport, MotorType.kBrushed);
   private final CANSparkMax rightShooterMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
   private final MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
+
+  private final Timer shooterTimer = new Timer();
 
   @Override
   public void periodic() {
@@ -40,8 +44,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void AutonShooter(){
 
-    shooter.setVoltage(Constants.autonShooterVolts);
-    System.out.println(shooter.get());
+    shooterTimer.reset();
+    shooterTimer.start();
 
+    while(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
+      leftShooterMotor.setInverted(true);
+      rightShooterMotor.setInverted(false);
+      shooter.setVoltage(Constants.shooterVolts);}
   }
 }
