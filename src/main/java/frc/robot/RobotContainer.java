@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ArmCommand;
 import frc.robot.commands.AutoCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.AutoGyroCommand;
@@ -14,6 +15,7 @@ import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.PotReadCommand;
+import frc.robot.commands.ReverseShooterCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SolenoidCommand;
 import frc.robot.subsystems.ArmSubsystem;
@@ -54,6 +56,7 @@ public class RobotContainer {
   private final AutonShootCommand autonShootCommand;
   private final AutoDriveCommand autoDriveCommand;
   private final AutoGyroCommand autoGyroCommand;
+  private final ReverseShooterCommand reverseShooterCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -75,6 +78,7 @@ public class RobotContainer {
     shooterCommand = new ShooterCommand(shooterSubsystem);
     intakeCommand = new IntakeCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
+    reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
@@ -87,6 +91,7 @@ public class RobotContainer {
     shooterCommand.addRequirements(shooterSubsystem);
     intakeCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
+    reverseShooterCommand.addRequirements(shooterSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
@@ -123,15 +128,23 @@ public class RobotContainer {
     JoystickButton Button10 = new JoystickButton(ButtonPanel, Constants.ButtonPort10);
     JoystickButton Button11 = new JoystickButton(ButtonPanel, Constants.ButtonPort11);
     JoystickButton Button12 = new JoystickButton(ButtonPanel, Constants.ButtonPort12);
+    JoystickButton Button13 = new JoystickButton(ButtonPanel, Constants.ButtonPort13);
+    JoystickButton Button14 = new JoystickButton(ButtonPanel, Constants.ButtonPort14);
 
     //Bind buttons to Commands and Subsystems 
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
-    Button2.whileHeld(new IntakeCommand(intakeSubsystem));
-    Button3.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button2.whileHeld(new ReverseShooterCommand(shooterSubsystem));
+    Button3.whileHeld(new PotReadCommand(climbSubsystem));
     Button4.whileHeld(new IntakeCommand(intakeSubsystem));
-    Button5.whenPressed(new SolenoidCommand(climbSubsystem));
-    Button6.whenPressed(new SolenoidCommand(climbSubsystem));
+    Button5.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button6.whileHeld(new IntakeCommand(intakeSubsystem));
+    button9.whenPressed(new SolenoidCommand(climbSubsystem));
+    Button12.whenPressed(new SolenoidCommand(climbSubsystem));
+    Button10.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button11.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button13.whenPressed(new ArmCommand(armSubsystem));
+    Button14.whenPressed(new ArmCommand(armSubsystem));
 
     //Below are some examples of doing so
 

@@ -5,17 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class ArmCommand extends CommandBase {
-  private final ArmSubsystem armSubsystem;
-  /** Creates a new ArmExtendCommand. */
-  public ArmCommand(ArmSubsystem subsystem) {
-    armSubsystem = subsystem;
+public class ReverseShooterCommand extends CommandBase {
+  private final ShooterSubsystem shooterSubsystem;
+  /** Creates a new ReverseShooterCommand. */
+  public ReverseShooterCommand(ShooterSubsystem subsystem) {
+    shooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,12 +23,9 @@ public class ArmCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort13));{
-      armSubsystem.ArmAngleDown();
-    }
-    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort14));{
-      armSubsystem.ArmAngleUp();
-    }
+
+    shooterSubsystem.ReverseShooter();
+
   }
 
   // Called once the command ends or is interrupted.

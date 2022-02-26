@@ -4,9 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -32,15 +29,14 @@ public class ClimbSubsystem extends SubsystemBase {
   public void Readpot(){
 
     System.out.println(pot.get());
-
   }
 
   public void SolenoidControl(){
-    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort5)){
+    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort9)){
       dSolenoid1.set(Value.kForward);
       dSolenoid2.set(Value.kForward);
     }
-    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort6)){
+    if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort12)){
       dSolenoid1.set(Value.kReverse);
       dSolenoid2.set(Value.kReverse);
     }
