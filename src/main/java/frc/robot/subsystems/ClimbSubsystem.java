@@ -29,7 +29,6 @@ public class ClimbSubsystem extends SubsystemBase {
   public void Readpot(){
 
     System.out.println(pot.get());
-
   }
 
   public void SolenoidControl(){

@@ -51,7 +51,7 @@ public final class Constants {
     //Voltage Constants
     public static final int shooterVolts = 10;
     public static final int autonShooterVolts = 10;
-    public static final int rShooterVolts = 2;
+    public static final int rShooterVolts = 3;
     public static final int bothIntakeVolts = 3;
     public static final int lIntakeVolts = 8;
     public static final int tIntakeVolts = 3;
