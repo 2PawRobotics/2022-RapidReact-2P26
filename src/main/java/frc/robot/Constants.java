@@ -80,5 +80,4 @@ public final class Constants {
     public static boolean AutonPath2 = false;
     public static boolean AutonPath3 = true;
     public static boolean AutonPath4 = false;
-    //I need to label which path is which
 }
