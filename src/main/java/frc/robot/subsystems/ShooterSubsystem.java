@@ -6,11 +6,14 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -30,6 +33,8 @@ public class ShooterSubsystem extends SubsystemBase {
     leftShooterMotor.setInverted(true);
     rightShooterMotor.setInverted(false);
     shooter.setVoltage(Constants.shooterVolts);
+    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 1.0);
+    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 1.0);
     System.out.println(shooter.get());
 
   }
