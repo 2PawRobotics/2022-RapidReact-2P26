@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,6 +18,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private final CANSparkMax lowIntakeMotor = new CANSparkMax(Constants.intakelowport, MotorType.kBrushed);
   private final CANSparkMax topIntakeMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
   private final MotorControllerGroup intakeMotors = new MotorControllerGroup(lowIntakeMotor, topIntakeMotor);
+
+  private final Timer intakeTimer = new Timer();
 
   @Override
   public void periodic() {
@@ -40,5 +44,23 @@ public class IntakeSubsystem extends SubsystemBase {
       topIntakeMotor.setInverted(false);
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);}
   }
-}
+//Auton Intake
+  public void AutonIntake() {
+
+    intakeTimer.reset();
+    intakeTimer.start();
+    lowIntakeMotor.setInverted(false);
+    topIntakeMotor.setInverted(true);
+
+      while(intakeTimer.get() >= 1 && intakeTimer.get() < 1.75){
+        lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
+      while(intakeTimer.get() >= 1.75 && intakeTimer.get() < 4.25){
+        intakeMotors.setVoltage(0);}
+      while(intakeTimer.get() >= 4.25 && intakeTimer.get() < 5.5){
+        intakeMotors.setVoltage(Constants.bothIntakeVolts);}
+      if(intakeTimer.get() >= 5.5){
+        intakeMotors.setVoltage(0);}
+  }
+  }
+
 

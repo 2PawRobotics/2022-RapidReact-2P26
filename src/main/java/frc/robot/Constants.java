@@ -75,4 +75,9 @@ public final class Constants {
     public static final int ButtonPort13 = 13;
     public static final int ButtonPort14 = 14;
 
+    //Auton Path Value
+    public static boolean AutonPath1 = false;
+    public static boolean AutonPath2 = false;
+    public static boolean AutonPath3 = true;
+    public static boolean AutonPath4 = false;
 }

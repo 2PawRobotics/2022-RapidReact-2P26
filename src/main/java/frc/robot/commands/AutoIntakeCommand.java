@@ -4,23 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 
-public class AutoCommandGroup extends ParallelCommandGroup {
-  /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive, DriveSubsystem gyro, IntakeSubsystem intake) {
-    addCommands(
-
-      new AutoGyroCommand(gyro),
-      new AutoDriveCommand(drive),
-      new AutonShootCommand(shoot),
-      new AutoIntakeCommand(intake)
-
-    );
+public class AutoIntakeCommand extends CommandBase {
+  private final IntakeSubsystem intakeSubsystem;
+  /** Creates a new AutoIntakeCommand. */
+  public AutoIntakeCommand(IntakeSubsystem subsystem) {
+    intakeSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +22,9 @@ public class AutoCommandGroup extends ParallelCommandGroup {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    intakeSubsystem.AutonIntake();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

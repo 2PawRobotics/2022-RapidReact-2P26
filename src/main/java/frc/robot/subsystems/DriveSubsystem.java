@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -47,20 +48,63 @@ public class DriveSubsystem extends SubsystemBase {
       arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*RspeedX, RobotContainer.XCont.getLeftY()*RspeedY);}
 
     arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*speedY);
-
   }
   public void AutonDrive(){
 
+  
     driveTimer.reset();
     driveTimer.start();
-    while(driveTimer.get() < 1){
-      arcadeDrive.tankDrive(.5, .5);
+
+//Auton Path 1
+    if(Constants.AutonPath1 = true){
+      while(driveTimer.get() < .5){
+        arcadeDrive.tankDrive(.3, .0);
+      }
+      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1.5){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
     }
-    if(driveTimer.get() >= 1){
-      arcadeDrive.tankDrive(0, 0);
+//Auton Path 2
+    if(Constants.AutonPath2 = true){
+      while(driveTimer.get() < .5){
+        arcadeDrive.tankDrive(.3, .0);
+      }
+      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1.5){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
     }
-  driveTimer.stop();
-   }
+//Auton Path 3
+    if(Constants.AutonPath3 = true){
+      while(driveTimer.get() < 1){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
+    }
+//Auton Path 4
+    if(Constants.AutonPath4 = true){
+      while(driveTimer.get() < .5){
+        arcadeDrive.tankDrive(.0, .3);
+      }
+      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(.5, .5);
+      }
+      if(driveTimer.get() >= 1.5){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      } 
+    }
+}
 
    public void resetGyro(){
      navXGyro.reset();
