@@ -30,19 +30,24 @@ public class IntakeSubsystem extends SubsystemBase {
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort4)){
       topIntakeMotor.setInverted(true);
       lowIntakeMotor.setInverted(false);
-      intakeMotors.setVoltage(Constants.bothIntakeVolts);}
+      intakeMotors.setVoltage(Constants.bothIntakeVolts);
+      Constants.intakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort6)){
       lowIntakeMotor.setInverted(false);
-      lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
+      lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
+      Constants.intakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort5)){
       topIntakeMotor.setInverted(true);
-      topIntakeMotor.setVoltage(Constants.tIntakeVolts);}
+      topIntakeMotor.setVoltage(Constants.tIntakeVolts);
+      Constants.intakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
       lowIntakeMotor.setInverted(true);
-      lowIntakeMotor.setVoltage(Constants.tIntakeVolts);}
+      lowIntakeMotor.setVoltage(Constants.tIntakeVolts);
+      Constants.reverseIntakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort11)){
       topIntakeMotor.setInverted(false);
-      topIntakeMotor.setVoltage(Constants.tIntakeVolts);}
+      topIntakeMotor.setVoltage(Constants.tIntakeVolts);
+      Constants.reverseIntakeActive = true;}
   }
 //Auton Intake
   public void AutonIntake() {

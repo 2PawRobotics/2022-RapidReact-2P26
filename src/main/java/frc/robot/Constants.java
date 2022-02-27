@@ -80,4 +80,9 @@ public final class Constants {
     public static boolean AutonPath2 = false;
     public static boolean AutonPath3 = true;
     public static boolean AutonPath4 = false;
+
+    //Commands running or not
+    public static boolean intakeActive = false;
+    public static boolean reverseIntakeActive = false;
+    public static boolean reverseDrive = false;
 }

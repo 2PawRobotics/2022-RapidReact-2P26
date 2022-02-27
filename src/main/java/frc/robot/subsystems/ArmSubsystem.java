@@ -14,7 +14,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
   private final CANSparkMax actuatorMotor = new CANSparkMax(Constants.actuatorport, MotorType.kBrushed);
-  private final AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
+  public final static AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
 
   @Override
   public void periodic() {

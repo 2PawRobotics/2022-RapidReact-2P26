@@ -11,7 +11,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -46,6 +45,7 @@ public class DriveSubsystem extends SubsystemBase {
   public void ArcadeDrive(XboxController controller, double speedX, double speedY, double RspeedX, double RspeedY){
     while(RobotContainer.XCont.getRightBumperPressed()){
       arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*RspeedX, RobotContainer.XCont.getLeftY()*RspeedY);}
+      Constants.reverseDrive = true;
 
     arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*speedY);
   }
