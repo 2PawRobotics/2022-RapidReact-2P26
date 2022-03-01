@@ -17,8 +17,8 @@ public class ClimbSubsystem extends SubsystemBase {
   //Declare Hardware Components
   private final AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
 
-  private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
-  private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 3, 4);
+  private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+  private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
 
   @Override
   public void periodic() {
