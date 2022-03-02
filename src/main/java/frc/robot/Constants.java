@@ -78,7 +78,7 @@ public final class Constants {
     //Auton Path Value
     public static boolean AutonPath1 = false;
     public static boolean AutonPath2 = false;
-    public static boolean AutonPath3 = true;
+    public static boolean AutonPath3 = false;
     public static boolean AutonPath4 = false;
 
     //Commands running or not

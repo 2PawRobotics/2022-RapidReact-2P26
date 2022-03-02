@@ -17,8 +17,8 @@ import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  public final static CANSparkMax leftShooterMotor = new CANSparkMax(Constants.intakelowport, MotorType.kBrushed);
-  public final static CANSparkMax rightShooterMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
+  public final static CANSparkMax leftShooterMotor = new CANSparkMax(Constants.leftshooterport, MotorType.kBrushed);
+  public final static CANSparkMax rightShooterMotor = new CANSparkMax(Constants.rightshooterport, MotorType.kBrushed);
   public final static MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
 
   private final Timer shooterTimer = new Timer();
