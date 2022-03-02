@@ -13,6 +13,7 @@ import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.AutoGyroCommand;
 import frc.robot.commands.AutoIntakeCommand;
 import frc.robot.commands.AutonShootCommand;
+import frc.robot.commands.CompressorCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ReverseShooterCommand;
@@ -57,6 +58,7 @@ public class RobotContainer {
   private final AutoGyroCommand autoGyroCommand;
   private final ReverseShooterCommand reverseShooterCommand;
   private final AutoIntakeCommand autoIntakeCommand;
+  private final CompressorCommand compressorCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -78,6 +80,7 @@ public class RobotContainer {
     intakeCommand = new IntakeCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
     reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
+    compressorCommand = new CompressorCommand(climbSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
@@ -91,6 +94,7 @@ public class RobotContainer {
     intakeCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
     reverseShooterCommand.addRequirements(shooterSubsystem);
+    compressorCommand.addRequirements(climbSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
@@ -98,8 +102,9 @@ public class RobotContainer {
     autoGyroCommand.addRequirements(driveSubsystem);
     autoIntakeCommand.addRequirements(intakeSubsystem);
 
-    //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
+    //Sets the Default Command of a subsystem, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
+    CommandScheduler.getInstance().setDefaultCommand(climbSubsystem, compressorCommand);
 
     //Make Controllers Here
     XCont = new XboxController(Constants.XContPort);
