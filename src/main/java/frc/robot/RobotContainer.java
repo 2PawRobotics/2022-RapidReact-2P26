@@ -15,7 +15,6 @@ import frc.robot.commands.AutoIntakeCommand;
 import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.PotReadCommand;
 import frc.robot.commands.ReverseShooterCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SolenoidCommand;
@@ -50,7 +49,6 @@ public class RobotContainer {
   
   //Name Commands Here
   private final DriveCommand driveCommand;
-  private final PotReadCommand potReadCommand;
   private final ShooterCommand shooterCommand;
   private final IntakeCommand intakeCommand;
   private final SolenoidCommand solenoidCommand;
@@ -76,7 +74,6 @@ public class RobotContainer {
 
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
-    potReadCommand = new PotReadCommand(climbSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
     intakeCommand = new IntakeCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
@@ -90,7 +87,6 @@ public class RobotContainer {
 
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
-    potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
     intakeCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
@@ -139,7 +135,6 @@ public class RobotContainer {
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
     Button2.whileHeld(new ReverseShooterCommand(shooterSubsystem));
-    Button3.whileHeld(new PotReadCommand(climbSubsystem));
     Button4.whileHeld(new IntakeCommand(intakeSubsystem));
     Button5.whileHeld(new IntakeCommand(intakeSubsystem));
     Button6.whileHeld(new IntakeCommand(intakeSubsystem));
