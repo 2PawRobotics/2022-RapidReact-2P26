@@ -16,8 +16,10 @@ import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.CompressorCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeOffCommand;
 import frc.robot.commands.ReverseShooterCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShooterOffCommand;
 import frc.robot.commands.SolenoidCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -59,6 +61,8 @@ public class RobotContainer {
   private final ReverseShooterCommand reverseShooterCommand;
   private final AutoIntakeCommand autoIntakeCommand;
   private final CompressorCommand compressorCommand;
+  private final IntakeOffCommand intakeOffCommand;
+  private final ShooterOffCommand shooterOffCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -81,6 +85,8 @@ public class RobotContainer {
     solenoidCommand = new SolenoidCommand(climbSubsystem);
     reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
     compressorCommand = new CompressorCommand(climbSubsystem);
+    intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
+    shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
@@ -95,6 +101,8 @@ public class RobotContainer {
     solenoidCommand.addRequirements(climbSubsystem);
     reverseShooterCommand.addRequirements(shooterSubsystem);
     compressorCommand.addRequirements(climbSubsystem);
+    intakeOffCommand.addRequirements(intakeSubsystem);
+    shooterOffCommand.addRequirements(shooterSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
@@ -105,6 +113,8 @@ public class RobotContainer {
     //Sets the Default Command of a subsystem, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
     CommandScheduler.getInstance().setDefaultCommand(climbSubsystem, compressorCommand);
+    CommandScheduler.getInstance().setDefaultCommand(intakeSubsystem, intakeOffCommand);
+    CommandScheduler.getInstance().setDefaultCommand(shooterSubsystem, shooterOffCommand);
 
     //Make Controllers Here
     XCont = new XboxController(Constants.XContPort);

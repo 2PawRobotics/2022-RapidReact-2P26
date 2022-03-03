@@ -5,15 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class SolenoidCommand extends CommandBase {
-  private final ClimbSubsystem climbSubsystem;
-  /** Creates a new SolenoidCommand. */
-  public SolenoidCommand(ClimbSubsystem subsystem) {
-    climbSubsystem = subsystem;
+public class ShooterOffCommand extends CommandBase {
+  private final ShooterSubsystem shooterSubsystem;
+  /** Creates a new ShooterOffCommand. */
+  public ShooterOffCommand(ShooterSubsystem subsystem) {
+    shooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climbSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +23,7 @@ public class SolenoidCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climbSubsystem.SolenoidControl();
+    shooterSubsystem.ShooterOff();
   }
 
   // Called once the command ends or is interrupted.
@@ -33,6 +33,6 @@ public class SolenoidCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

@@ -27,11 +27,20 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void ShooterOff(){
+    shooter.setVoltage(0);
+    leftShooterMotor.setVoltage(0);
+    rightShooterMotor.setVoltage(0);
+    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 0);
+    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 0);
+  }
+
   public void RunShooter(){
 
 
-    leftShooterMotor.setInverted(true);
-    rightShooterMotor.setInverted(false);
+    leftShooterMotor.setInverted(false);
+    rightShooterMotor.setInverted(true);
     shooter.setVoltage(Constants.shooterVolts);
     RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 0.5);
     RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 0.5);
@@ -41,8 +50,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void ReverseShooter(){
 
-    leftShooterMotor.setInverted(false);
-    rightShooterMotor.setInverted(true);
+    leftShooterMotor.setInverted(true);
+    rightShooterMotor.setInverted(false);
     shooter.setVoltage(Constants.rShooterVolts);
 
   }
@@ -53,8 +62,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterTimer.start();
 
     while(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
-      leftShooterMotor.setInverted(true);
-      rightShooterMotor.setInverted(false);
+      leftShooterMotor.setInverted(false);
+      rightShooterMotor.setInverted(true);
       shooter.setVoltage(Constants.shooterVolts);}
   }
 }

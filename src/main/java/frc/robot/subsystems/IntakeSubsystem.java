@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -26,27 +25,33 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public void IntakeOff(){
+     intakeMotors.setVoltage(0);
+     lowIntakeMotor.setVoltage(0);
+     topIntakeMotor.setVoltage(0);
+  }
+
   public void RunIntake() {
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort4)){
-      topIntakeMotor.setInverted(true);
-      lowIntakeMotor.setInverted(false);
+      topIntakeMotor.setInverted(false);
+      lowIntakeMotor.setInverted(true);
       intakeMotors.setVoltage(Constants.bothIntakeVolts);
       Constants.intakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort6)){
-      lowIntakeMotor.setInverted(false);
+      lowIntakeMotor.setInverted(true);
       lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
       Constants.intakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort5)){
-      topIntakeMotor.setInverted(true);
+      topIntakeMotor.setInverted(false);
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.intakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
-      lowIntakeMotor.setInverted(true);
-      lowIntakeMotor.setVoltage(Constants.tIntakeVolts);
+      topIntakeMotor.setInverted(true);
+      topIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.reverseIntakeActive = true;}
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort11)){
-      topIntakeMotor.setInverted(false);
-      topIntakeMotor.setVoltage(Constants.tIntakeVolts);
+      lowIntakeMotor.setInverted(false);
+      lowIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.reverseIntakeActive = true;}
   }
 //Auton Intake
@@ -54,8 +59,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeTimer.reset();
     intakeTimer.start();
-    lowIntakeMotor.setInverted(false);
-    topIntakeMotor.setInverted(true);
+    lowIntakeMotor.setInverted(true);
+    topIntakeMotor.setInverted(false);
 
       while(intakeTimer.get() >= 1 && intakeTimer.get() < 1.75){
         lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}

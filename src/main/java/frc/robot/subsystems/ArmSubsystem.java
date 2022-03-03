@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class ArmSubsystem extends SubsystemBase {
 
@@ -26,6 +27,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void ArmAngleDown(){
 
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort13));{
     actuatorMotor.setInverted(true);
 
     while(pot.get() < 300);{
@@ -41,8 +43,10 @@ public class ArmSubsystem extends SubsystemBase {
       actuatorMotor.setVoltage(Constants.zeroAngleVolts);
     }
   }                                                         //ranges are from aprox 150 at top and 350
-
+  }
   public void ArmAngleUp(){
+
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort14)){
 
     actuatorMotor.setInverted(false);
 
@@ -59,4 +63,5 @@ public class ArmSubsystem extends SubsystemBase {
       actuatorMotor.setVoltage(Constants.zeroAngleVolts);
     }
   }
+}
 }
