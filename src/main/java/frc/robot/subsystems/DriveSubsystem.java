@@ -44,7 +44,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void ArcadeDrive(XboxController controller, double speedX, double speedY, double RspeedX, double RspeedY){
     while(RobotContainer.XCont.getRightBumperPressed()){
-      arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*RspeedX, RobotContainer.XCont.getLeftY()*RspeedY);}
+      arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*RspeedY);}
       Constants.reverseDrive = true;
 
     arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*speedY);

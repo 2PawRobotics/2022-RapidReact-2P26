@@ -16,10 +16,10 @@ public class ClimbSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
 
-  private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
-  private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 3, 4);
+  private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+  private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
 
-  private final Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  public final static Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   @Override
   public void periodic() {
@@ -41,7 +41,8 @@ public class ClimbSubsystem extends SubsystemBase {
 
   public void CompRun(){
 
-    comp.enableDigital();
+   // comp.enableDigital();
+   System.out.println(comp.getPressureSwitchValue());
 
   }
 }

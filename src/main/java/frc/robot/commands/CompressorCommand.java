@@ -24,7 +24,7 @@ public class CompressorCommand extends CommandBase {
   @Override
   public void execute() {
 
-    climbSubsystem.CompRun();
+   // climbSubsystem.CompRun();
 
   }
 
