@@ -7,10 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSubsystem;
 
-public class ArmDownCommand extends CommandBase {
+public class ArmZeroCommand extends CommandBase {
   private final ArmSubsystem armSubsystem;
-  /** Creates a new ArmDownCommand. */
-  public ArmDownCommand(ArmSubsystem subsystem) {
+  /** Creates a new ArmZeroCommand. */
+  public ArmZeroCommand(ArmSubsystem subsystem) {
     armSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armSubsystem);
@@ -23,7 +23,7 @@ public class ArmDownCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.ArmChangeDown();
+    armSubsystem.ArmChangeNull();
   }
 
   // Called once the command ends or is interrupted.
@@ -33,6 +33,6 @@ public class ArmDownCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

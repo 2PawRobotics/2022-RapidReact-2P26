@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArmUpCommand;
+import frc.robot.commands.ArmZeroCommand;
+import frc.robot.commands.ArmClimbCommand;
 import frc.robot.commands.ArmDownCommand;
 import frc.robot.commands.AutoCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
@@ -59,6 +61,8 @@ public class RobotContainer {
   private final ShooterOffCommand shooterOffCommand;
   private final ArmUpCommand armCommandUp;
   private final ArmDownCommand armDownCommand;
+  private final ArmZeroCommand armZeroCommand;
+  private final ArmClimbCommand armClimbCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -84,6 +88,8 @@ public class RobotContainer {
     shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
     armCommandUp = new ArmUpCommand(armSubsystem);
     armDownCommand = new ArmDownCommand(armSubsystem);
+    armZeroCommand = new ArmZeroCommand(armSubsystem);
+    armClimbCommand = new ArmClimbCommand(armSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
@@ -101,6 +107,7 @@ public class RobotContainer {
     shooterOffCommand.addRequirements(shooterSubsystem);
     armCommandUp.addRequirements(armSubsystem);
     armDownCommand.addRequirements(armSubsystem);
+    armClimbCommand.addRequirements(armSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
@@ -112,6 +119,7 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
     CommandScheduler.getInstance().setDefaultCommand(intakeSubsystem, intakeOffCommand);
     CommandScheduler.getInstance().setDefaultCommand(shooterSubsystem, shooterOffCommand);
+    CommandScheduler.getInstance().setDefaultCommand(armSubsystem, armZeroCommand);
 
     //Make Controllers Here
     XCont = new XboxController(Constants.XContPort);
@@ -142,6 +150,7 @@ public class RobotContainer {
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
     Button2.whileHeld(new ReverseShooterCommand(shooterSubsystem));
+    Button3.whileHeld(new ArmClimbCommand(armSubsystem));
     Button4.whileHeld(new IntakeCommand(intakeSubsystem));
     Button5.whileHeld(new IntakeCommand(intakeSubsystem));
     Button6.whileHeld(new IntakeCommand(intakeSubsystem));

@@ -7,8 +7,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class ArmSubsystem extends SubsystemBase {
 
@@ -16,26 +18,37 @@ public class ArmSubsystem extends SubsystemBase {
   private final CANSparkMax actuatorMotor = new CANSparkMax(Constants.actuatorport, MotorType.kBrushed);
   private final DigitalInput topLimitSwitch = new DigitalInput(Constants.topLimitSwitchPort);
   private final DigitalInput lowLimitSwitch = new DigitalInput(Constants.lowLimitSwitchPort);
+  private final Timer armTimer = new Timer();
 
   //--------------------------------------------------------------------------------------------//
   //Make Methods Here
 
+  public void ArmChangeNull(){
+    actuatorMotor.set(0);
+    armTimer.reset();
+  }
+
   public void ArmChangeDown(){
     while(lowLimitSwitch.get() == false){
-      actuatorMotor.set(Constants.RactuatorSpeed);
-    }
-    while(lowLimitSwitch.get() == true){
-      actuatorMotor.set(Constants.zeroSpeed);
+      actuatorMotor.set(Constants.actuatorSpeed);
     }
   }
   
   public void ArmChangeUp(){
     while(topLimitSwitch.get() == false){
-      actuatorMotor.set(Constants.actuatorSpeed);
+      actuatorMotor.set(Constants.RactuatorSpeed);
     }
-    while(topLimitSwitch.get() == true){
-      actuatorMotor.set(Constants.zeroSpeed);
+  }
+
+  public void ArmClimb(){
+    armTimer.start();
+    while(armTimer.get() <= 1){
+      actuatorMotor.set(0.3);
     }
+    while(armTimer.get() == 1.1 ){
+      actuatorMotor.set(0);
+    }
+
   }
   
 }
