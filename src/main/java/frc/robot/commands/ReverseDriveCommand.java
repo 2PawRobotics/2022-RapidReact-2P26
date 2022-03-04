@@ -6,17 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 
-public class ArmCommand extends CommandBase {
-  private final ArmSubsystem armSubsystem;
-  /** Creates a new ArmExtendCommand. */
-  public ArmCommand(ArmSubsystem subsystem) {
-    armSubsystem = subsystem;
+public class ReverseDriveCommand extends CommandBase {
+  private final DriveSubsystem driveSubsystem;
+  /** Creates a new ReverseDriveCommand. */
+  public ReverseDriveCommand(DriveSubsystem subsystem) {
+    driveSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
+    addRequirements(driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,10 +25,9 @@ public class ArmCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.ArmAngleChange(Constants.ButtonPort13, Constants.ButtonPort14, RobotContainer.ButtonPanel,
-    Constants.zeroSpeed, Constants.actuatorSpeed, Constants.RactuatorSpeed);
+    driveSubsystem.ReverseDrive(RobotContainer.XCont, Constants.speedX, Constants.RspeedY);
   }
-    
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
@@ -37,6 +35,6 @@ public class ArmCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

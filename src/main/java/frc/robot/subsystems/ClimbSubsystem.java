@@ -33,11 +33,4 @@ public class ClimbSubsystem extends SubsystemBase {
       dSolenoid2.set(Value.kReverse);
     }
   }
-
-  public void CompRun(){
-
-   // comp.enableDigital();
-   System.out.println(comp.getPressureSwitchValue());
-
-  }
 }

@@ -6,7 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ArmCommand;
+import frc.robot.commands.ArmUpCommand;
+import frc.robot.commands.ArmDownCommand;
 import frc.robot.commands.AutoCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.AutoGyroCommand;
@@ -56,6 +57,8 @@ public class RobotContainer {
   private final AutoIntakeCommand autoIntakeCommand;
   private final IntakeOffCommand intakeOffCommand;
   private final ShooterOffCommand shooterOffCommand;
+  private final ArmUpCommand armCommandUp;
+  private final ArmDownCommand armDownCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -79,6 +82,8 @@ public class RobotContainer {
     reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
     intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
     shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
+    armCommandUp = new ArmUpCommand(armSubsystem);
+    armDownCommand = new ArmDownCommand(armSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
@@ -94,6 +99,8 @@ public class RobotContainer {
     reverseShooterCommand.addRequirements(shooterSubsystem);
     intakeOffCommand.addRequirements(intakeSubsystem);
     shooterOffCommand.addRequirements(shooterSubsystem);
+    armCommandUp.addRequirements(armSubsystem);
+    armDownCommand.addRequirements(armSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
@@ -142,8 +149,8 @@ public class RobotContainer {
     Button12.whenPressed(new SolenoidCommand(climbSubsystem));
     Button10.whileHeld(new IntakeCommand(intakeSubsystem));
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
-    Button13.whenPressed(new ArmCommand(armSubsystem));
-    Button14.whileHeld(new ArmCommand(armSubsystem));
+    Button13.whileHeld(new ArmDownCommand(armSubsystem));
+    Button14.whileHeld(new ArmUpCommand(armSubsystem));
     Bumper1.whileHeld(new DriveCommand(driveSubsystem));
     
 

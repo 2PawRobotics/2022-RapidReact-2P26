@@ -5,16 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 
-public class IntakeCommand extends CommandBase {
-  private final IntakeSubsystem intakeSubsystem;
-  /** Creates a new IntakeCommand. */
-  public IntakeCommand(IntakeSubsystem subsystem) {
-    intakeSubsystem = subsystem;
+public class ArmUpCommand extends CommandBase {
+  private final ArmSubsystem armSubsystem;
+  /** Creates a new ArmExtendCommand. */
+  public ArmUpCommand(ArmSubsystem subsystem) {
+    armSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intakeSubsystem);
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -24,11 +23,9 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    intakeSubsystem.RunIntake(RobotContainer.ButtonPanel);
-    
+    armSubsystem.ArmChangeUp();
   }
-
+    
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
