@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -21,23 +22,28 @@ public class ArmSubsystem extends SubsystemBase {
   //--------------------------------------------------------------------------------------------//
   //Make Methods Here
 
-  public void ArmAngleDown(){
+  public void ArmAngleChange(
+    int ButtonPort13, int ButtonPort14, Joystick ButtonPanel, 
+    int zeroSpeed, double actuatorSpeed, double RactuatorSpeed){
 
-    actuatorMotor.setInverted(true);
-    
-     while(lowLimitSwitch.get() == false);{
-        actuatorMotor.set(Constants.actuatorSpeed);}
-     while(lowLimitSwitch.get() == true);{
-        actuatorMotor.set(Constants.zeroSpeed);}
+    if(ButtonPanel.getRawButtonPressed(ButtonPort13) ||
+       ButtonPanel.getRawButtonPressed(ButtonPort14)){
+
+      if(topLimitSwitch.get()){
+        actuatorMotor.set(zeroSpeed);
+      }
+        else{
+          actuatorMotor.set(actuatorSpeed);
+        }
+    }
+    else{
+      if(lowLimitSwitch.get()){
+        actuatorMotor.set(zeroSpeed);
+      }
+      else{
+        actuatorMotor.set(RactuatorSpeed);
+      }
+    }
   }
-  
-  public void ArmAngleUp(){
-    actuatorMotor.setInverted(false);
-
-     while(topLimitSwitch.get() == false);{
-        actuatorMotor.set(Constants.actuatorSpeed);}
-     while(topLimitSwitch.get() == true);{
-        actuatorMotor.set(Constants.zeroSpeed);}
-  }
-
 }
+

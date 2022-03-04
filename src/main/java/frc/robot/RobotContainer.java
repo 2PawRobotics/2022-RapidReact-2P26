@@ -143,7 +143,7 @@ public class RobotContainer {
     Button10.whileHeld(new IntakeCommand(intakeSubsystem));
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
     Button13.whenPressed(new ArmCommand(armSubsystem));
-    Button14.whenPressed(new ArmCommand(armSubsystem));
+    Button14.whileHeld(new ArmCommand(armSubsystem));
     Bumper1.whileHeld(new DriveCommand(driveSubsystem));
     
 
