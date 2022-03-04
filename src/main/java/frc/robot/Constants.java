@@ -66,8 +66,8 @@ public final class Constants {
         public static final double RspeedY = -0.83;
         public static final double RspeedX = 0.83;
         //Speed Constants
-        public static final double actuatorSpeed = 0.5;
-        public static final double RactuatorSpeed = -0.5;
+        public static final double actuatorSpeed = 0.7;
+        public static final double RactuatorSpeed = -0.7;
         public static final int zeroSpeed = 0;
         //Voltage Constants
         public static final int shooterVolts = 10;
