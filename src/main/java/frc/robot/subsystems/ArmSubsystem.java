@@ -29,27 +29,21 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void ArmChangeDown(){
-    while(lowLimitSwitch.get() == false){
+    if(lowLimitSwitch.get() == false){
       actuatorMotor.set(Constants.actuatorSpeed);
+    }
+    else{
+      actuatorMotor.set(0);
     }
   }
   
   public void ArmChangeUp(){
-    while(topLimitSwitch.get() == false){
+    if(topLimitSwitch.get() == false){
       actuatorMotor.set(Constants.RactuatorSpeed);
     }
-  }
-
-  public void ArmClimb(){
-    armTimer.start();
-    while(armTimer.get() <= 1){
-      actuatorMotor.set(0.3);
-    }
-    while(armTimer.get() == 1.1 ){
+    else{
       actuatorMotor.set(0);
     }
-
   }
-  
 }
 
