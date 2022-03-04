@@ -18,15 +18,10 @@ public class ClimbSubsystem extends SubsystemBase {
 
   private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
   private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
-
   public final static Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  // This method will be called once per scheduler run
+  //--------------------------------------------------------------------------------------------//
+  // Make Methods Here
 
   public void SolenoidControl(){
     if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort9)){

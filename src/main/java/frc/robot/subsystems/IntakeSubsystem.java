@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,16 +15,16 @@ import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
 
+  //Declare Hardware Components
+
   private final CANSparkMax lowIntakeMotor = new CANSparkMax(Constants.intakelowport, MotorType.kBrushed);
   private final CANSparkMax topIntakeMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
   private final MotorControllerGroup intakeMotors = new MotorControllerGroup(lowIntakeMotor, topIntakeMotor);
 
   private final Timer intakeTimer = new Timer();
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  //--------------------------------------------------------------------------------------------//
+  // Make Methods Here
 
   public void IntakeOff(){
      intakeMotors.setVoltage(0);
@@ -31,25 +32,25 @@ public class IntakeSubsystem extends SubsystemBase {
      topIntakeMotor.setVoltage(0);
   }
 
-  public void RunIntake() {
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort4)){
+  public void RunIntake(Joystick ButtonPanel) {
+    while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort4)){
       topIntakeMotor.setInverted(false);
       lowIntakeMotor.setInverted(true);
       intakeMotors.setVoltage(Constants.bothIntakeVolts);
       Constants.intakeActive = true;}
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort6)){
+    while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort6)){
       lowIntakeMotor.setInverted(true);
       lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
       Constants.intakeActive = true;}
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort5)){
+    while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort5)){
       topIntakeMotor.setInverted(false);
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.intakeActive = true;}
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
+    while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
       topIntakeMotor.setInverted(true);
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.reverseIntakeActive = true;}
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort11)){
+    while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort11)){
       lowIntakeMotor.setInverted(false);
       lowIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.reverseIntakeActive = true;}

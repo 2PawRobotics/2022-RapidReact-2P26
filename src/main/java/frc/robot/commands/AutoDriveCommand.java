@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class AutoDriveCommand extends CommandBase {
@@ -24,7 +25,7 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    driveSubsystem.AutonDrive();
+    driveSubsystem.AutonDrive(Constants.AutonPath);
 
   }
 
@@ -35,6 +36,6 @@ public class AutoDriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

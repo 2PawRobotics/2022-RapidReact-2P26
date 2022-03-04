@@ -13,76 +13,76 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    //Motors
+        //Drive Motors
+        public static final int leftCimPort1 = 1;
+        public static final int leftCimPort2 = 3;
+        public static final int rightCimPort1 = 2;
+        public static final int rightCimPort2 = 4;
+        //Other Motors
+        public static final int actuatorport = 5;
+        public static final int intakelowport = 6;
+        public static final int intakehighport = 7;
+        public static final int leftshooterport = 8;
+        public static final int rightshooterport = 9;
 
-    //Drive Motors
-    public static final int leftCimPort1 = 1;
-    public static final int leftCimPort2 = 3;
-    public static final int rightCimPort1 = 2;
-    public static final int rightCimPort2 = 4;
+    //Encoder Stuff
+        //Encoder Ports THIS IS NEW STUFF
+        public static final int[] kLeftEncoderPorts = new int[] {0, 1};
+        public static final int[] krightEncoderPorts = new int[] {2, 3};
+        public static final boolean kLeftEncoderReversed = true;
+        public static final boolean kRightEncoderReversed = true;
+        //Other Encoder Stuff
+        public static final int kEncoderCPR = 720;
+        public static final double kWheelDiameterMeters = 0.15;
+        public static final double kEncoderDistancePerPulse = (kWheelDiameterMeters * Math.PI) / (kEncoderCPR);
 
-    //Encoder Ports THIS IS NEW STUFF
-    public static final int[] kLeftEncoderPorts = new int[] {0, 1};
-    public static final int[] krightEncoderPorts = new int[] {2, 3};
-    public static final boolean kLeftEncoderReversed = true;
-    public static final boolean kRightEncoderReversed = true;
+    //Controllers and Various Ports
+        //Controllers 
+        public static final int XContPort = 1;
+        public static final int ButtonPanelPort = 0;
+        //Button Panel Ports
+        public static final int ButtonPort1 = 1;
+        public static final int ButtonPort2 = 2;
+        public static final int ButtonPort3 = 3;
+        public static final int ButtonPort4 = 4;
+        public static final int ButtonPort5 = 5;
+        public static final int ButtonPort6 = 6;
+        public static final int ButtonPort9 = 9;
+        public static final int ButtonPort10 = 10;
+        public static final int ButtonPort11 = 11;
+        public static final int ButtonPort12 = 12;
+        public static final int ButtonPort13 = 13;
+        public static final int ButtonPort14 = 14;
+        public static final int RightBumper = 6;
+        //DIO Ports
+        public static final int topLimitSwitchPort = 4;
+        public static final int lowLimitSwitchPort = 5;
 
-    //Other Encoder Stuff
-    public static final int kEncoderCPR = 720;
-    public static final double kWheelDiameterMeters = 0.15;
-    public static final double kEncoderDistancePerPulse = (kWheelDiameterMeters * Math.PI) / (kEncoderCPR);
+    //Speeds and Voltages
+        //Drive Speeds
+        public static final double speedY = 1.00;
+        public static final double speedX = -0.90;
+        public static final double RspeedY = -0.83;
+        public static final double RspeedX = 0.83;
+        //Speed Constants
+        public static final double actuatorSpeed = 0.3;
+        public static final int zeroSpeed = 0;
+        //Voltage Constants
+        public static final int shooterVolts = 10;
+        public static final int autonShooterVolts = 10;
+        public static final int rShooterVolts = 3;
+        public static final int bothIntakeVolts = 3;
+        public static final int lIntakeVolts = 8;
+        public static final int tIntakeVolts = 3;
+       
 
-    //Other Motors
-    public static final int actuatorport = 5;
-    public static final int intakelowport = 6;
-    public static final int intakehighport = 7;
-    public static final int leftshooterport = 8;
-    public static final int rightshooterport = 9;
+    
+    //Auton Paths
+        public static int AutonPath = 0;
 
-    //Controllers 
-    public static final int XContPort = 1;
-    public static final int ButtonPanelPort = 0;
-
-    //Drive Variables
-    public static final double speedY = 0.83;
-    public static final double speedX = -0.83;
-    public static final double RspeedY = -0.83;
-    public static final double RspeedX = 0.83;
-
-    //Voltage Constants
-    public static final int shooterVolts = 10;
-    public static final int autonShooterVolts = 10;
-    public static final int rShooterVolts = 3;
-    public static final int bothIntakeVolts = 3;
-    public static final int lIntakeVolts = 8;
-    public static final int tIntakeVolts = 3;
-    public static final int fastAngleVolts = 4;
-    public static final int slowAngleVolts = 2;
-    public static final int zeroAngleVolts = 0;
-
-    //Button Panel Ports
-    public static final int ButtonPort1 = 1;
-    public static final int ButtonPort2 = 2;
-    public static final int ButtonPort3 = 3;
-    public static final int ButtonPort4 = 4;
-    public static final int ButtonPort5 = 5;
-    public static final int ButtonPort6 = 6;
-    //public static final int ButtonPort7 = 7; These two are not wired on the button panel.
-    //public static final int ButtonPort8 = 8;
-    public static final int ButtonPort9 = 9;
-    public static final int ButtonPort10 = 10;
-    public static final int ButtonPort11 = 11;
-    public static final int ButtonPort12 = 12;
-    public static final int ButtonPort13 = 13;
-    public static final int ButtonPort14 = 14;
-
-    //Auton Path Value
-    public static boolean AutonPath1 = false;
-    public static boolean AutonPath2 = false;
-    public static boolean AutonPath3 = false;
-    public static boolean AutonPath4 = false;
-
-    //Commands running or not
-    public static boolean intakeActive = false;
-    public static boolean reverseIntakeActive = false;
-    public static boolean reverseDrive = false;
+    //Command Booleans
+        public static boolean intakeActive = false;
+        public static boolean reverseIntakeActive = false;
+        public static boolean reverseDrive = false;
 }

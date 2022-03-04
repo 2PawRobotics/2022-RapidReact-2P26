@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArmCommand;
@@ -13,7 +12,6 @@ import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.AutoGyroCommand;
 import frc.robot.commands.AutoIntakeCommand;
 import frc.robot.commands.AutonShootCommand;
-import frc.robot.commands.CompressorCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeOffCommand;
@@ -27,7 +25,6 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -37,11 +34,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
-public class RobotContainer {
 
-// The robot's subsystems and commands are defined here...
- // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
- // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem );
+public class RobotContainer {
 
   //Name Subsystems Here
   private final DriveSubsystem driveSubsystem;
@@ -60,7 +54,6 @@ public class RobotContainer {
   private final AutoGyroCommand autoGyroCommand;
   private final ReverseShooterCommand reverseShooterCommand;
   private final AutoIntakeCommand autoIntakeCommand;
-  private final CompressorCommand compressorCommand;
   private final IntakeOffCommand intakeOffCommand;
   private final ShooterOffCommand shooterOffCommand;
 
@@ -84,7 +77,6 @@ public class RobotContainer {
     intakeCommand = new IntakeCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
     reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
-    compressorCommand = new CompressorCommand(climbSubsystem);
     intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
     shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
 
@@ -100,7 +92,6 @@ public class RobotContainer {
     intakeCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
     reverseShooterCommand.addRequirements(shooterSubsystem);
-    compressorCommand.addRequirements(climbSubsystem);
     intakeOffCommand.addRequirements(intakeSubsystem);
     shooterOffCommand.addRequirements(shooterSubsystem);
 
@@ -112,7 +103,6 @@ public class RobotContainer {
 
     //Sets the Default Command of a subsystem, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
-    CommandScheduler.getInstance().setDefaultCommand(climbSubsystem, compressorCommand);
     CommandScheduler.getInstance().setDefaultCommand(intakeSubsystem, intakeOffCommand);
     CommandScheduler.getInstance().setDefaultCommand(shooterSubsystem, shooterOffCommand);
 
@@ -124,12 +114,6 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
 
     //Make Button names and tie them to port numbers from Constants.
@@ -145,6 +129,7 @@ public class RobotContainer {
     JoystickButton Button12 = new JoystickButton(ButtonPanel, Constants.ButtonPort12);
     JoystickButton Button13 = new JoystickButton(ButtonPanel, Constants.ButtonPort13);
     JoystickButton Button14 = new JoystickButton(ButtonPanel, Constants.ButtonPort14);
+    JoystickButton Bumper1 = new JoystickButton(XCont, Constants.RightBumper);
 
     //Bind buttons to Commands and Subsystems 
 
@@ -159,16 +144,13 @@ public class RobotContainer {
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
     Button13.whenPressed(new ArmCommand(armSubsystem));
     Button14.whenPressed(new ArmCommand(armSubsystem));
+    Bumper1.whileHeld(new DriveCommand(driveSubsystem));
+    
 
     //Below are some examples of doing so
 
     //Button1.whenPressed(new ExampleCommand(exampleSubsystem));
     //Button1.whileHeld(new ExampleCommand(exampleSubsystem));
-
-    /*XCont.getRightStickButtonPressed();{
-      new SolenoidCommand(climbSubsystem);
-    }
-    */
   }
 
   /**

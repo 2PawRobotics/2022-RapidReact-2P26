@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -85,15 +86,13 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    /*SmartDashboard.putNumber("Arm Angle", ArmSubsystem.pot.get());
-    SmartDashboard.putBoolean("Arm Angle ", ArmSubsystem.pot.get() >= 350);
     SmartDashboard.putNumber("Shooter RPM", ShooterSubsystem.shooter.get()*3600);
     SmartDashboard.putBoolean("Shooter is Ready", ShooterSubsystem.shooter.get()*3600 >= 2800);
     SmartDashboard.putNumber("Left Joystick Y", RobotContainer.XCont.getLeftY());
     SmartDashboard.putNumber("Right Joystick X", RobotContainer.XCont.getRightX());
     SmartDashboard.putBoolean("Intake is Active", Constants.intakeActive);
     SmartDashboard.putBoolean("Intake is in Reverse", Constants.reverseIntakeActive);
-    SmartDashboard.putBoolean("Drive is in Reverse", Constants.reverseDrive);*/
+    SmartDashboard.putBoolean("Drive is in Reverse", Constants.reverseDrive);
   }
 
   @Override

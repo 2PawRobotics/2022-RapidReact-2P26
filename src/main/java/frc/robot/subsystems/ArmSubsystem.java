@@ -6,9 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -17,53 +15,29 @@ public class ArmSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
   private final CANSparkMax actuatorMotor = new CANSparkMax(Constants.actuatorport, MotorType.kBrushed);
-  public final static AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
+  private final DigitalInput topLimitSwitch = new DigitalInput(Constants.topLimitSwitchPort);
+  private final DigitalInput lowLimitSwitch = new DigitalInput(Constants.lowLimitSwitchPort);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  public void Readpot(){
-    System.out.println(pot.get());}
+  //--------------------------------------------------------------------------------------------//
+  //Make Methods Here
 
   public void ArmAngleDown(){
 
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort13));{
     actuatorMotor.setInverted(true);
-
-    while(pot.get() < 300);{
-      actuatorMotor.setVoltage(Constants.fastAngleVolts);
-    }
-    while(pot.get() >= 300 && pot.get() <350);{
-      actuatorMotor.setVoltage(Constants.slowAngleVolts);
-    }
-    while(pot.get() >= 350);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
-    }
-    if(actuatorMotor.getOutputCurrent() > 5);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
-    }
-  }                                                         //ranges are from aprox 150 at top and 350
+    
+     while(lowLimitSwitch.get() == false);{
+        actuatorMotor.set(Constants.actuatorSpeed);}
+     while(lowLimitSwitch.get() == true);{
+        actuatorMotor.set(Constants.zeroSpeed);}
   }
+  
   public void ArmAngleUp(){
-
-    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort14)){
-
     actuatorMotor.setInverted(false);
 
-    while(pot.get() > 200);{
-      actuatorMotor.setVoltage(Constants.fastAngleVolts);
-    }
-    while(pot.get() <= 200 && pot.get() > 150);{
-      actuatorMotor.setVoltage(Constants.slowAngleVolts);
-    }
-    while(pot.get() <= 150);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
-    }
-    if(actuatorMotor.getOutputCurrent() > 5);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
-    }
+     while(topLimitSwitch.get() == false);{
+        actuatorMotor.set(Constants.actuatorSpeed);}
+     while(topLimitSwitch.get() == true);{
+        actuatorMotor.set(Constants.zeroSpeed);}
   }
-}
+
 }

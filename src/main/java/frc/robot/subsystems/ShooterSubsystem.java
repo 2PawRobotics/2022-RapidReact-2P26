@@ -17,18 +17,18 @@ import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
 
+  //Declare Hardware Components
   public final static CANSparkMax leftShooterMotor = new CANSparkMax(Constants.leftshooterport, MotorType.kBrushed);
   public final static CANSparkMax rightShooterMotor = new CANSparkMax(Constants.rightshooterport, MotorType.kBrushed);
   public final static MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
 
   private final Timer shooterTimer = new Timer();
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  //--------------------------------------------------------------------------------------------//
+  // Make Methods Here
 
   public void ShooterOff(){
+
     shooter.setVoltage(0);
     leftShooterMotor.setVoltage(0);
     rightShooterMotor.setVoltage(0);
@@ -38,14 +38,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void RunShooter(){
 
-
     leftShooterMotor.setInverted(false);
     rightShooterMotor.setInverted(true);
     shooter.setVoltage(Constants.shooterVolts);
     RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 1);
     RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 1);
     System.out.println(shooter.get());
-
   }
 
   public void ReverseShooter(){
@@ -53,7 +51,6 @@ public class ShooterSubsystem extends SubsystemBase {
     leftShooterMotor.setInverted(true);
     rightShooterMotor.setInverted(false);
     shooter.setVoltage(Constants.rShooterVolts);
-
   }
 
   public void AutonShooter(){

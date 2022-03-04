@@ -30,6 +30,9 @@ public class DriveCommand extends CommandBase {
   public void execute() {
 
     driveSubsystem.ArcadeDrive(RobotContainer.XCont, Constants.speedX, Constants.speedY, Constants.RspeedX, Constants.RspeedY);
+    while(RobotContainer.XCont.getRightBumperPressed());{
+      driveSubsystem.ReverseDrive(RobotContainer.XCont, Constants.speedX, Constants.RspeedY);
+    }
 
   }
   // Called once the command ends or is interrupted.

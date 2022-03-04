@@ -22,12 +22,13 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 
 public class DriveSubsystem extends SubsystemBase {
- 
+
+  //Declare Hardware Components
+
   private final CANSparkMax leftCim1 = new CANSparkMax(Constants.leftCimPort1, MotorType.kBrushed);
   private final CANSparkMax leftCim2 = new CANSparkMax(Constants.leftCimPort2, MotorType.kBrushed);
   private final CANSparkMax rightCim1 = new CANSparkMax(Constants.rightCimPort1, MotorType.kBrushed);
   private final CANSparkMax rightCim2 = new CANSparkMax(Constants.rightCimPort2, MotorType.kBrushed);
-
   private final MotorControllerGroup leftCims = new MotorControllerGroup(leftCim1, leftCim2);
   private final MotorControllerGroup rightCims = new MotorControllerGroup(rightCim1, rightCim2);
 
@@ -37,26 +38,26 @@ public class DriveSubsystem extends SubsystemBase {
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  //--------------------------------------------------------------------------------------------//
+  // Make Methods Here
 
-  public void ArcadeDrive(XboxController controller, double speedX, double speedY, double RspeedX, double RspeedY){
-    while(RobotContainer.XCont.getRightBumperPressed()){
-      arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*RspeedY);}
-      Constants.reverseDrive = true;
-
+  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedX, double RspeedY){
     arcadeDrive.arcadeDrive(RobotContainer.XCont.getRightX()*speedX, RobotContainer.XCont.getLeftY()*speedY);
   }
-  public void AutonDrive(){
 
-  
+  public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
+    while(RobotContainer.XCont.getRightBumperPressed()){
+      arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, XCont.getLeftY()*RspeedY);
+      Constants.reverseDrive = true;
+    }
+  }
+
+  public void AutonDrive(int AutonPath){
     driveTimer.reset();
     driveTimer.start();
 
 //Auton Path 1
-    if(Constants.AutonPath1 = true){
+    if(AutonPath == 1){
       while(driveTimer.get() < .5){
         arcadeDrive.tankDrive(.3, .0);
       }
@@ -69,7 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
       }
     }
 //Auton Path 2
-    if(Constants.AutonPath2 = true){
+    if(AutonPath == 2){
       while(driveTimer.get() < .5){
         arcadeDrive.tankDrive(.3, .0);
       }
@@ -82,7 +83,7 @@ public class DriveSubsystem extends SubsystemBase {
       }
     }
 //Auton Path 3
-    if(Constants.AutonPath3 = true){
+    if(AutonPath == 3){
       while(driveTimer.get() < 1){
         arcadeDrive.tankDrive(.5, .5);
       }
@@ -92,7 +93,7 @@ public class DriveSubsystem extends SubsystemBase {
       }
     }
 //Auton Path 4
-    if(Constants.AutonPath4 = true){
+    if(AutonPath == 4){
       while(driveTimer.get() < .5){
         arcadeDrive.tankDrive(.0, .3);
       }
