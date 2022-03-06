@@ -2,18 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class ArmDownCommand extends CommandBase {
-  private final ArmSubsystem armSubsystem;
-  /** Creates a new ArmDownCommand. */
-  public ArmDownCommand(ArmSubsystem subsystem) {
-    armSubsystem = subsystem;
+public class IntakeCommand extends CommandBase {
+  private final IntakeSubsystem intakeSubsystem;
+  /** Creates a new IntakeCommand. */
+  public IntakeCommand(IntakeSubsystem subsystem) {
+    intakeSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +24,9 @@ public class ArmDownCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.ArmChangeDown();
+
+    intakeSubsystem.RunIntake(RobotContainer.ButtonPanel);
+    
   }
 
   // Called once the command ends or is interrupted.

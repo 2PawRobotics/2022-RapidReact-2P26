@@ -46,6 +46,15 @@ public class ShooterSubsystem extends SubsystemBase {
     System.out.println(shooter.get());
   }
 
+  public void LowRunShooter(){
+
+    leftShooterMotor.setInverted(false);
+    rightShooterMotor.setInverted(true);
+    shooter.setVoltage(Constants.lowshooterVolts);
+    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, .5);
+    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, .5);
+  }
+
   public void ReverseShooter(){
 
     leftShooterMotor.setInverted(true);

@@ -2,19 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class IntakeCommand extends CommandBase {
-  private final IntakeSubsystem intakeSubsystem;
-  /** Creates a new IntakeCommand. */
-  public IntakeCommand(IntakeSubsystem subsystem) {
-    intakeSubsystem = subsystem;
+public class AutonShootCommand extends CommandBase {
+  private final ShooterSubsystem shooterSubsystem;
+  /** Creates a new AutoShoot. */
+  public AutonShootCommand(ShooterSubsystem subsytem) {
+    shooterSubsystem = subsytem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intakeSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,8 +24,8 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
 
-    intakeSubsystem.RunIntake(RobotContainer.ButtonPanel);
-    
+    shooterSubsystem.AutonShooter();
+
   }
 
   // Called once the command ends or is interrupted.

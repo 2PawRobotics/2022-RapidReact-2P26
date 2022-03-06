@@ -6,21 +6,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ArmUpCommand;
-import frc.robot.commands.ArmZeroCommand;
-import frc.robot.commands.ArmDownCommand;
-import frc.robot.commands.AutoCommandGroup;
-import frc.robot.commands.AutoDriveCommand;
-import frc.robot.commands.AutoGyroCommand;
-import frc.robot.commands.AutoIntakeCommand;
-import frc.robot.commands.AutonShootCommand;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.IntakeOffCommand;
-import frc.robot.commands.ReverseShooterCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.ShooterOffCommand;
-import frc.robot.commands.SolenoidCommand;
+import frc.robot.commands.Arm.ArmDownCommand;
+import frc.robot.commands.Arm.ArmUpCommand;
+import frc.robot.commands.Arm.ArmZeroCommand;
+import frc.robot.commands.Auton.AutoCommandGroup;
+import frc.robot.commands.Auton.AutoDriveCommand;
+import frc.robot.commands.Auton.AutoGyroCommand;
+import frc.robot.commands.Auton.AutoIntakeCommand;
+import frc.robot.commands.Auton.AutonShootCommand;
+import frc.robot.commands.Climb.SolenoidCommand;
+import frc.robot.commands.Drive.DriveCommand;
+import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Intake.IntakeOffCommand;
+import frc.robot.commands.Shooter.ShooterLowCommand;
+import frc.robot.commands.Shooter.ReverseShooterCommand;
+import frc.robot.commands.Shooter.ShooterCommand;
+import frc.robot.commands.Shooter.ShooterOffCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -49,18 +50,19 @@ public class RobotContainer {
   //Name Commands Here
   private final DriveCommand driveCommand;
   private final ShooterCommand shooterCommand;
+  private final ShooterOffCommand shooterOffCommand;
+  private final ShooterLowCommand shooterLowCommand;
+  private final ReverseShooterCommand reverseShooterCommand;
   private final IntakeCommand intakeCommand;
+  private final IntakeOffCommand intakeOffCommand;
   private final SolenoidCommand solenoidCommand;
+  private final ArmUpCommand armUpCommand;
+  private final ArmDownCommand armDownCommand;
+  private final ArmZeroCommand armZeroCommand;
   private final AutonShootCommand autonShootCommand;
   private final AutoDriveCommand autoDriveCommand;
   private final AutoGyroCommand autoGyroCommand;
-  private final ReverseShooterCommand reverseShooterCommand;
   private final AutoIntakeCommand autoIntakeCommand;
-  private final IntakeOffCommand intakeOffCommand;
-  private final ShooterOffCommand shooterOffCommand;
-  private final ArmUpCommand armCommandUp;
-  private final ArmDownCommand armDownCommand;
-  private final ArmZeroCommand armZeroCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -79,12 +81,13 @@ public class RobotContainer {
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
-    intakeCommand = new IntakeCommand(intakeSubsystem);
-    solenoidCommand = new SolenoidCommand(climbSubsystem);
-    reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
-    intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
     shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
-    armCommandUp = new ArmUpCommand(armSubsystem);
+    shooterLowCommand = new ShooterLowCommand(shooterSubsystem);
+    reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
+    intakeCommand = new IntakeCommand(intakeSubsystem);
+    intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
+    solenoidCommand = new SolenoidCommand(climbSubsystem);
+    armUpCommand = new ArmUpCommand(armSubsystem);
     armDownCommand = new ArmDownCommand(armSubsystem);
     armZeroCommand = new ArmZeroCommand(armSubsystem);
 
@@ -97,12 +100,13 @@ public class RobotContainer {
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
-    intakeCommand.addRequirements(intakeSubsystem);
-    solenoidCommand.addRequirements(climbSubsystem);
-    reverseShooterCommand.addRequirements(shooterSubsystem);
-    intakeOffCommand.addRequirements(intakeSubsystem);
     shooterOffCommand.addRequirements(shooterSubsystem);
-    armCommandUp.addRequirements(armSubsystem);
+    shooterLowCommand.addRequirements(shooterSubsystem);
+    reverseShooterCommand.addRequirements(shooterSubsystem);
+    intakeCommand.addRequirements(intakeSubsystem);
+    intakeOffCommand.addRequirements(intakeSubsystem);
+    solenoidCommand.addRequirements(climbSubsystem);
+    armUpCommand.addRequirements(armSubsystem);
     armDownCommand.addRequirements(armSubsystem);
 
     //Add Autonomous Requirements Here
@@ -145,7 +149,8 @@ public class RobotContainer {
     //Bind buttons to Commands and Subsystems 
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
-    Button2.whileHeld(new ReverseShooterCommand(shooterSubsystem));
+    Button2.whileHeld(new ShooterLowCommand(shooterSubsystem));
+    Button3.whileHeld(new ReverseShooterCommand(shooterSubsystem));
     Button4.whileHeld(new IntakeCommand(intakeSubsystem));
     Button5.whileHeld(new IntakeCommand(intakeSubsystem));
     Button6.whileHeld(new IntakeCommand(intakeSubsystem));

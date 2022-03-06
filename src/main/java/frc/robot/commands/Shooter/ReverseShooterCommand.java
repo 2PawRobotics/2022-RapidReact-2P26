@@ -2,25 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Shooter;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class AutoCommandGroup extends ParallelCommandGroup {
-  /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive, DriveSubsystem gyro, IntakeSubsystem intake) {
-    addCommands(
-
-      new AutoGyroCommand(gyro),
-      new AutoDriveCommand(drive),
-      new AutonShootCommand(shoot),
-      new AutoIntakeCommand(intake)
-
-    );
+public class ReverseShooterCommand extends CommandBase {
+  private final ShooterSubsystem shooterSubsystem;
+  /** Creates a new ReverseShooterCommand. */
+  public ReverseShooterCommand(ShooterSubsystem subsystem) {
+    shooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +22,11 @@ public class AutoCommandGroup extends ParallelCommandGroup {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    shooterSubsystem.ReverseShooter();
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
