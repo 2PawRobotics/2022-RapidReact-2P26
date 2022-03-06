@@ -62,15 +62,22 @@ public class IntakeSubsystem extends SubsystemBase {
     lowIntakeMotor.setInverted(true);
     topIntakeMotor.setInverted(false);
 
-      while(intakeTimer.get() >= 1 && intakeTimer.get() < 1.75){
+    if(Constants.AutonPath == 1 || Constants.AutonPath == 2 || Constants.AutonPath == 4){
+      while(intakeTimer.get() >= .5 && intakeTimer.get() < 1.5){
         lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
-      while(intakeTimer.get() >= 1.75 && intakeTimer.get() < 4.25){
+      while(intakeTimer.get() >= 1.5 && intakeTimer.get() < 4.25){
         intakeMotors.setVoltage(0);}
       while(intakeTimer.get() >= 4.25 && intakeTimer.get() < 5.5){
         intakeMotors.setVoltage(Constants.bothIntakeVolts);}
       if(intakeTimer.get() >= 5.5){
         intakeMotors.setVoltage(0);}
+    }else if(Constants.AutonPath == 3){
+      while(intakeTimer.get() >= 4.25 && intakeTimer.get() < 5.5){
+        intakeMotors.setVoltage(Constants.bothIntakeVolts);}
+      if(intakeTimer.get() >= 5.5){
+        intakeMotors.setVoltage(0);}
+    }
   }
-  }
+}
 
 
