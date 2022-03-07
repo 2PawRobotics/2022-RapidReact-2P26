@@ -2,18 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 
-public class PotReadCommand extends CommandBase {
-  private final ClimbSubsystem climbSubsystem;
-  /** Creates a new PotReadCommand. */
-  public PotReadCommand(ClimbSubsystem subsystem) {
-    climbSubsystem = subsystem;
+public class ArmDownCommand extends CommandBase {
+  private final ArmSubsystem armSubsystem;
+  /** Creates a new ArmDownCommand. */
+  public ArmDownCommand(ArmSubsystem subsystem) {
+    armSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climbSubsystem);
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,9 +23,7 @@ public class PotReadCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    climbSubsystem.Readpot();
-
+    armSubsystem.ArmChangeDown();
   }
 
   // Called once the command ends or is interrupted.
@@ -35,6 +33,6 @@ public class PotReadCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

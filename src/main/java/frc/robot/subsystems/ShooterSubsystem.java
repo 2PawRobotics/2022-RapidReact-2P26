@@ -17,34 +17,49 @@ import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private final CANSparkMax leftShooterMotor = new CANSparkMax(Constants.intakelowport, MotorType.kBrushed);
-  private final CANSparkMax rightShooterMotor = new CANSparkMax(Constants.intakehighport, MotorType.kBrushed);
-  private final MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
+  //Declare Hardware Components
+  public final static CANSparkMax leftShooterMotor = new CANSparkMax(Constants.leftshooterport, MotorType.kBrushed);
+  public final static CANSparkMax rightShooterMotor = new CANSparkMax(Constants.rightshooterport, MotorType.kBrushed);
+  public final static MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
 
   private final Timer shooterTimer = new Timer();
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  //--------------------------------------------------------------------------------------------//
+  // Make Methods Here
+
+  public void ShooterOff(){
+
+    shooter.setVoltage(0);
+    leftShooterMotor.setVoltage(0);
+    rightShooterMotor.setVoltage(0);
+    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 0);
+    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 0);
   }
 
   public void RunShooter(){
 
-    leftShooterMotor.setInverted(true);
-    rightShooterMotor.setInverted(false);
+    leftShooterMotor.setInverted(false);
+    rightShooterMotor.setInverted(true);
     shooter.setVoltage(Constants.shooterVolts);
-    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 1.0);
-    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 1.0);
+    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, 1);
+    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, 1);
     System.out.println(shooter.get());
+  }
 
+  public void LowRunShooter(){
+
+    leftShooterMotor.setInverted(false);
+    rightShooterMotor.setInverted(true);
+    shooter.setVoltage(Constants.lowshooterVolts);
+    RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, .5);
+    RobotContainer.XCont.setRumble(RumbleType.kRightRumble, .5);
   }
 
   public void ReverseShooter(){
 
-    leftShooterMotor.setInverted(false);
-    rightShooterMotor.setInverted(true);
+    leftShooterMotor.setInverted(true);
+    rightShooterMotor.setInverted(false);
     shooter.setVoltage(Constants.rShooterVolts);
-
   }
 
   public void AutonShooter(){
@@ -53,8 +68,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterTimer.start();
 
     while(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
-      leftShooterMotor.setInverted(true);
-      rightShooterMotor.setInverted(false);
+      leftShooterMotor.setInverted(false);
+      rightShooterMotor.setInverted(true);
       shooter.setVoltage(Constants.shooterVolts);}
   }
 }

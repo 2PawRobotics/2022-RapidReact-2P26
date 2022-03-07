@@ -4,28 +4,31 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ArmCommand;
-import frc.robot.commands.AutoCommandGroup;
-import frc.robot.commands.AutoDriveCommand;
-import frc.robot.commands.AutoGyroCommand;
-import frc.robot.commands.AutoIntakeCommand;
-import frc.robot.commands.AutonShootCommand;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.PotReadCommand;
-import frc.robot.commands.ReverseShooterCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.SolenoidCommand;
+import frc.robot.commands.Arm.ArmDownCommand;
+import frc.robot.commands.Arm.ArmUpCommand;
+import frc.robot.commands.Arm.ArmZeroCommand;
+import frc.robot.commands.Auton.AutoCommandGroup;
+import frc.robot.commands.Auton.AutoDriveCommand;
+import frc.robot.commands.Auton.AutoGyroCommand;
+import frc.robot.commands.Auton.AutoIntakeCommand;
+import frc.robot.commands.Auton.AutonShootCommand;
+import frc.robot.commands.Climb.SolenoidCommand;
+import frc.robot.commands.Drive.DriveCommand;
+import frc.robot.commands.Drive.ReverseDriveCommand;
+import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Intake.IntakeOffCommand;
+import frc.robot.commands.Shooter.ShooterLowCommand;
+import frc.robot.commands.Shooter.ReverseShooterCommand;
+import frc.robot.commands.Shooter.ShooterCommand;
+import frc.robot.commands.Shooter.ShooterOffCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -35,11 +38,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
-public class RobotContainer {
 
-// The robot's subsystems and commands are defined here...
- // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
- // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem );
+public class RobotContainer {
 
   //Name Subsystems Here
   private final DriveSubsystem driveSubsystem;
@@ -50,14 +50,19 @@ public class RobotContainer {
   
   //Name Commands Here
   private final DriveCommand driveCommand;
-  private final PotReadCommand potReadCommand;
   private final ShooterCommand shooterCommand;
+  private final ShooterOffCommand shooterOffCommand;
+  private final ShooterLowCommand shooterLowCommand;
+  private final ReverseShooterCommand reverseShooterCommand;
   private final IntakeCommand intakeCommand;
+  private final IntakeOffCommand intakeOffCommand;
   private final SolenoidCommand solenoidCommand;
+  private final ArmUpCommand armUpCommand;
+  private final ArmDownCommand armDownCommand;
+  private final ArmZeroCommand armZeroCommand;
   private final AutonShootCommand autonShootCommand;
   private final AutoDriveCommand autoDriveCommand;
   private final AutoGyroCommand autoGyroCommand;
-  private final ReverseShooterCommand reverseShooterCommand;
   private final AutoIntakeCommand autoIntakeCommand;
 
   //Name Controllers Here
@@ -76,11 +81,16 @@ public class RobotContainer {
 
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
-    potReadCommand = new PotReadCommand(climbSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
-    intakeCommand = new IntakeCommand(intakeSubsystem);
-    solenoidCommand = new SolenoidCommand(climbSubsystem);
+    shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
+    shooterLowCommand = new ShooterLowCommand(shooterSubsystem);
     reverseShooterCommand = new ReverseShooterCommand(shooterSubsystem);
+    intakeCommand = new IntakeCommand(intakeSubsystem);
+    intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
+    solenoidCommand = new SolenoidCommand(climbSubsystem);
+    armUpCommand = new ArmUpCommand(armSubsystem);
+    armDownCommand = new ArmDownCommand(armSubsystem);
+    armZeroCommand = new ArmZeroCommand(armSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
@@ -90,11 +100,15 @@ public class RobotContainer {
 
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
-    potReadCommand.addRequirements(climbSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
-    intakeCommand.addRequirements(intakeSubsystem);
-    solenoidCommand.addRequirements(climbSubsystem);
+    shooterOffCommand.addRequirements(shooterSubsystem);
+    shooterLowCommand.addRequirements(shooterSubsystem);
     reverseShooterCommand.addRequirements(shooterSubsystem);
+    intakeCommand.addRequirements(intakeSubsystem);
+    intakeOffCommand.addRequirements(intakeSubsystem);
+    solenoidCommand.addRequirements(climbSubsystem);
+    armUpCommand.addRequirements(armSubsystem);
+    armDownCommand.addRequirements(armSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
@@ -102,8 +116,11 @@ public class RobotContainer {
     autoGyroCommand.addRequirements(driveSubsystem);
     autoIntakeCommand.addRequirements(intakeSubsystem);
 
-    //Sets the Default Command of the Scheduler, should remain the drive subsystem and command.
+    //Sets the Default Command of a subsystem, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
+    CommandScheduler.getInstance().setDefaultCommand(intakeSubsystem, intakeOffCommand);
+    CommandScheduler.getInstance().setDefaultCommand(shooterSubsystem, shooterOffCommand);
+    CommandScheduler.getInstance().setDefaultCommand(armSubsystem, armZeroCommand);
 
     //Make Controllers Here
     XCont = new XboxController(Constants.XContPort);
@@ -113,12 +130,6 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
 
     //Make Button names and tie them to port numbers from Constants.
@@ -134,12 +145,13 @@ public class RobotContainer {
     JoystickButton Button12 = new JoystickButton(ButtonPanel, Constants.ButtonPort12);
     JoystickButton Button13 = new JoystickButton(ButtonPanel, Constants.ButtonPort13);
     JoystickButton Button14 = new JoystickButton(ButtonPanel, Constants.ButtonPort14);
+    JoystickButton Bumper1 = new JoystickButton(XCont, Constants.RightBumper);
 
     //Bind buttons to Commands and Subsystems 
 
     Button1.whileHeld(new ShooterCommand(shooterSubsystem));
-    Button2.whileHeld(new ReverseShooterCommand(shooterSubsystem));
-    Button3.whileHeld(new PotReadCommand(climbSubsystem));
+    Button2.whileHeld(new ShooterLowCommand(shooterSubsystem));
+    Button3.whileHeld(new ReverseShooterCommand(shooterSubsystem));
     Button4.whileHeld(new IntakeCommand(intakeSubsystem));
     Button5.whileHeld(new IntakeCommand(intakeSubsystem));
     Button6.whileHeld(new IntakeCommand(intakeSubsystem));
@@ -147,18 +159,15 @@ public class RobotContainer {
     Button12.whenPressed(new SolenoidCommand(climbSubsystem));
     Button10.whileHeld(new IntakeCommand(intakeSubsystem));
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
-    Button13.whenPressed(new ArmCommand(armSubsystem));
-    Button14.whenPressed(new ArmCommand(armSubsystem));
+    Button13.whileHeld(new ArmDownCommand(armSubsystem));
+    Button14.whileHeld(new ArmUpCommand(armSubsystem));
+    Bumper1.whileHeld(new ReverseDriveCommand(driveSubsystem));
+    
 
     //Below are some examples of doing so
 
     //Button1.whenPressed(new ExampleCommand(exampleSubsystem));
     //Button1.whileHeld(new ExampleCommand(exampleSubsystem));
-
-    /*XCont.getRightStickButtonPressed();{
-      new SolenoidCommand(climbSubsystem);
-    }
-    */
   }
 
   /**

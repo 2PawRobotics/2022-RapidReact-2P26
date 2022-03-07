@@ -2,41 +2,34 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 
-public class DriveCommand extends CommandBase {
-  private final DriveSubsystem driveSubsystem;
-
-  /** Creates a new DriveCommand. */
-  public DriveCommand(DriveSubsystem subsystem) {
-    driveSubsystem = subsystem; 
+public class ArmZeroCommand extends CommandBase {
+  private final ArmSubsystem armSubsystem;
+  /** Creates a new ArmZeroCommand. */
+  public ArmZeroCommand(ArmSubsystem subsystem) {
+    armSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveSubsystem);
-
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    
-  }
+  public void initialize() {}
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    driveSubsystem.ArcadeDrive(RobotContainer.XCont, Constants.speedX, Constants.speedY, Constants.RspeedX, Constants.RspeedY);
-
+    armSubsystem.ArmChangeNull();
   }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
 
-//BRUH
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

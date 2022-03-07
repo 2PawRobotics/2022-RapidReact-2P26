@@ -6,7 +6,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -14,49 +15,34 @@ public class ArmSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
   private final CANSparkMax actuatorMotor = new CANSparkMax(Constants.actuatorport, MotorType.kBrushed);
-  private final AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
+  private final DigitalInput topLimitSwitch = new DigitalInput(Constants.topLimitSwitchPort);
+  private final DigitalInput lowLimitSwitch = new DigitalInput(Constants.lowLimitSwitchPort);
+  private final Timer armTimer = new Timer();
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  //--------------------------------------------------------------------------------------------//
+  //Make Methods Here
+
+  public void ArmChangeNull(){
+    actuatorMotor.set(0);
+    armTimer.reset();
   }
 
-  public void Readpot(){
-    System.out.println(pot.get());}
-
-  public void ArmAngleDown(){
-
-    actuatorMotor.setInverted(true);
-
-    while(pot.get() < 300);{
-      actuatorMotor.setVoltage(Constants.fastAngleVolts);
+  public void ArmChangeDown(){
+    if(lowLimitSwitch.get() == false){
+      actuatorMotor.set(Constants.actuatorSpeed);
     }
-    while(pot.get() >= 300 && pot.get() <350);{
-      actuatorMotor.setVoltage(Constants.slowAngleVolts);
+    else{
+      actuatorMotor.set(0);
     }
-    while(pot.get() >= 350);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
+  }
+  
+  public void ArmChangeUp(){
+    if(topLimitSwitch.get() == false){
+      actuatorMotor.set(Constants.RactuatorSpeed);
     }
-    if(actuatorMotor.getOutputCurrent() > 5);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
-    }
-  }                                                         //ranges are from aprox 150 at top and 350
-
-  public void ArmAngleUp(){
-
-    actuatorMotor.setInverted(false);
-
-    while(pot.get() > 200);{
-      actuatorMotor.setVoltage(Constants.fastAngleVolts);
-    }
-    while(pot.get() <= 200 && pot.get() > 150);{
-      actuatorMotor.setVoltage(Constants.slowAngleVolts);
-    }
-    while(pot.get() <= 150);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
-    }
-    if(actuatorMotor.getOutputCurrent() > 5);{
-      actuatorMotor.setVoltage(Constants.zeroAngleVolts);
+    else{
+      actuatorMotor.set(0);
     }
   }
 }
+

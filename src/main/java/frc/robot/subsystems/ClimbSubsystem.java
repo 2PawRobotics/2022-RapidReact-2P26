@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -15,29 +15,18 @@ import frc.robot.RobotContainer;
 public class ClimbSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
-  private final AnalogPotentiometer pot = new AnalogPotentiometer(0, 500, 0);
 
-  private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
   private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
+  public final static Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  // This method will be called once per scheduler run
-  public void Readpot(){
-
-    System.out.println(pot.get());
-  }
+  //--------------------------------------------------------------------------------------------//
+  // Make Methods Here
 
   public void SolenoidControl(){
     if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort9)){
-      dSolenoid1.set(Value.kForward);
       dSolenoid2.set(Value.kForward);
     }
     if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort12)){
-      dSolenoid1.set(Value.kReverse);
       dSolenoid2.set(Value.kReverse);
     }
   }
