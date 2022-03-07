@@ -70,10 +70,10 @@ public final class Constants {
         public static final double RactuatorSpeed = -0.7;
         public static final int zeroSpeed = 0;
         //Voltage Constants
-        public static final int shooterVolts = 9;
-        public static final int lowshooterVolts = 3;
+        public static final double shooterVolts = 10.5;
+        public static final int lowshooterVolts = 5;
         public static final int autonShooterVolts = 10;
-        public static final int rShooterVolts = 3;
+        public static final int rShooterVolts = 4;
         public static final int bothIntakeVolts = 4;
         public static final int lIntakeVolts = 6;
         public static final int tIntakeVolts = 3;
