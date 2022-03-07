@@ -16,6 +16,7 @@ import frc.robot.commands.Auton.AutoIntakeCommand;
 import frc.robot.commands.Auton.AutonShootCommand;
 import frc.robot.commands.Climb.SolenoidCommand;
 import frc.robot.commands.Drive.DriveCommand;
+import frc.robot.commands.Drive.ReverseDriveCommand;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeOffCommand;
 import frc.robot.commands.Shooter.ShooterLowCommand;
@@ -160,7 +161,7 @@ public class RobotContainer {
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
     Button13.whileHeld(new ArmDownCommand(armSubsystem));
     Button14.whileHeld(new ArmUpCommand(armSubsystem));
-    Bumper1.whileHeld(new DriveCommand(driveSubsystem));
+    Bumper1.whileHeld(new ReverseDriveCommand(driveSubsystem));
     
 
     //Below are some examples of doing so
