@@ -63,8 +63,7 @@ public final class Constants {
         //Drive Speeds
         public static final double speedY = Math.pow(RobotContainer.XCont.getRightX(), 2)*0.83;
         public static final double speedX = Math.pow(RobotContainer.XCont.getLeftY(), 2)*-0.83;
-        public static final double RspeedY =Math.pow(RobotContainer.XCont.getRightX(), 2)*-0.83;
-        public static final double RspeedX = Math.pow(RobotContainer.XCont.getLeftY(), 2)*0.83;
+        public static final double RspeedY = Math.pow(RobotContainer.XCont.getRightX(), 2)*-0.83;
         //Speed Constants
         public static final double actuatorSpeed = 0.7;
         public static final double RactuatorSpeed = -0.7;
