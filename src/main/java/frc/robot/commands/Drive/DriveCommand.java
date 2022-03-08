@@ -29,7 +29,7 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    driveSubsystem.ArcadeDrive(RobotContainer.XCont, Constants.speedX, Constants.speedY, Constants.RspeedX, Constants.RspeedY);
+    driveSubsystem.ArcadeDrive(RobotContainer.XCont, Constants.speedX, Constants.speedY, Constants.RspeedY);
     while(RobotContainer.XCont.getRightBumperPressed());{
       driveSubsystem.ReverseDrive(RobotContainer.XCont, Constants.speedX, Constants.RspeedY);
     }

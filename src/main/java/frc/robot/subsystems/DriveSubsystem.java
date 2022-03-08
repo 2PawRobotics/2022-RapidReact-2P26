@@ -41,7 +41,7 @@ public class DriveSubsystem extends SubsystemBase {
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
 
-  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedX, double RspeedY){
+  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY){
     arcadeDrive.arcadeDrive(speedX, speedY);
   }
 
