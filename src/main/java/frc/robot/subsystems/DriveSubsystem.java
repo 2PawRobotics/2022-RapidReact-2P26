@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -35,14 +36,17 @@ public class DriveSubsystem extends SubsystemBase {
   private final DifferentialDrive arcadeDrive = new DifferentialDrive(leftCims, rightCims);
 
   private final Timer driveTimer = new Timer();
+  private final SlewRateLimiter slewRate = new SlewRateLimiter(Constants.rateLimit);
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
 
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
 
-  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY){
-    arcadeDrive.arcadeDrive(speedX, speedY);
+  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY, double XContY){
+    slewRate.calculate(XContY);
+    arcadeDrive.arcadeDrive(XCont.getRightX(), slewRate.calculate(XContY));
+    System.out.println(XContY);
   }
 
   public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){

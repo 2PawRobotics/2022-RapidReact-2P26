@@ -29,10 +29,8 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    driveSubsystem.ArcadeDrive(RobotContainer.XCont, Constants.speedX, Constants.speedY, Constants.RspeedY);
-    while(RobotContainer.XCont.getRightBumperPressed());{
-      driveSubsystem.ReverseDrive(RobotContainer.XCont, Constants.speedX, Constants.RspeedY);
-    }
+    double XContY = RobotContainer.XCont.getLeftY();
+    driveSubsystem.ArcadeDrive(RobotContainer.XCont, Constants.speedX, Constants.speedY, Constants.RspeedY, XContY);
 
   }
   // Called once the command ends or is interrupted.
