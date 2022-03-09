@@ -14,7 +14,7 @@ public class CameraSubsystem extends SubsystemBase {
   //Declare Hardware Componets 
   private CameraServer cameraServer;
 
-  public void Camera(){
+  public static void Camera(){
     CameraServer.startAutomaticCapture();
   }
 
