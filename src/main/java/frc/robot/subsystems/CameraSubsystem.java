@@ -12,8 +12,7 @@ import edu.wpi.first.cscore.CvSource;
 public class CameraSubsystem extends SubsystemBase {
 
   //Declare Hardware Componets 
-  private final CvSink cvSink = CameraServer.getVideo();
-  private final CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
+  private CameraServer cameraServer;
 
   public void Camera(){
     CameraServer.startAutomaticCapture();
