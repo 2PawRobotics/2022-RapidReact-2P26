@@ -6,17 +6,19 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
 
 public class CameraSubsystem extends SubsystemBase {
 
   //Declare Hardware Componets 
-  private final CvSink cvSink = CameraServer.getVideo();
-  private final CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
+  public static CameraServer cameraServer;
+   
+  
 
-  public void Camera(){
-    CameraServer.startAutomaticCapture();
+  
+  
+
+  public static void Camera(){
+    CameraServer.startAutomaticCapture(0);
   }
 
    
