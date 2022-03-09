@@ -64,7 +64,7 @@ public final class Constants {
         public static final double speedY = 0.83;
         public static final double speedX = -0.83;
         public static final double RspeedY = -0.83;
-        public static final double rateLimit = 0.01;
+        public static final double rateLimit = 0.5;
        // public static final double speedX = RobotContainer.XCont.getRightX();
         //public static final double speedY = Math.pow(RobotContainer.XCont.getRightX(), 2)*0.83;
         //public static final double speedX = Math.pow(RobotContainer.XCont.getLeftY(), 2)*-0.83;

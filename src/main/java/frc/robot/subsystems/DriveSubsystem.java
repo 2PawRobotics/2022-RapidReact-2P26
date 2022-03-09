@@ -36,17 +36,21 @@ public class DriveSubsystem extends SubsystemBase {
   private final DifferentialDrive arcadeDrive = new DifferentialDrive(leftCims, rightCims);
 
   private final Timer driveTimer = new Timer();
-  private final SlewRateLimiter slewRate = new SlewRateLimiter(Constants.rateLimit);
+  private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.rateLimit);
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
 
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
 
-  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY, double XContY){
-    slewRate.calculate(XContY);
-    arcadeDrive.arcadeDrive(XCont.getRightX(), slewRate.calculate(XContY));
-    System.out.println(XContY);
+  public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
+
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, /*slewRateLimiter.calculate(*/XCont.getLeftY()*speedY/*)*/);
+    //System.out.println(XContY);
+    /*System.out.println("left");
+    System.out.println(leftCims.get());*/
+    System.out.println("right");
+    System.out.println(rightCims.get());
   }
 
   public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
