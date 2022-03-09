@@ -5,6 +5,7 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class AutonShootCommand extends CommandBase {
@@ -24,7 +25,7 @@ public class AutonShootCommand extends CommandBase {
   @Override
   public void execute() {
 
-    shooterSubsystem.AutonShooter();
+    shooterSubsystem.AutonShooter(Constants.AutonPath);
 
   }
 

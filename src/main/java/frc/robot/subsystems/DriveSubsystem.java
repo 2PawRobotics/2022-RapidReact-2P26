@@ -45,12 +45,12 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
-    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, /*slewRateLimiter.calculate(*/XCont.getLeftY()*speedY/*)*/);
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()*speedY));
     //System.out.println(XContY);
-    /*System.out.println("left");
-    System.out.println(leftCims.get());*/
-    System.out.println("right");
-    System.out.println(rightCims.get());
+    System.out.println("left: ");
+    System.out.print(leftCims.get());
+    System.out.println("right: ");
+    System.out.print(rightCims.get());
   }
 
   public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
@@ -99,6 +99,17 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
         driveTimer.stop();
       } 
+    }
+//Low Port Auton 5
+    if(AutonPath == 5){
+      while(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
+        arcadeDrive.tankDrive(0.75, 0.75);
+      }
+      if(driveTimer.get() >= 3){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      } 
+
     }
 }
 

@@ -62,14 +62,29 @@ public class ShooterSubsystem extends SubsystemBase {
     shooter.setVoltage(Constants.rShooterVolts);
   }
 
-  public void AutonShooter(){
+//Auton Shooter
+  public void AutonShooter(int AutonPath){
 
     shooterTimer.reset();
     shooterTimer.start();
 
-    while(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
+//Auton Path 1, 2, 3, and 4
+    if(AutonPath == 1 || AutonPath == 2 || AutonPath == 3 || AutonPath == 4)
+      while(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
       leftShooterMotor.setInverted(false);
       rightShooterMotor.setInverted(true);
       shooter.setVoltage(Constants.shooterVolts);}
+      if(shooter.get() >= 5.5){
+        shooter.setVoltage(0);}
+
+//Low Port Auton 5
+    if(AutonPath == 5){
+      while(shooterTimer.get() >= 0 && shooterTimer.get() < 1.5){
+        leftShooterMotor.setInverted(false);
+        rightShooterMotor.setInverted(true);
+        shooter.setVoltage(Constants.lowshooterVolts);}
+      if(shooter.get() >= 1.5){
+        shooter.setVoltage(0);}
+    }
   }
 }
