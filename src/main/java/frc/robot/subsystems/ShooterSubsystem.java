@@ -71,7 +71,6 @@ public class ShooterSubsystem extends SubsystemBase {
     if(shooterTimer.get() <= 1.5){
       shooter.setVoltage(Constants.shooterVolts);
     }else{shooter.setVoltage(0);}
-  
 
 /*
 //Auton Path 1, 2, 3, and 4
