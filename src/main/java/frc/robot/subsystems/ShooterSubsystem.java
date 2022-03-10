@@ -70,8 +70,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     if(shooterTimer.get() <= 1.5){
       shooter.setVoltage(Constants.shooterVolts);
-    }else{shooter.setVoltage(0);
-    shooterTimer.stop();}
+    }else{shooter.setVoltage(0);}
   
 
 /*

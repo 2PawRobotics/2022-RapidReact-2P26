@@ -63,7 +63,7 @@ public class DriveSubsystem extends SubsystemBase {
   public void AutonDrive(int AutonPath){
     driveTimer.reset();
     driveTimer.start();
-/*
+
 //Auton Path 1 and 2
     if(AutonPath == 1 || AutonPath == 2){
       while(driveTimer.get() < .5){
@@ -76,13 +76,17 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
         driveTimer.stop();
       }
-    }*/
+    }
 //Auton Path 3
-    if(driveTimer.get() >= 1 && driveTimer.get() < 2){
-      arcadeDrive.tankDrive(.6, .6);
-    }else{arcadeDrive.tankDrive(0, 0);
-        driveTimer.stop();}
-    /*
+    if(AutonPath == 3){
+      while(driveTimer.get() < 1){
+        arcadeDrive.tankDrive(.6, .6);
+      }
+      if(driveTimer.get() >= 1){
+        arcadeDrive.tankDrive(0, 0);
+        driveTimer.stop();
+      }
+    }
 //Auton Path 4
     if(AutonPath == 4){
       while(driveTimer.get() < .5){
@@ -106,7 +110,7 @@ public class DriveSubsystem extends SubsystemBase {
         driveTimer.stop();
       } 
 
-    }*/
+    }
 }
 
    public void resetGyro(){

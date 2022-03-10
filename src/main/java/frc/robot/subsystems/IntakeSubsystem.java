@@ -63,8 +63,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     if(intakeTimer.get() <= 1.5){
     intakeMotors.setVoltage(Constants.bothIntakeVolts);
-    }else{intakeMotors.setVoltage(0);
-    intakeTimer.stop();}
+    }else{intakeMotors.setVoltage(0);}
 
     /*
 //Auton Path 1, 2, and 4
