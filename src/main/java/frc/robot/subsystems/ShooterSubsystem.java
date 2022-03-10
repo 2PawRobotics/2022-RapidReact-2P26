@@ -68,6 +68,11 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterTimer.reset();
     shooterTimer.start();
 
+    if(shooterTimer.get() <= 1.5){
+      shooter.setVoltage(Constants.shooterVolts);
+    }else{shooter.setVoltage(0);}
+
+/*
 //Auton Path 1, 2, 3, and 4
     if(AutonPath == 1 || AutonPath == 2 || AutonPath == 3 || AutonPath == 4)
       while(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
@@ -85,6 +90,6 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter.setVoltage(Constants.lowshooterVolts);}
       if(shooter.get() >= 1.5){
         shooter.setVoltage(0);}
-    }
+    }*/
   }
 }

@@ -5,17 +5,14 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class AutoCommandGroup extends ParallelCommandGroup {
   /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive, DriveSubsystem gyro, IntakeSubsystem intake) {
+  public AutoCommandGroup(ShooterSubsystem shoot, IntakeSubsystem intake) {
     addCommands(
 
-      new AutoGyroCommand(gyro),
-      new AutoDriveCommand(drive),
       new AutonShootCommand(shoot),
       new AutoIntakeCommand(intake)
 

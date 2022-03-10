@@ -78,7 +78,7 @@ public final class Constants {
         public static final int lowshooterVolts = 5;
         public static final int autonShooterVolts = 10;
         public static final int rShooterVolts = 4;
-        public static final int bothIntakeVolts = 4;
+        public static final double bothIntakeVolts = 5.5;
         public static final int lIntakeVolts = 6;
         public static final int tIntakeVolts = 3;
     
