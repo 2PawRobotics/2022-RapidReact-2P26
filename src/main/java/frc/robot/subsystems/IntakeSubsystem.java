@@ -65,7 +65,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeMotors.setVoltage(Constants.bothIntakeVolts);
     }else{intakeMotors.setVoltage(0);}
 
-    /*
+    
 //Auton Path 1, 2, and 4
     if(Constants.AutonPath == 1 || Constants.AutonPath == 2 || Constants.AutonPath == 4){
       while(intakeTimer.get() >= .5 && intakeTimer.get() < 1.5){
@@ -90,7 +90,7 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeMotors.setVoltage(Constants.bothIntakeVolts);}
       if(intakeTimer.get() >= 1.5){
         intakeMotors.setVoltage(0);}
-      }*/
+      }
   }
 }
 

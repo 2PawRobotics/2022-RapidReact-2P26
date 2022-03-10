@@ -5,22 +5,28 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class AutoCommandGroup extends ParallelCommandGroup {
   /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(ShooterSubsystem shoot, IntakeSubsystem intake) {
+  public AutoCommandGroup(DriveSubsystem drive, ShooterSubsystem shoot, IntakeSubsystem intake) {
     addCommands(
 
       new AutonShootCommand(shoot),
-      new AutoIntakeCommand(intake)
+      new AutoIntakeCommand(intake),
+      new AutoDriveCommand(drive)
 
     );
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
+  public AutoCommandGroup(DriveSubsystem driveSubsystem, IntakeSubsystem intakeSubsystem,
+        ShooterSubsystem shooterSubsystem) {
+}
+
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 

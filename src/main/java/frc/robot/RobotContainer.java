@@ -67,6 +67,7 @@ public class RobotContainer {
   private final AutoDriveCommand autoDriveCommand;
   private final AutoGyroCommand autoGyroCommand;
   private final AutoIntakeCommand autoIntakeCommand;
+
   private final CameraCommand cameraCommand;
 
   //Name Controllers Here
@@ -184,6 +185,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new AutoCommandGroup(shooterSubsystem, intakeSubsystem);
+    return new AutoCommandGroup(driveSubsystem, intakeSubsystem, shooterSubsystem);
   }
 }
