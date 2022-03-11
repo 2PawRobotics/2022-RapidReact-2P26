@@ -88,7 +88,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
   }
 
-  public void initTimer() {
+  public void ShooterinitTimer() {
     shooterTimer.reset();
     shooterTimer.start();
   }

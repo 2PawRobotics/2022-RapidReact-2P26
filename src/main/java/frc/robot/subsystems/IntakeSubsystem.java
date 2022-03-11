@@ -56,8 +56,7 @@ public class IntakeSubsystem extends SubsystemBase {
 //Auton Intake
   public void AutonIntake() {
 
-    intakeTimer.reset();
-    intakeTimer.start();
+    
     lowIntakeMotor.setInverted(true);
     topIntakeMotor.setInverted(false);
 
@@ -93,6 +92,10 @@ public class IntakeSubsystem extends SubsystemBase {
       if(intakeTimer.get() >= 1.5){
         intakeMotors.setVoltage(0);}
       }
+  }
+  public void IntakeinitTimer() {
+    intakeTimer.reset();
+    intakeTimer.start();
   }
 }
 

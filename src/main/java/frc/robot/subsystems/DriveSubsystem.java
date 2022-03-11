@@ -61,8 +61,6 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void AutonDrive(int AutonPath){
-    driveTimer.reset();
-    driveTimer.start();
 
 //Auton Path 1 and 2
     if(AutonPath == 1 || AutonPath == 2){
@@ -103,7 +101,7 @@ public class DriveSubsystem extends SubsystemBase {
 //Low Port Auton 5
     if(AutonPath == 5){
       if(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
-        System.out.println("hi");
+        System.out.println("Thank you BlitzCreek");
         arcadeDrive.tankDrive(0.75, 0.75);
       }
       if(driveTimer.get() >= 3){
@@ -112,6 +110,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     }
     arcadeDrive.feed();
+}
+public void DriveinitTimer() {
+  driveTimer.reset();
+  driveTimer.start();
 }
 
    public void resetGyro(){
