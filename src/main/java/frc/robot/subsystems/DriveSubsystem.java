@@ -47,10 +47,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()*speedY));
     //System.out.println(XContY);
-    System.out.println("left: ");
-    System.out.print(leftCims.get());
-    System.out.println("right: ");
-    System.out.print(rightCims.get());
+    //System.out.println("left: ");
+    //System.out.print(leftCims.get());
+    //System.out.println("right: ");
+    //System.out.print(rightCims.get());
   }
 
   public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
@@ -66,10 +66,10 @@ public class DriveSubsystem extends SubsystemBase {
 
 //Auton Path 1 and 2
     if(AutonPath == 1 || AutonPath == 2){
-      while(driveTimer.get() < .5){
+      if(driveTimer.get() < .5){
         arcadeDrive.tankDrive(.3, .0);
       }
-      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+      if(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
         arcadeDrive.tankDrive(.5, .5);
       }
       if(driveTimer.get() >= 1.5){
@@ -79,7 +79,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
 //Auton Path 3
     if(AutonPath == 3){
-      while(driveTimer.get() < 1){
+      if(driveTimer.get() < 1){
         arcadeDrive.tankDrive(.6, .6);
       }
       if(driveTimer.get() >= 1){
@@ -89,10 +89,10 @@ public class DriveSubsystem extends SubsystemBase {
     }
 //Auton Path 4
     if(AutonPath == 4){
-      while(driveTimer.get() < .5){
+      if(driveTimer.get() < .5){
         arcadeDrive.tankDrive(.0, .3);
       }
-      while(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
+      if(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
         arcadeDrive.tankDrive(.6, .6);
       }
       if(driveTimer.get() >= 1.5){
@@ -102,15 +102,16 @@ public class DriveSubsystem extends SubsystemBase {
     }
 //Low Port Auton 5
     if(AutonPath == 5){
-      while(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
+      if(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
+        System.out.println("hi");
         arcadeDrive.tankDrive(0.75, 0.75);
       }
       if(driveTimer.get() >= 3){
         arcadeDrive.tankDrive(0, 0);
-        driveTimer.stop();
       } 
 
     }
+    arcadeDrive.feed();
 }
 
    public void resetGyro(){

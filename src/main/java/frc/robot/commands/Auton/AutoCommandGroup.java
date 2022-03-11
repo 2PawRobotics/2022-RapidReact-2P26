@@ -20,11 +20,10 @@ public class AutoCommandGroup extends ParallelCommandGroup {
 
     );
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drive, shoot, intake);
   }
 
-  public AutoCommandGroup(DriveSubsystem driveSubsystem, IntakeSubsystem intakeSubsystem,
-        ShooterSubsystem shooterSubsystem) {
-}
+ 
 
 // Called when the command is initially scheduled.
   @Override
@@ -41,6 +40,6 @@ public class AutoCommandGroup extends ParallelCommandGroup {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
