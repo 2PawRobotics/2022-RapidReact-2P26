@@ -75,15 +75,17 @@ public final class Constants {
         public static final int zeroSpeed = 0;
         //Voltage Constants
         public static final double shooterVolts = 10.5;
+        public static final double HiAutoshooterVolts = 10;
         public static final int lowshooterVolts = 6;
         public static final int rShooterVolts = 4;
         public static final int autonShooterVolts = 10;
         public static final double bothIntakeVolts = 5.0;
         public static final int lIntakeVolts = 6;
         public static final int tIntakeVolts = 3;
+        public static final int AutoshooterVolts = 6;
     
     //Auton Paths
-        public static int AutonPath = 5;
+        public static int AutonPath = 6;
 
     //Command Booleans
         public static boolean intakeActive = false;

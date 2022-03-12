@@ -79,9 +79,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
 //Auton Path 3
     if(Constants.AutonPath == 3){
-      if(intakeTimer.get() >= 4.25 && intakeTimer.get() < 5.5){
+      if(intakeTimer.get() >= 2 && intakeTimer.get() < 4){
         intakeMotors.setVoltage(Constants.bothIntakeVolts);}
-      if(intakeTimer.get() >= 5.5){
+      if(intakeTimer.get() >= 4){
         intakeMotors.setVoltage(0);}
       }
 
@@ -91,6 +91,26 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeMotors.setVoltage(Constants.bothIntakeVolts);}
       if(intakeTimer.get() >= 1.5){
         intakeMotors.setVoltage(0);}
+      }
+      if(Constants.AutonPath == 6){
+        if(intakeTimer.get() > .5 && intakeTimer.get() <=1.5){
+          intakeMotors.setVoltage(Constants.lIntakeVolts);
+        }
+        if(intakeTimer.get() >1.5 && intakeTimer.get() <=3){
+          intakeMotors.setVoltage(0);
+        }
+        if(intakeTimer.get() > 3 && intakeTimer.get() <=3.5){
+          lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
+        }
+        if(intakeTimer.get() >3.5 && intakeTimer.get() <= 5.5){
+          intakeMotors.setVoltage(0);
+        }
+        if(intakeTimer.get() >5.5 && intakeTimer.get() <= 6.5){
+          intakeMotors.setVoltage(Constants.bothIntakeVolts);
+        }
+        if(intakeTimer.get() >6.5){
+          intakeMotors.setVoltage(0);
+        }
       }
   }
   public void IntakeinitTimer() {

@@ -77,10 +77,10 @@ public class DriveSubsystem extends SubsystemBase {
     }
 //Auton Path 3
     if(AutonPath == 3){
-      if(driveTimer.get() < 1){
-        arcadeDrive.tankDrive(.6, .6);
+      if(driveTimer.get() < 1.5){
+        arcadeDrive.tankDrive(-.68, .68);
       }
-      if(driveTimer.get() >= 1){
+      if(driveTimer.get() >= 1.5){
         arcadeDrive.tankDrive(0, 0);
         driveTimer.stop();
       }
@@ -102,12 +102,26 @@ public class DriveSubsystem extends SubsystemBase {
     if(AutonPath == 5){
       if(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
         System.out.println("Thank you BlitzCreek");
-        arcadeDrive.tankDrive(0.75, 0.75);
+        arcadeDrive.tankDrive(-0.68, 0.68);
       }
       if(driveTimer.get() >= 3){
         arcadeDrive.tankDrive(0, 0);
       } 
 
+    }
+    if(AutonPath == 6){
+      if(driveTimer.get() >= 1.5 && driveTimer.get()< 3){
+        arcadeDrive.tankDrive(-0.68, 0.68);
+      }
+      if(driveTimer.get() >3 && driveTimer.get() <4.5){
+        arcadeDrive.tankDrive(0, 0);
+      }
+      if(driveTimer.get() >= 4.5 && driveTimer.get() <=5.5){
+        arcadeDrive.tankDrive(0.48, -0.48);
+      }
+      if(driveTimer.get() >5.5 ){
+        arcadeDrive.tankDrive(0, 0);
+      }
     }
     arcadeDrive.feed();
 }
