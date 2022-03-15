@@ -14,6 +14,7 @@ import frc.robot.commands.Auton.AutoDriveCommand;
 import frc.robot.commands.Auton.AutoGyroCommand;
 import frc.robot.commands.Auton.AutoIntakeCommand;
 import frc.robot.commands.Auton.AutonShootCommand;
+import frc.robot.commands.Camera.CameraCommand;
 import frc.robot.commands.Climb.SolenoidCommand;
 import frc.robot.commands.Drive.DriveCommand;
 import frc.robot.commands.Drive.ReverseDriveCommand;
@@ -24,12 +25,14 @@ import frc.robot.commands.Shooter.ReverseShooterCommand;
 import frc.robot.commands.Shooter.ShooterCommand;
 import frc.robot.commands.Shooter.ShooterOffCommand;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -47,6 +50,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem;
   private final ShooterSubsystem shooterSubsystem;
   private final ArmSubsystem armSubsystem;
+  private final CameraSubsystem cameraSubsystem;
   
   //Name Commands Here
   private final DriveCommand driveCommand;
@@ -64,6 +68,9 @@ public class RobotContainer {
   private final AutoDriveCommand autoDriveCommand;
   private final AutoGyroCommand autoGyroCommand;
   private final AutoIntakeCommand autoIntakeCommand;
+  private final AutoCommandGroup autoCommandGroup;
+
+  private final CameraCommand cameraCommand;
 
   //Name Controllers Here
   public static XboxController XCont;
@@ -78,6 +85,7 @@ public class RobotContainer {
     intakeSubsystem = new IntakeSubsystem();
     shooterSubsystem = new ShooterSubsystem();
     armSubsystem = new ArmSubsystem();
+    cameraSubsystem = new CameraSubsystem();
 
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
@@ -91,12 +99,14 @@ public class RobotContainer {
     armUpCommand = new ArmUpCommand(armSubsystem);
     armDownCommand = new ArmDownCommand(armSubsystem);
     armZeroCommand = new ArmZeroCommand(armSubsystem);
+    cameraCommand = new CameraCommand(cameraSubsystem);
 
     //Instantilize Autonomous Commands Here
     autonShootCommand = new AutonShootCommand(shooterSubsystem);
     autoDriveCommand = new AutoDriveCommand(driveSubsystem);
     autoGyroCommand = new AutoGyroCommand(driveSubsystem);
     autoIntakeCommand = new AutoIntakeCommand(intakeSubsystem);
+    autoCommandGroup = new AutoCommandGroup(driveSubsystem, shooterSubsystem, intakeSubsystem);
 
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
@@ -109,12 +119,14 @@ public class RobotContainer {
     solenoidCommand.addRequirements(climbSubsystem);
     armUpCommand.addRequirements(armSubsystem);
     armDownCommand.addRequirements(armSubsystem);
+    cameraCommand.addRequirements(cameraSubsystem);
 
     //Add Autonomous Requirements Here
     autonShootCommand.addRequirements(shooterSubsystem);
     autoDriveCommand.addRequirements(driveSubsystem);
     autoGyroCommand.addRequirements(driveSubsystem);
     autoIntakeCommand.addRequirements(intakeSubsystem);
+    autoCommandGroup.addRequirements(driveSubsystem, shooterSubsystem, intakeSubsystem);
 
     //Sets the Default Command of a subsystem, should remain the drive subsystem and command.
     CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
@@ -177,6 +189,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new AutoCommandGroup(shooterSubsystem, driveSubsystem, driveSubsystem, intakeSubsystem);
+    return new AutoDriveCommand(driveSubsystem)
+    .alongWith(new AutonShootCommand(shooterSubsystem), new AutoIntakeCommand(intakeSubsystem));/*new AutoCommandGroup(driveSubsystem, shooterSubsystem, intakeSubsystem);*/
   }
 }

@@ -11,19 +11,21 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class AutoCommandGroup extends ParallelCommandGroup {
   /** Creates a new AutoCommandGroup. */
-  public AutoCommandGroup(ShooterSubsystem shoot, DriveSubsystem drive, DriveSubsystem gyro, IntakeSubsystem intake) {
+  public AutoCommandGroup(DriveSubsystem drive, ShooterSubsystem shoot, IntakeSubsystem intake) {
     addCommands(
 
-      new AutoGyroCommand(gyro),
-      new AutoDriveCommand(drive),
       new AutonShootCommand(shoot),
-      new AutoIntakeCommand(intake)
+      new AutoIntakeCommand(intake),
+      new AutoDriveCommand(drive)
 
     );
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drive, shoot, intake);
   }
 
-  // Called when the command is initially scheduled.
+ 
+
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
@@ -38,6 +40,6 @@ public class AutoCommandGroup extends ParallelCommandGroup {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
