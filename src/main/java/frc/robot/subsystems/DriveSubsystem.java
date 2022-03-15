@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -35,8 +36,12 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive arcadeDrive = new DifferentialDrive(leftCims, rightCims);
 
+  private final Encoder LEncoder = new Encoder(0,1);
+  private final Encoder REncoder = new Encoder(2,3);
+
   private final Timer driveTimer = new Timer();
   private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.rateLimit);
+
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
 
@@ -61,6 +66,18 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void AutonDrive(int AutonPath){
+
+    LEncoder.setDistancePerPulse(1./76.);
+    REncoder.setDistancePerPulse(1./76.);
+    
+    if(AutonPath == 7){
+      if(LEncoder.getDistance() < 12 && REncoder.getDistance() < 12){
+        arcadeDrive.tankDrive(.3, .3);
+      }
+      if(LEncoder.getDistance() >= 12 && REncoder.getDistance() >= 12){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
 
 //Auton Path 1 and 2
     if(AutonPath == 1 || AutonPath == 2){
