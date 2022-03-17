@@ -36,8 +36,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive arcadeDrive = new DifferentialDrive(leftCims, rightCims);
 
-  private final Encoder LEncoder = new Encoder(0,1);
-  private final Encoder REncoder = new Encoder(2,3);
+  private final Encoder LEncoder = new Encoder(0,1, true, Encoder.EncodingType.k2X);
+  private final Encoder REncoder = new Encoder(2,3, true, Encoder.EncodingType.k2X);
 
   private final Timer driveTimer = new Timer();
   private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.rateLimit);
@@ -51,6 +51,8 @@ public class DriveSubsystem extends SubsystemBase {
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
     arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()*speedY));
+    System.out.println(LEncoder.getRate() + "Left Encoder");
+    System.out.println(REncoder.getRate() + "Right Encoder");
     //System.out.println(XContY);
     //System.out.println("left: ");
     //System.out.print(leftCims.get());
@@ -69,52 +71,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     LEncoder.setDistancePerPulse(1./76.);
     REncoder.setDistancePerPulse(1./76.);
-    
-    if(AutonPath == 7){
-      if(LEncoder.getDistance() < 12 && REncoder.getDistance() < 12){
-        arcadeDrive.tankDrive(.3, .3);
-      }
-      if(LEncoder.getDistance() >= 12 && REncoder.getDistance() >= 12){
-        arcadeDrive.tankDrive(0, 0);
-      }
-    }
 
-//Auton Path 1 and 2
-    if(AutonPath == 1 || AutonPath == 2){
-      if(driveTimer.get() < .5){
-        arcadeDrive.tankDrive(.3, .0);
-      }
-      if(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
-        arcadeDrive.tankDrive(.5, .5);
-      }
-      if(driveTimer.get() >= 1.5){
-        arcadeDrive.tankDrive(0, 0);
-        driveTimer.stop();
-      }
-    }
-//Auton Path 3
-    if(AutonPath == 3){
-      if(driveTimer.get() < 1.5){
-        arcadeDrive.tankDrive(-.68, .68);
-      }
-      if(driveTimer.get() >= 1.5){
-        arcadeDrive.tankDrive(0, 0);
-        driveTimer.stop();
-      }
-    }
-//Auton Path 4
-    if(AutonPath == 4){
-      if(driveTimer.get() < .5){
-        arcadeDrive.tankDrive(.0, .3);
-      }
-      if(driveTimer.get() >= .5 && driveTimer.get() < 1.5){
-        arcadeDrive.tankDrive(.6, .6);
-      }
-      if(driveTimer.get() >= 1.5){
-        arcadeDrive.tankDrive(0, 0);
-        driveTimer.stop();
-      } 
-    }
 //Low Port Auton 5
     if(AutonPath == 5){
       if(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
@@ -140,11 +97,23 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
       }
     }
+    if(AutonPath == 7){
+      System.out.println(LEncoder.getDistance() + "Left Encoder");
+      System.out.println(REncoder.getDistance() + "Right Encoder");
+      if(LEncoder.getDistance() < 110 && REncoder.getDistance() < 110){
+        arcadeDrive.tankDrive(-.5, .5);
+      }
+      if(LEncoder.getDistance() >= 110 && REncoder.getDistance() >= 110){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
     arcadeDrive.feed();
 }
 public void DriveinitTimer() {
   driveTimer.reset();
   driveTimer.start();
+  LEncoder.reset();
+  REncoder.reset();
 }
 
    public void resetGyro(){
