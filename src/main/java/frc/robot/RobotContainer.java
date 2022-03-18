@@ -15,6 +15,7 @@ import frc.robot.commands.Auton.AutoGyroCommand;
 import frc.robot.commands.Auton.AutoIntakeCommand;
 import frc.robot.commands.Auton.AutonShootCommand;
 import frc.robot.commands.Camera.CameraCommand;
+import frc.robot.commands.Climb.SlowSolenoidCommand;
 import frc.robot.commands.Climb.SolenoidCommand;
 import frc.robot.commands.Drive.DriveCommand;
 import frc.robot.commands.Drive.ReverseDriveCommand;
@@ -32,7 +33,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -61,6 +61,7 @@ public class RobotContainer {
   private final IntakeCommand intakeCommand;
   private final IntakeOffCommand intakeOffCommand;
   private final SolenoidCommand solenoidCommand;
+  private final SlowSolenoidCommand slowSolenoidCommand;
   private final ArmUpCommand armUpCommand;
   private final ArmDownCommand armDownCommand;
   private final ArmZeroCommand armZeroCommand;
@@ -69,7 +70,6 @@ public class RobotContainer {
   private final AutoGyroCommand autoGyroCommand;
   private final AutoIntakeCommand autoIntakeCommand;
   private final AutoCommandGroup autoCommandGroup;
-
   private final CameraCommand cameraCommand;
 
   //Name Controllers Here
@@ -96,6 +96,7 @@ public class RobotContainer {
     intakeCommand = new IntakeCommand(intakeSubsystem);
     intakeOffCommand = new IntakeOffCommand(intakeSubsystem);
     solenoidCommand = new SolenoidCommand(climbSubsystem);
+    slowSolenoidCommand = new SlowSolenoidCommand(climbSubsystem);
     armUpCommand = new ArmUpCommand(armSubsystem);
     armDownCommand = new ArmDownCommand(armSubsystem);
     armZeroCommand = new ArmZeroCommand(armSubsystem);
@@ -117,6 +118,7 @@ public class RobotContainer {
     intakeCommand.addRequirements(intakeSubsystem);
     intakeOffCommand.addRequirements(intakeSubsystem);
     solenoidCommand.addRequirements(climbSubsystem);
+    slowSolenoidCommand.addRequirements(climbSubsystem);
     armUpCommand.addRequirements(armSubsystem);
     armDownCommand.addRequirements(armSubsystem);
     cameraCommand.addRequirements(cameraSubsystem);
@@ -133,6 +135,7 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(intakeSubsystem, intakeOffCommand);
     CommandScheduler.getInstance().setDefaultCommand(shooterSubsystem, shooterOffCommand);
     CommandScheduler.getInstance().setDefaultCommand(armSubsystem, armZeroCommand);
+    CommandScheduler.getInstance().setDefaultCommand(climbSubsystem, slowSolenoidCommand);
 
     //Make Controllers Here
     XCont = new XboxController(Constants.XContPort);
@@ -169,7 +172,7 @@ public class RobotContainer {
     Button6.whileHeld(new IntakeCommand(intakeSubsystem));
     button9.whenPressed(new SolenoidCommand(climbSubsystem));
     Button12.whenPressed(new SolenoidCommand(climbSubsystem));
-    Button10.whileHeld(new IntakeCommand(intakeSubsystem));
+    Button10.whileHeld(new SolenoidCommand(climbSubsystem));
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
     Button13.whileHeld(new ArmDownCommand(armSubsystem));
     Button14.whileHeld(new ArmUpCommand(armSubsystem));

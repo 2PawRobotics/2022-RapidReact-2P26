@@ -85,11 +85,15 @@ public final class Constants {
         public static final int AutoshooterVolts = 6;
     
     //Auton Paths
-        public static int AutonPath = 6;
+        public static int AutonPath = 7;
 
     //Command Booleans
         public static boolean intakeActive = false;
         public static boolean reverseIntakeActive = false;
         public static boolean reverseDrive = false;
+
+    //Encoder Motor Correction
+        public static double LEncoderCorrection = 0;
+        //public static double LEncoderCorrection = .5;
 
 }
