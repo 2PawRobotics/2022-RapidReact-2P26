@@ -104,9 +104,9 @@ public class DriveSubsystem extends SubsystemBase {
       System.out.println(REncoder.getDistance() + "Right Encoder");
       if(LEncoder.getDistance() < 60 && REncoder.getDistance() < 60){
         if(LEncoder.getDistance() < REncoder.getDistance()){
-          arcadeDrive.tankDrive(-.5, .495);
+          arcadeDrive.tankDrive(-.5, .4985);
         }else if (LEncoder.getDistance() > REncoder.getDistance()){
-          arcadeDrive.tankDrive(-.495, .5);
+          arcadeDrive.tankDrive(-.4985, .5);
         }else{
           arcadeDrive.tankDrive(.5, .5);
         }
@@ -118,9 +118,9 @@ public class DriveSubsystem extends SubsystemBase {
       if(driveTimer.get() >= 3){
         if(LEncoder.getDistance() > 45 && REncoder.getDistance() > 45){
           if(LEncoder.getDistance() > REncoder.getDistance()){
-            arcadeDrive.tankDrive(-.5, .495);
+            arcadeDrive.tankDrive(-.5, .4985);
           }else if (LEncoder.getDistance() < REncoder.getDistance()){
-            arcadeDrive.tankDrive(-.495, .5);
+            arcadeDrive.tankDrive(-.4985, .5);
           }else{
             arcadeDrive.tankDrive(.5, .5);
           }
