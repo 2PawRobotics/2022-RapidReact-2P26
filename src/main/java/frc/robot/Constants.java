@@ -92,4 +92,8 @@ public final class Constants {
         public static boolean reverseIntakeActive = false;
         public static boolean reverseDrive = false;
 
+    //Encoder Motor Correction
+        public static double LEncoderCorrection = 0;
+        //public static double LEncoderCorrection = .5;
+
 }

@@ -50,7 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
-    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()*speedY));
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()));
     System.out.println(LEncoder.getRate() + "Left Encoder");
     System.out.println(REncoder.getRate() + "Right Encoder");
     //System.out.println(XContY);
@@ -71,9 +71,11 @@ public class DriveSubsystem extends SubsystemBase {
 
     LEncoder.setDistancePerPulse(1./76.);
     REncoder.setDistancePerPulse(1./76.);
+    Constants.LEncoderCorrection = LEncoder.getDistance() + 20;
+
 
 //Low Port Auton 5
-    if(AutonPath == 5){
+    if(AutonPath == 1){
       if(driveTimer.get() >= 1.5 && driveTimer.get() < 3){
         System.out.println("Thank you BlitzCreek");
         arcadeDrive.tankDrive(-0.68, 0.68);
@@ -83,7 +85,7 @@ public class DriveSubsystem extends SubsystemBase {
       } 
 
     }
-    if(AutonPath == 6){
+    if(AutonPath == 2){
       if(driveTimer.get() >= 1.5 && driveTimer.get()< 3){
         arcadeDrive.tankDrive(-0.68, 0.68);
       }
@@ -97,21 +99,69 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
       }
     }
-    if(AutonPath == 7){
+    if(AutonPath == 3){
       System.out.println(LEncoder.getDistance() + "Left Encoder");
       System.out.println(REncoder.getDistance() + "Right Encoder");
-      if(LEncoder.getDistance() < 110 && REncoder.getDistance() < 110){
-        arcadeDrive.tankDrive(-.5, .5);
+      if(LEncoder.getDistance() < 60 && REncoder.getDistance() < 60){
+        if(LEncoder.getDistance() < REncoder.getDistance()){
+          arcadeDrive.tankDrive(-.5, .495);
+        }else if (LEncoder.getDistance() > REncoder.getDistance()){
+          arcadeDrive.tankDrive(-.495, .5);
+        }else{
+          arcadeDrive.tankDrive(.5, .5);
+        }
       }
-      if(LEncoder.getDistance() >= 110 && REncoder.getDistance() >= 110){
+      if(LEncoder.getDistance() >= 60 && REncoder.getDistance() >= 60){
         arcadeDrive.tankDrive(0, 0);
+        driveTimer.start();
+      }
+      if(driveTimer.get() >= 3){
+        if(LEncoder.getDistance() > 45 && REncoder.getDistance() > 45){
+          if(LEncoder.getDistance() > REncoder.getDistance()){
+            arcadeDrive.tankDrive(-.5, .495);
+          }else if (LEncoder.getDistance() < REncoder.getDistance()){
+            arcadeDrive.tankDrive(-.495, .5);
+          }else{
+            arcadeDrive.tankDrive(.5, .5);
+          }
+        }
+        if(LEncoder.getDistance() <= 45 && REncoder.getDistance() <= 45){
+          arcadeDrive.tankDrive(0, 0);
+        }
+      }
+    }
+    if(AutonPath == 4){
+      System.out.println(LEncoder.getDistance() + "Left Encoder");
+      System.out.println(REncoder.getDistance() + "Right Encoder");
+      if(LEncoder.getDistance() < 5 && REncoder.getDistance() < 5){
+        if(LEncoder.getDistance() < REncoder.getDistance()){
+          arcadeDrive.tankDrive(-.5, .495);
+        }else if (LEncoder.getDistance() > REncoder.getDistance()){
+          arcadeDrive.tankDrive(-.495, .5);
+        }else{
+          arcadeDrive.tankDrive(.5, .5);
+        }
+      }
+      if(LEncoder.getDistance() >= 5 && REncoder.getDistance() >= 5 && LEncoder.getDistance() < 15 && REncoder.getDistance() < 35){
+        arcadeDrive.tankDrive(.3, .5);
+        //driveTimer.start();
+      }
+      if(LEncoder.getDistance() >= 15 && REncoder.getDistance() >= 35 && LEncoder.getDistance() < 30 && REncoder.getDistance() < 50){
+        if(Constants.LEncoderCorrection < REncoder.getDistance()){
+          arcadeDrive.tankDrive(-.5, .495);
+        }else if (Constants.LEncoderCorrection > REncoder.getDistance()){
+          arcadeDrive.tankDrive(-.495, .5);
+        }else{
+          arcadeDrive.tankDrive(.5, .5);
+        }
+      }
+      if(LEncoder.getDistance() >= 30 && REncoder.getDistance() >= 50){
       }
     }
     arcadeDrive.feed();
 }
 public void DriveinitTimer() {
   driveTimer.reset();
-  driveTimer.start();
   LEncoder.reset();
   REncoder.reset();
 }

@@ -64,35 +64,14 @@ public class IntakeSubsystem extends SubsystemBase {
     //intakeMotors.setVoltage(Constants.bothIntakeVolts);
     //}else{intakeMotors.setVoltage(0);}
 
-    
-//Auton Path 1, 2, and 4
-    if(Constants.AutonPath == 1 || Constants.AutonPath == 2 || Constants.AutonPath == 4){
-      if(intakeTimer.get() >= .5 && intakeTimer.get() < 1.5){
-        lowIntakeMotor.setVoltage(Constants.lIntakeVolts);}
-      if(intakeTimer.get() >= 1.5 && intakeTimer.get() < 4.25){
-        intakeMotors.setVoltage(0);}
-      if(intakeTimer.get() >= 4.25 && intakeTimer.get() < 5.5){
-        intakeMotors.setVoltage(Constants.bothIntakeVolts);}
-      if(intakeTimer.get() >= 5.5){
-        intakeMotors.setVoltage(0);}
-      }
-
-//Auton Path 3
-    if(Constants.AutonPath == 3){
-      if(intakeTimer.get() >= 2 && intakeTimer.get() < 4){
-        intakeMotors.setVoltage(Constants.bothIntakeVolts);}
-      if(intakeTimer.get() >= 4){
-        intakeMotors.setVoltage(0);}
-      }
-
 //Low Port Auton Path 5
-    if(Constants.AutonPath == 5){
+    if(Constants.AutonPath == 1){
       if(intakeTimer.get() >= .5 && intakeTimer.get() < 1.5){
         intakeMotors.setVoltage(Constants.bothIntakeVolts);}
       if(intakeTimer.get() >= 1.5){
         intakeMotors.setVoltage(0);}
       }
-      if(Constants.AutonPath == 6){
+      if(Constants.AutonPath == 2){
         if(intakeTimer.get() > .5 && intakeTimer.get() <=1.5){
           intakeMotors.setVoltage(Constants.lIntakeVolts);
         }

@@ -69,25 +69,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
 //Auton Path 1, 2, 3, and 4
-    if(AutonPath == 1 || AutonPath == 2 || AutonPath == 3 || AutonPath == 4)
-      if(shooterTimer.get() >= 1.75 && shooterTimer.get() < 5.5){
-      leftShooterMotor.setInverted(false);
-      rightShooterMotor.setInverted(true);
-      shooter.setVoltage(Constants.shooterVolts);}
-      if(shooterTimer.get() >= 5.5){
-        shooter.setVoltage(0);}
-
-    if(AutonPath == 3){
-      if(shooterTimer.get() >= 1.5 && shooterTimer.get() < 4){
-        leftShooterMotor.setInverted(false);
-        rightShooterMotor.setInverted(true);
-        shooter.setVoltage(Constants.shooterVolts);}
-      if(shooterTimer.get() >= 4){
-        shooter.setVoltage(0);}
-    }
 
 //Low Port Auton 5
-    if(AutonPath == 5){
+    if(AutonPath == 1){
       if(shooterTimer.get() >= 0 && shooterTimer.get() < 1.5){
         leftShooterMotor.setInverted(false);
         rightShooterMotor.setInverted(true);
@@ -95,7 +79,7 @@ public class ShooterSubsystem extends SubsystemBase {
       if(shooterTimer.get() >= 1.5){
         shooter.setVoltage(0);}
     }
-    if(AutonPath == 6){
+    if(AutonPath == 2){
       if(shooterTimer.get() >= 0 && shooterTimer.get() <= 1.8){
         leftShooterMotor.setInverted(false);
         rightShooterMotor.setInverted(true);
