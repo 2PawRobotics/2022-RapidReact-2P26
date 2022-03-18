@@ -44,13 +44,11 @@ public class IntakeSubsystem extends SubsystemBase {
       topIntakeMotor.setInverted(false);
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.intakeActive = true;}
-    while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
-      topIntakeMotor.setInverted(true);
-      topIntakeMotor.setVoltage(Constants.tIntakeVolts);
-      Constants.reverseIntakeActive = true;}
     while(ButtonPanel.getRawButtonPressed(Constants.ButtonPort11)){
       lowIntakeMotor.setInverted(false);
       lowIntakeMotor.setVoltage(Constants.tIntakeVolts);
+      topIntakeMotor.setInverted(true);
+      topIntakeMotor.setVoltage(Constants.tIntakeVolts);
       Constants.reverseIntakeActive = true;}
   }
 //Auton Intake

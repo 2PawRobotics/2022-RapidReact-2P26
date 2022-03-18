@@ -16,6 +16,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
   //Declare Hardware Components
 
+  private final DoubleSolenoid dSolenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
   private final DoubleSolenoid dSolenoid2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
   public final static Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
@@ -29,5 +30,11 @@ public class ClimbSubsystem extends SubsystemBase {
     if(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort12)){
       dSolenoid2.set(Value.kReverse);
     }
+    while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
+      dSolenoid1.set(Value.kForward);
+    }
+  }
+  public void SlowSolenoid(){
+      dSolenoid1.set(Value.kReverse);
   }
 }
