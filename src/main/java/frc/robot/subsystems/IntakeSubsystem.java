@@ -49,7 +49,7 @@ public class IntakeSubsystem extends SubsystemBase {
       lowIntakeMotor.setVoltage(Constants.tIntakeVolts);
       topIntakeMotor.setInverted(true);
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);
-      Constants.reverseIntakeActive = true;}
+    }
   }
 //Auton Intake
   public void AutonIntake() {
@@ -64,31 +64,35 @@ public class IntakeSubsystem extends SubsystemBase {
 
 //Low Port Auton Path 5
     if(Constants.AutonPath == 1){
-      if(intakeTimer.get() >= .5 && intakeTimer.get() < 1.5){
-        intakeMotors.setVoltage(Constants.bothIntakeVolts);}
-      if(intakeTimer.get() >= 1.5){
-        intakeMotors.setVoltage(0);}
+      if(intakeTimer.get() > 3.2 && intakeTimer.get() <= 3.75){
+        lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
       }
-      if(Constants.AutonPath == 2){
-        if(intakeTimer.get() > .5 && intakeTimer.get() <=1.5){
-          intakeMotors.setVoltage(Constants.lIntakeVolts);
-        }
-        if(intakeTimer.get() >1.5 && intakeTimer.get() <=3){
-          intakeMotors.setVoltage(0);
-        }
-        if(intakeTimer.get() > 3 && intakeTimer.get() <=3.5){
-          lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
-        }
-        if(intakeTimer.get() >3.5 && intakeTimer.get() <= 5.5){
-          intakeMotors.setVoltage(0);
-        }
-        if(intakeTimer.get() >5.5 && intakeTimer.get() <= 6.5){
-          intakeMotors.setVoltage(Constants.bothIntakeVolts);
-        }
-        if(intakeTimer.get() >6.5){
-          intakeMotors.setVoltage(0);
-        }
+      if(intakeTimer.get() >3.75 && intakeTimer.get() <= 8.5){
+        intakeMotors.setVoltage(0);
       }
+
+      if(intakeTimer.get() > 8.5 && intakeTimer.get() <= 10){
+        intakeMotors.setVoltage(Constants.AutobothIntakeVolts);
+      }
+      if(intakeTimer.get() >10){
+        intakeMotors.setVoltage(0);
+      }
+    }
+    if(Constants.AutonPath == 2){
+      if(intakeTimer.get() > 2.2 && intakeTimer.get() <= 2.6){
+        lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
+      }
+      if(intakeTimer.get() >2.6 && intakeTimer.get() <= 6){
+        intakeMotors.setVoltage(0);
+      }
+
+      if(intakeTimer.get() > 6 && intakeTimer.get() <= 7.25){
+        intakeMotors.setVoltage(Constants.AutobothIntakeVolts);
+      }
+      if(intakeTimer.get() > 7.25){
+        intakeMotors.setVoltage(0);
+      }
+    }
   }
   public void IntakeinitTimer() {
     intakeTimer.reset();

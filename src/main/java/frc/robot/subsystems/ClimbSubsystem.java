@@ -31,10 +31,10 @@ public class ClimbSubsystem extends SubsystemBase {
       dSolenoid2.set(Value.kReverse);
     }
     while(RobotContainer.ButtonPanel.getRawButtonPressed(Constants.ButtonPort10)){
-      dSolenoid1.set(Value.kForward);
+      dSolenoid1.set(Value.kReverse);
     }
   }
   public void SlowSolenoid(){
-      dSolenoid1.set(Value.kReverse);
+      dSolenoid1.set(Value.kForward);
   }
 }
