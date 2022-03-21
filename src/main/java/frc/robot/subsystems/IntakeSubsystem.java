@@ -51,53 +51,79 @@ public class IntakeSubsystem extends SubsystemBase {
       topIntakeMotor.setVoltage(Constants.tIntakeVolts);
     }
   }
-//Auton Intake
-  public void AutonIntake() {
 
-    
-    lowIntakeMotor.setInverted(true);
-    topIntakeMotor.setInverted(false);
 
-    //if(intakeTimer.get() <= 1.5){
-    //intakeMotors.setVoltage(Constants.bothIntakeVolts);
-    //}else{intakeMotors.setVoltage(0);}
-
-//Low Port Auton Path 5
-    if(Constants.AutonPath == 1){
-      if(intakeTimer.get() > 3.2 && intakeTimer.get() <= 3.75){
-        lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
-      }
-      if(intakeTimer.get() >3.75 && intakeTimer.get() <= 8.5){
-        intakeMotors.setVoltage(0);
-      }
-
-      if(intakeTimer.get() > 8.5 && intakeTimer.get() <= 10){
-        intakeMotors.setVoltage(Constants.AutobothIntakeVolts);
-      }
-      if(intakeTimer.get() >10){
-        intakeMotors.setVoltage(0);
-      }
-    }
-    if(Constants.AutonPath == 2){
-      if(intakeTimer.get() > 2.2 && intakeTimer.get() <= 2.6){
-        lowIntakeMotor.setVoltage(Constants.lIntakeVolts);
-      }
-      if(intakeTimer.get() >2.6 && intakeTimer.get() <= 6){
-        intakeMotors.setVoltage(0);
-      }
-
-      if(intakeTimer.get() > 6 && intakeTimer.get() <= 7.25){
-        intakeMotors.setVoltage(Constants.AutobothIntakeVolts);
-      }
-      if(intakeTimer.get() > 7.25){
-        intakeMotors.setVoltage(0);
-      }
-    }
-  }
+//Autonomous Intake Timer
   public void IntakeinitTimer() {
     intakeTimer.reset();
     intakeTimer.start();
   }
+
+//Autonomous Intake Paths
+  public void AutonIntake(int AutonPath, int lIntakeVolts, Double AutobothIntakeVolts) {
+    lowIntakeMotor.setInverted(true);
+    topIntakeMotor.setInverted(false);
+
+//Autonomous Path 1
+  if(AutonPath == 1){
+    if(intakeTimer.get() > 3.2 && intakeTimer.get() <= 3.75){
+      lowIntakeMotor.setVoltage(lIntakeVolts);
+    }
+    if(intakeTimer.get() >3.75 && intakeTimer.get() <= 8.5){
+      intakeMotors.setVoltage(0);
+    }
+    if(intakeTimer.get() > 8.5 && intakeTimer.get() <= 10){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    if(intakeTimer.get() >10){
+      intakeMotors.setVoltage(0);
+    }
+  }
+
+//Autonomous Path 2
+  if(AutonPath == 2){
+    if(intakeTimer.get() > 2.2 && intakeTimer.get() <= 2.6){
+      lowIntakeMotor.setVoltage(lIntakeVolts);
+    }
+    if(intakeTimer.get() >2.6 && intakeTimer.get() <= 6){
+      intakeMotors.setVoltage(0);
+    }
+    if(intakeTimer.get() > 6 && intakeTimer.get() <= 7.25){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    if(intakeTimer.get() > 7.25){
+      intakeMotors.setVoltage(0);
+    }
+  }
+
+//Autonomous Path 3
+  if(AutonPath == 3){
+    if(intakeTimer.get() >= 3 && intakeTimer.get() <= 3.4){
+      lowIntakeMotor.setVoltage(lIntakeVolts);
+    }
+    if(intakeTimer.get() >= 3.4 && intakeTimer.get() <= 7){
+      lowIntakeMotor.setVoltage(0);
+    }
+    if(intakeTimer.get() >= 7 && intakeTimer.get() <= 8.25){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    if(intakeTimer.get() >= 8.25){
+      intakeMotors.setVoltage(0);
+    }
+  }
+
+//Autonomous Path 4
+  if(AutonPath == 4){
+    if(intakeTimer.get() >= 6 && intakeTimer.get() <= 7){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    if(intakeTimer.get() >= 7){
+      intakeMotors.setVoltage(0);
+    }
+  }
+
+}
+
 }
 
 

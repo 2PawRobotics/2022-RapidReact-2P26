@@ -51,13 +51,6 @@ public class DriveSubsystem extends SubsystemBase {
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
     arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()));
-    System.out.println(LEncoder.getRate() + "Left Encoder");
-    System.out.println(REncoder.getRate() + "Right Encoder");
-    //System.out.println(XContY);
-    //System.out.println("left: ");
-    //System.out.print(leftCims.get());
-    //System.out.println("right: ");
-    //System.out.print(rightCims.get());
   }
 
   public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
@@ -67,60 +60,106 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
+//Autonomous Drive Timer & Encoder
+  public void DriveinitTimer() {
+    driveTimer.reset();
+    driveTimer.start();
+    LEncoder.reset();
+    REncoder.reset();
+  }
+
+//Autonomous Drive Paths
   public void AutonDrive(int AutonPath){
 
     LEncoder.setDistancePerPulse(1./76.);
     REncoder.setDistancePerPulse(1./76.);
     Constants.LEncoderCorrection = LEncoder.getDistance() + 20;
 
+//Autonomous Path 1
+  if(AutonPath == 1){
+    if(driveTimer.get() <= 4){
+      if(REncoder.getDistance() < 20){
+        arcadeDrive.tankDrive(-.55, .6);
+      }
+      if(REncoder.getDistance() >= 20){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() >= 5){
+      if(REncoder.getDistance() > 18){
+        arcadeDrive.tankDrive(.55, -.65);
+      }
+      if(REncoder.getDistance() <= 18){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+  }
 
-//Low Port Auton 5
-    if(AutonPath == 1){
-      if(driveTimer.get() <= 4)
-        if(REncoder.getDistance() < 20){
-          
-          arcadeDrive.tankDrive(-.55, .6);
-        }
-        if(REncoder.getDistance() >= 20){
-          arcadeDrive.tankDrive(0, 0);
-        }
-        if(driveTimer.get() >= 5){
-          if(REncoder.getDistance() > 18){
-            arcadeDrive.tankDrive(.55, -.65);
-          }
-          if(REncoder.getDistance() <= 18){
-            arcadeDrive.tankDrive(0, 0);
-          }
+//Autonomous Path 2
+  if(AutonPath == 2){
+    if(driveTimer.get() <= 3){
+      if(REncoder.getDistance() < 11.5){ 
+        arcadeDrive.tankDrive(-.55, .6);
+      }
+      if(REncoder.getDistance() >= 11.5){
+        arcadeDrive.tankDrive(0, 0);
       }
     }
-    if(AutonPath == 2){
-      if(driveTimer.get() <= 3)
-        if(REncoder.getDistance() < 11.5){
-          
-          arcadeDrive.tankDrive(-.55, .6);
-        }
-        if(REncoder.getDistance() >= 11.5){
-          arcadeDrive.tankDrive(0, 0);
-        }
-        if(driveTimer.get() >= 4){
-          if(REncoder.getDistance() > 9){
-            arcadeDrive.tankDrive(.55, -.6);
-          }
-          if(REncoder.getDistance() <= 9){
-            arcadeDrive.tankDrive(0, 0);
-          }
+    if(driveTimer.get() >= 4){
+      if(REncoder.getDistance() > 9){
+        arcadeDrive.tankDrive(.55, -.6);
+      }
+      if(REncoder.getDistance() <= 9){
+        arcadeDrive.tankDrive(0, 0);
       }
     }
-    arcadeDrive.feed();
-}
-public void DriveinitTimer() {
-  driveTimer.reset();
-  driveTimer.start();
-  LEncoder.reset();
-  REncoder.reset();
+  }
+
+//Autonomous Path 3
+  if(AutonPath == 3){
+    if(driveTimer.get() <= 4){
+      if(REncoder.getDistance() < 14){
+        arcadeDrive.tankDrive(-.55, .6);
+      }
+      if(REncoder.getDistance() > 14){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() >= 5){
+      if(LEncoder.getDistance() > 9){
+        arcadeDrive.tankDrive(.55, .65);
+      }
+      if(LEncoder.getDistance() <= 9){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+  }
+
+//Autonomous Path 4
+  if(AutonPath == 4){
+    if(driveTimer.get() <= 4){
+      if(REncoder.getDistance() < 8){
+        arcadeDrive.tankDrive(-.55, .6);
+      }
+      if(REncoder.getDistance() > 8){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() >= 8){
+      if(LEncoder.getDistance() <= 18){
+        arcadeDrive.tankDrive(-.55, 0.7);
+      }
+      if(LEncoder.getDistance() >= 18){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    
+  }
+
 }
 
    public void resetGyro(){
      //navXGyro.reset();
    }
+
 }

@@ -65,25 +65,19 @@ public final class Constants {
         public static final double speedX = -0.78;
         public static final double RspeedY = -0.83;
         public static final double rateLimit = 2.0;
-       // public static final double speedX = RobotContainer.XCont.getRightX();
-        //public static final double speedY = Math.pow(RobotContainer.XCont.getRightX(), 2)*0.83;
-        //public static final double speedX = Math.pow(RobotContainer.XCont.getLeftY(), 2)*-0.83;
-        //public static final double RspeedY = Math.pow(RobotContainer.XCont.getRightX(), 2)*-0.83;
         //Speed Constants
         public static final double actuatorSpeed = 0.6;
         public static final double RactuatorSpeed = -0.6;
         public static final int zeroSpeed = 0;
         //Voltage Constants
         public static final double shooterVolts = 10.5;
-        public static final double HiAutoshooterVolts = 10;
-        public static final int lowshooterVolts = 6;
         public static final int rShooterVolts = 4;
-        public static final int autonShooterVolts = 10;
-        public static final double bothIntakeVolts = 5.0;
-        public static final double AutobothIntakeVolts = 4.0;
+        public static final int lowshooterVolts = 6;
         public static final int lIntakeVolts = 6;
         public static final int tIntakeVolts = 3;
-        public static final int AutoshooterVolts = 6;
+        public static final double bothIntakeVolts = 5.0;
+        public static final double AutobothIntakeVolts = 4.0;
+    
     
     //Auton Paths
         public static int AutonPath = 2;

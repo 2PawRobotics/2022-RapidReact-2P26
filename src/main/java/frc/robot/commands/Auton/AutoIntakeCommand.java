@@ -5,6 +5,7 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class AutoIntakeCommand extends CommandBase {
@@ -25,7 +26,7 @@ public class AutoIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.AutonIntake();
+    intakeSubsystem.AutonIntake(Constants.AutonPath, Constants.lIntakeVolts, Constants.AutobothIntakeVolts);
   }
 
   // Called once the command ends or is interrupted.

@@ -63,38 +63,57 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   
-//Auton Shooter
-  public void AutonShooter(int AutonPath){
-    System.out.println(shooterTimer.get());
+//Autonomous Shooter Timer
+public void ShooterinitTimer() {
+  shooterTimer.reset();
+  shooterTimer.start();
+}
 
+//Autonomous Shooter Paths
+public void AutonShooter(int AutonPath, double shooterVolts){
+  leftShooterMotor.setInverted(false);
+  rightShooterMotor.setInverted(true);
 
-//Auton Path 1, 2, 3, and 4
-
-//Low Port Auton 5
-    if(AutonPath == 1){
-      if(shooterTimer.get() >= 7.5 && shooterTimer.get() <= 10){
-        leftShooterMotor.setInverted(false);
-        rightShooterMotor.setInverted(true);
-        shooter.setVoltage(Constants.shooterVolts);
-      }
-      if(shooterTimer.get() >= 10){
-        shooter.setVoltage(0);
-      }
+//Autonomous Path 1
+  if(AutonPath == 1){
+    if(shooterTimer.get() >= 7.5 && shooterTimer.get() <= 10){
+      shooter.setVoltage(shooterVolts);
     }
-    if(AutonPath == 2){
-      if(shooterTimer.get() >= 5.5 && shooterTimer.get() <= 7.5){
-        leftShooterMotor.setInverted(false);
-        rightShooterMotor.setInverted(true);
-        shooter.setVoltage(Constants.shooterVolts);
-      }
-      if(shooterTimer.get() >= 8){
-        shooter.setVoltage(0);
-      }
+    if(shooterTimer.get() >= 10){
+      shooter.setVoltage(0);
     }
   }
 
-  public void ShooterinitTimer() {
-    shooterTimer.reset();
-    shooterTimer.start();
+//Autonomous Path 2
+  if(AutonPath == 2){
+    if(shooterTimer.get() >= 5.5 && shooterTimer.get() <= 8){
+      shooter.setVoltage(shooterVolts);
+    }
+    if(shooterTimer.get() >= 8){
+      shooter.setVoltage(0);
+    }
   }
+
+//Autonomous Path 3
+  if(AutonPath == 3){
+    if(shooterTimer.get() >= 6.5 && shooterTimer.get() <= 8.5){
+      shooter.setVoltage(shooterVolts);
+    }
+    if(shooterTimer.get() >= 8.5){
+      shooter.setVoltage(0);
+    }
+  }
+
+//Autonomous Path 4
+  if(AutonPath == 4){
+    if(shooterTimer.get() >= 5.5 && shooterTimer.get() <= 7.5){
+      shooter.setVoltage(shooterVolts);
+    }
+    if(shooterTimer.get() >= 7.5){
+      shooter.setVoltage(0);
+    }
+  }
+
+}
+
 }
