@@ -40,7 +40,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final Encoder REncoder = new Encoder(2,3, true, Encoder.EncodingType.k2X);
 
   private final Timer driveTimer = new Timer();
-  private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.rateLimit);
+  private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.RampRateLimit);
 
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
@@ -50,7 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
-    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()));
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY())*speedY);
   }
 
   public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
@@ -79,7 +79,7 @@ public class DriveSubsystem extends SubsystemBase {
   if(AutonPath == 1){
     if(driveTimer.get() <= 4){
       if(REncoder.getDistance() < 20){
-        arcadeDrive.tankDrive(-.55, .6);
+        arcadeDrive.tankDrive(-.6, .6);
       }
       if(REncoder.getDistance() >= 20){
         arcadeDrive.tankDrive(0, 0);
@@ -87,7 +87,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
     if(driveTimer.get() >= 5){
       if(REncoder.getDistance() > 18){
-        arcadeDrive.tankDrive(.55, -.65);
+        arcadeDrive.tankDrive(.6, -.65);
       }
       if(REncoder.getDistance() <= 18){
         arcadeDrive.tankDrive(0, 0);
@@ -98,18 +98,18 @@ public class DriveSubsystem extends SubsystemBase {
 //Autonomous Path 2
   if(AutonPath == 2){
     if(driveTimer.get() <= 3){
-      if(REncoder.getDistance() < 11.5){ 
-        arcadeDrive.tankDrive(-.55, .6);
+      if(REncoder.getDistance() < 10.7){ 
+        arcadeDrive.tankDrive(-.6, .6);
       }
-      if(REncoder.getDistance() >= 11.5){
+      if(REncoder.getDistance() >= 10.7){
         arcadeDrive.tankDrive(0, 0);
       }
     }
     if(driveTimer.get() >= 4){
-      if(REncoder.getDistance() > 9){
-        arcadeDrive.tankDrive(.55, -.6);
+      if(REncoder.getDistance() > 8){
+        arcadeDrive.tankDrive(.6, -.6);
       }
-      if(REncoder.getDistance() <= 9){
+      if(REncoder.getDistance() <= 8){
         arcadeDrive.tankDrive(0, 0);
       }
     }
@@ -117,17 +117,17 @@ public class DriveSubsystem extends SubsystemBase {
 
 //Autonomous Path 3
   if(AutonPath == 3){
-    if(driveTimer.get() <= 4){
+    if(driveTimer.get() <= 3.5){
       if(REncoder.getDistance() < 14){
-        arcadeDrive.tankDrive(-.55, .6);
+        arcadeDrive.tankDrive(-.6, .6);
       }
       if(REncoder.getDistance() > 14){
         arcadeDrive.tankDrive(0, 0);
       }
     }
-    if(driveTimer.get() >= 5){
+    if(driveTimer.get() >= 4){
       if(LEncoder.getDistance() > 9){
-        arcadeDrive.tankDrive(.55, .65);
+        arcadeDrive.tankDrive(.64, -.6);
       }
       if(LEncoder.getDistance() <= 9){
         arcadeDrive.tankDrive(0, 0);
@@ -139,7 +139,7 @@ public class DriveSubsystem extends SubsystemBase {
   if(AutonPath == 4){
     if(driveTimer.get() <= 4){
       if(REncoder.getDistance() < 8){
-        arcadeDrive.tankDrive(-.55, .6);
+        arcadeDrive.tankDrive(-.6, .6);
       }
       if(REncoder.getDistance() > 8){
         arcadeDrive.tankDrive(0, 0);
@@ -147,7 +147,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
     if(driveTimer.get() >= 8){
       if(LEncoder.getDistance() <= 18){
-        arcadeDrive.tankDrive(-.55, 0.7);
+        arcadeDrive.tankDrive(-.6, 0.7);
       }
       if(LEncoder.getDistance() >= 18){
         arcadeDrive.tankDrive(0, 0);

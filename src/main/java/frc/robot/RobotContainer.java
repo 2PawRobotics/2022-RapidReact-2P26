@@ -19,6 +19,7 @@ import frc.robot.commands.Climb.SlowSolenoidCommand;
 import frc.robot.commands.Climb.SolenoidCommand;
 import frc.robot.commands.Drive.DriveCommand;
 import frc.robot.commands.Drive.ReverseDriveCommand;
+import frc.robot.commands.Intake.EasterEgg;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeOffCommand;
 import frc.robot.commands.Shooter.ShooterLowCommand;
@@ -161,6 +162,7 @@ public class RobotContainer {
     JoystickButton Button13 = new JoystickButton(ButtonPanel, Constants.ButtonPort13);
     JoystickButton Button14 = new JoystickButton(ButtonPanel, Constants.ButtonPort14);
     JoystickButton Bumper1 = new JoystickButton(XCont, Constants.RightBumper);
+    JoystickButton Start = new JoystickButton(XCont, 8);
 
     //Bind buttons to Commands and Subsystems 
 
@@ -176,7 +178,8 @@ public class RobotContainer {
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
     Button13.whileHeld(new ArmDownCommand(armSubsystem));
     Button14.whileHeld(new ArmUpCommand(armSubsystem));
-    Bumper1.whileHeld(new ReverseDriveCommand(driveSubsystem));
+    Bumper1.whileHeld(new EasterEgg(intakeSubsystem));
+    Start.whenPressed(new EasterEgg(intakeSubsystem));
     
 
     //Below are some examples of doing so

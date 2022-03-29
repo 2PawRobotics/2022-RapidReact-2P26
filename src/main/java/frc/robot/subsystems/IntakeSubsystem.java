@@ -52,6 +52,57 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
+  public void EasterEgg (){
+    System.out.println("This Robot, 2P26, was created and made possible by the 2PawRobotics team of 2022.");
+    System.out.println(" ");
+    System.out.println(" ");
+    System.out.println("Our Leadership Team");
+    System.out.println(" ");
+    System.out.println("  Captains  - Emily Dalecki & Derek Keene");
+    System.out.println("  Secretary - Olivia Garrod");
+    System.out.println(" ");
+    System.out.println("  Team Leads:");
+    System.out.println(" ");
+    System.out.println("Build Team Lead       - Tyler Houston");
+    System.out.println("Programming Team Lead - William Mackeller");
+    System.out.println("Buisness Team Lead    - Natalie Atwater");
+    System.out.println("Marketing Team Leads  - Carter Buck & Meah Hameed");
+    System.out.println("Media Team Lead       - Jaxin Lovorn");
+    System.out.println(" ");
+    System.out.println("----------------------------------");
+    System.out.println(" ");
+    System.out.println("Our Drive Team:");
+    System.out.println(" ");
+    System.out.println("Driver       - Tyler Houston");
+    System.out.println("Operator     - Derek Keene");
+    System.out.println("Drive Coach  - Logan Keene");
+    System.out.println("Human Player - Brenden Muessig");
+    System.out.println("Technician   - William Mackeller");
+    System.out.println("Media        - Jaxin Lovorn");
+    System.out.println(" ");
+    System.out.println("----------------------------------");
+    System.out.println(" ");
+    System.out.println("Full Team Roster:");
+    System.out.println(" ");
+    System.out.println(" ");
+    System.out.println("Build Team");
+    System.out.println("Tyler Houston, Abigal Goodwin, Brenden Muessig, Hassei Omori, Jaxin Lovorn, William Mackeller, Phil Staffen, Derek Keene,");
+    System.out.println(" ");
+    System.out.println("Programming Team");
+    System.out.println("Derek Keene, William Mackeller, Logan Keene, Phil Staffen, Ethan Skowronski, Carter Borah");
+    System.out.println(" ");
+    System.out.println("Marketing & Buisness Team");
+    System.out.println("Emily Dalecki, Natalie Atwater, Carter Buck, Olivia Garrod, Meah Hameed, Jaxin Lovorn, Chante (Creed) Rayborn, Teagen TenBrink");
+    System.out.println(" ");
+    System.out.println("----------------------------------");
+    System.out.println(" ");
+    System.out.println("Our Mentors:");
+    System.out.println(" ");
+    System.out.println(" ");
+    System.out.println("Lead Mentor - Mr.Tomlinson");
+    System.out.println(" ");
+    System.out.println("Arthur Keene, Bruce Mackeller, Clayton Meyers, Sherri Keene");
+  }
 
 //Autonomous Intake Timer
   public void IntakeinitTimer() {
@@ -98,10 +149,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
 //Autonomous Path 3
   if(AutonPath == 3){
-    if(intakeTimer.get() >= 3 && intakeTimer.get() <= 3.4){
+    if(intakeTimer.get() >= 2.5 && intakeTimer.get() <= 2.9){
       lowIntakeMotor.setVoltage(lIntakeVolts);
     }
-    if(intakeTimer.get() >= 3.4 && intakeTimer.get() <= 7){
+    if(intakeTimer.get() >= 2.9 && intakeTimer.get() <= 7){
       lowIntakeMotor.setVoltage(0);
     }
     if(intakeTimer.get() >= 7 && intakeTimer.get() <= 8.25){

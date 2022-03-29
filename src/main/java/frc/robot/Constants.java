@@ -61,18 +61,18 @@ public final class Constants {
 
     //Speeds and Voltages
         //Drive Speeds
-        public static final double speedY = 0.83;
+        public static final double speedY = 0.93;
         public static final double speedX = -0.78;
         public static final double RspeedY = -0.83;
-        public static final double rateLimit = 2.0;
+        public static final double RampRateLimit = 1.8;
         //Speed Constants
-        public static final double actuatorSpeed = 0.6;
-        public static final double RactuatorSpeed = -0.6;
+        public static final double actuatorSpeed = 0.7;
+        public static final double RactuatorSpeed = -0.7;
         public static final int zeroSpeed = 0;
         //Voltage Constants
         public static final double shooterVolts = 10.5;
-        public static final int rShooterVolts = 4;
-        public static final int lowshooterVolts = 6;
+        public static final int RshooterVolts = 4;
+        public static final int lshooterVolts = 6;
         public static final int lIntakeVolts = 6;
         public static final int tIntakeVolts = 3;
         public static final double bothIntakeVolts = 5.0;

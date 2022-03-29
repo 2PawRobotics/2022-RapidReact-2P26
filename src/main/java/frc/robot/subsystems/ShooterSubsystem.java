@@ -50,7 +50,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     leftShooterMotor.setInverted(false);
     rightShooterMotor.setInverted(true);
-    shooter.setVoltage(Constants.lowshooterVolts);
+    shooter.setVoltage(Constants.lshooterVolts);
     RobotContainer.XCont.setRumble(RumbleType.kLeftRumble, .5);
     RobotContainer.XCont.setRumble(RumbleType.kRightRumble, .5);
   }
@@ -59,7 +59,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     leftShooterMotor.setInverted(true);
     rightShooterMotor.setInverted(false);
-    shooter.setVoltage(Constants.rShooterVolts);
+    shooter.setVoltage(Constants.RshooterVolts);
   }
 
   
