@@ -156,6 +156,60 @@ public class DriveSubsystem extends SubsystemBase {
     
   }
 
+//Autonomous Path 5
+  if(AutonPath == 5){
+    if(driveTimer.get() < 2){
+      if(REncoder.getDistance() < 3){
+        arcadeDrive.tankDrive(-.6, .6);
+      }
+      else if(REncoder.getDistance() < 10){
+        arcadeDrive.tankDrive(-.8, .8);
+      }
+      else if (REncoder.getDistance() < 12){
+        arcadeDrive.tankDrive(-.6, .6);
+      }
+      if(REncoder.getDistance() >= 12){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() > 3 && driveTimer.get() < 4.5){
+      if(REncoder.getDistance() > 8){
+        arcadeDrive.tankDrive(.65, -.6);
+      }
+      if(REncoder.getDistance() <= 8){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() > 6 && driveTimer.get() < 9){
+      if(REncoder.getDistance() < 10){
+        arcadeDrive.tankDrive(-.67, .65);
+      }
+      else if(REncoder.getDistance() < 20){
+        arcadeDrive.tankDrive(-.87, .85);
+      }
+      else if(REncoder.getDistance() < 25){
+        arcadeDrive.tankDrive(-.53, 6);
+      }
+      else if (REncoder.getDistance() > 25){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() > 10.5 && driveTimer.get() < 13.5){
+      if(REncoder.getDistance() > 20){
+        arcadeDrive.tankDrive(6, -.53);
+      }
+      else if(REncoder.getDistance() > 10){
+        arcadeDrive.tankDrive(.85, -.87);
+      }
+      else if(REncoder.getDistance() > 8){
+        arcadeDrive.tankDrive(.65, -.67);
+      }
+      if(REncoder.getDistance() <= 8){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+  }
+
 }
 
    public void resetGyro(){

@@ -71,6 +71,7 @@ public final class Constants {
         public static final int zeroSpeed = 0;
         //Voltage Constants
         public static final double shooterVolts = 10.5;
+        public static final double AutonShooterVolts = 11.5;
         public static final int RshooterVolts = 4;
         public static final int lshooterVolts = 6;
         public static final int lIntakeVolts = 6;

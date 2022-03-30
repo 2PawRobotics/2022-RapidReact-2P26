@@ -111,7 +111,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
 //Autonomous Intake Paths
-  public void AutonIntake(int AutonPath, int lIntakeVolts, Double AutobothIntakeVolts) {
+  public void AutonIntake(int AutonPath, int lIntakeVolts, int tIntakeVolts, Double AutobothIntakeVolts) {
     lowIntakeMotor.setInverted(true);
     topIntakeMotor.setInverted(false);
 
@@ -170,6 +170,35 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     if(intakeTimer.get() >= 7){
       intakeMotors.setVoltage(0);
+    }
+  }
+
+//Autonomous Path 5
+  if(AutonPath == 5){
+    if(intakeTimer.get() > 2 && intakeTimer.get() < 3){
+      lowIntakeMotor.setVoltage(lIntakeVolts);
+    }
+    else {
+      lowIntakeMotor.setVoltage(0);
+    }
+    if(intakeTimer.get() > 4.5 && intakeTimer.get() < 6){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    else {
+      intakeMotors.setVoltage(0);
+    }
+    if(intakeTimer.get() > 9 && intakeTimer.get() < 10.5){
+      lowIntakeMotor.setVoltage(lIntakeVolts);
+      if(intakeTimer.get() > 9.7 && intakeTimer.get() < 10.3){
+        topIntakeMotor.setVoltage(tIntakeVolts);
+      }
+    }
+    else {
+      lowIntakeMotor.setVoltage(0);
+      topIntakeMotor.setVoltage(0);
+    }
+    if(intakeTimer.get() > 13.5){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
     }
   }
 

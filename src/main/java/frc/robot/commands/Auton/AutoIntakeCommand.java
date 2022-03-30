@@ -26,7 +26,7 @@ public class AutoIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.AutonIntake(Constants.AutonPath, Constants.lIntakeVolts, Constants.AutobothIntakeVolts);
+    intakeSubsystem.AutonIntake(Constants.AutonPath, Constants.lIntakeVolts, Constants.tIntakeVolts, Constants.AutobothIntakeVolts);
   }
 
   // Called once the command ends or is interrupted.
