@@ -53,11 +53,9 @@ public class DriveSubsystem extends SubsystemBase {
     arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY())*speedY);
   }
 
-  public void ReverseDrive(XboxController XCont, double speedX, double RspeedY){
-    while(RobotContainer.XCont.getRightBumperPressed()){
-      arcadeDrive.arcadeDrive(speedX, RspeedY);
-      Constants.reverseDrive = true;
-    }
+  public void FullDrive(XboxController XCont, double speedX, double RspeedY){
+    
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, XCont.getRightY());
   }
 
 //Autonomous Drive Timer & Encoder

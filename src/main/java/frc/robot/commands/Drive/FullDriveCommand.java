@@ -9,10 +9,10 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class ReverseDriveCommand extends CommandBase {
+public class FullDriveCommand extends CommandBase {
   private final DriveSubsystem driveSubsystem;
   /** Creates a new ReverseDriveCommand. */
-  public ReverseDriveCommand(DriveSubsystem subsystem) {
+  public FullDriveCommand(DriveSubsystem subsystem) {
     driveSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSubsystem);
@@ -25,7 +25,7 @@ public class ReverseDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveSubsystem.ReverseDrive(RobotContainer.XCont, Constants.speedX, Constants.RspeedY);
+    driveSubsystem.FullDrive(RobotContainer.XCont, Constants.speedX, Constants.RspeedY);
   }
 
   // Called once the command ends or is interrupted.

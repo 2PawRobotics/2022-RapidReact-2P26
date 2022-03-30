@@ -18,7 +18,7 @@ import frc.robot.commands.Camera.CameraCommand;
 import frc.robot.commands.Climb.SlowSolenoidCommand;
 import frc.robot.commands.Climb.SolenoidCommand;
 import frc.robot.commands.Drive.DriveCommand;
-import frc.robot.commands.Drive.ReverseDriveCommand;
+import frc.robot.commands.Drive.FullDriveCommand;
 import frc.robot.commands.Intake.EasterEgg;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeOffCommand;
@@ -55,6 +55,7 @@ public class RobotContainer {
   
   //Name Commands Here
   private final DriveCommand driveCommand;
+  private final FullDriveCommand fullDriveCommand;
   private final ShooterCommand shooterCommand;
   private final ShooterOffCommand shooterOffCommand;
   private final ShooterLowCommand shooterLowCommand;
@@ -90,6 +91,7 @@ public class RobotContainer {
 
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
+    fullDriveCommand = new FullDriveCommand(driveSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
     shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
     shooterLowCommand = new ShooterLowCommand(shooterSubsystem);
@@ -112,6 +114,7 @@ public class RobotContainer {
 
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
+    fullDriveCommand.addRequirements(driveSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
     shooterOffCommand.addRequirements(shooterSubsystem);
     shooterLowCommand.addRequirements(shooterSubsystem);
@@ -178,8 +181,8 @@ public class RobotContainer {
     Button11.whileHeld(new IntakeCommand(intakeSubsystem));
     Button13.whileHeld(new ArmDownCommand(armSubsystem));
     Button14.whileHeld(new ArmUpCommand(armSubsystem));
-    Bumper1.whileHeld(new EasterEgg(intakeSubsystem));
-    Start.whenPressed(new EasterEgg(intakeSubsystem));
+    Bumper1.whileHeld(new FullDriveCommand(driveSubsystem));
+    Start.whileHeld(new EasterEgg(intakeSubsystem));
     
 
     //Below are some examples of doing so
