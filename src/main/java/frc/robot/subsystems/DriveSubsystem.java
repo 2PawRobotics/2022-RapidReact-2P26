@@ -184,18 +184,18 @@ public class DriveSubsystem extends SubsystemBase {
       if(REncoder.getDistance() < 10){
         arcadeDrive.tankDrive(-.67, .65);
       }
-      else if(REncoder.getDistance() < 20){
+      else if(REncoder.getDistance() < 25){
         arcadeDrive.tankDrive(-.87, .85);
       }
-      else if(REncoder.getDistance() < 25){
+      else if(REncoder.getDistance() < 28){
         arcadeDrive.tankDrive(-.53, 6);
       }
-      else if (REncoder.getDistance() > 25){
+      else if (REncoder.getDistance() > 28){
         arcadeDrive.tankDrive(0, 0);
       }
     }
     if(driveTimer.get() > 10.5 && driveTimer.get() < 13.5){
-      if(REncoder.getDistance() > 20){
+      if(REncoder.getDistance() > 25){
         arcadeDrive.tankDrive(6, -.53);
       }
       else if(REncoder.getDistance() > 10){
