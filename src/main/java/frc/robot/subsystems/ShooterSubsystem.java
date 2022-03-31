@@ -116,12 +116,14 @@ public void AutonShooter(int AutonPath, double shooterVolts){
 
 //Autonomous Path 5
   if(AutonPath == 5){
+    //Shoot 1st & 2nd Cargo
     if(shooterTimer.get() > 4 && shooterTimer.get() < 6.5){
       shooter.setVoltage(shooterVolts);
     }
     else {
       shooter.setVoltage(0);
     }
+    //Shoot 3rd & 4th Cargo
     if(shooterTimer.get() > 13){
       shooter.setVoltage(shooterVolts);
     }

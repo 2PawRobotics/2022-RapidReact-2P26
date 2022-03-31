@@ -175,18 +175,21 @@ public class IntakeSubsystem extends SubsystemBase {
 
 //Autonomous Path 5
   if(AutonPath == 5){
-    if(intakeTimer.get() > 2 && intakeTimer.get() < 3){
+    //Intake First Cargo
+    if(intakeTimer.get() > 2.3 && intakeTimer.get() < 2.7){
       lowIntakeMotor.setVoltage(lIntakeVolts);
     }
     else {
       lowIntakeMotor.setVoltage(0);
     }
+    //Shoot First Two Cargo
     if(intakeTimer.get() > 4.5 && intakeTimer.get() < 6){
       intakeMotors.setVoltage(AutobothIntakeVolts);
     }
     else {
       intakeMotors.setVoltage(0);
     }
+    //Intake 3rd & 4th Cargo and Index Appropriately 
     if(intakeTimer.get() > 9 && intakeTimer.get() < 10.5){
       lowIntakeMotor.setVoltage(lIntakeVolts);
       if(intakeTimer.get() > 9.7 && intakeTimer.get() < 10.3){
@@ -197,6 +200,7 @@ public class IntakeSubsystem extends SubsystemBase {
       lowIntakeMotor.setVoltage(0);
       topIntakeMotor.setVoltage(0);
     }
+    //Shoot 3rd & 4th Cargo
     if(intakeTimer.get() > 13.5){
       intakeMotors.setVoltage(AutobothIntakeVolts);
     }

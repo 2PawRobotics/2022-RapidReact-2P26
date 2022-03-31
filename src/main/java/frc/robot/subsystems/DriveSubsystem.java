@@ -156,6 +156,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 //Autonomous Path 5
   if(AutonPath == 5){
+    //Forward to first Cargo
     if(driveTimer.get() < 2){
       if(REncoder.getDistance() < 3){
         arcadeDrive.tankDrive(-.6, .6);
@@ -170,6 +171,7 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
       }
     }
+    //Backwards w/ Slight Angle to Align With Scoring Hub to Shoot Cargo
     if(driveTimer.get() > 3 && driveTimer.get() < 4.5){
       if(REncoder.getDistance() > 8){
         arcadeDrive.tankDrive(.65, -.6);
@@ -178,6 +180,7 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
       }
     }
+    //Forward S-Curve Towards Human Player Station, grab 3rd & 4th Cargo
     if(driveTimer.get() > 6 && driveTimer.get() < 9){
       if(REncoder.getDistance() < 10){
         arcadeDrive.tankDrive(-.67, .65);
@@ -192,6 +195,7 @@ public class DriveSubsystem extends SubsystemBase {
         arcadeDrive.tankDrive(0, 0);
       }
     }
+    //Backwards S-Curve Towards Human Player Station, Shoot 3rd & 4th Cargo
     if(driveTimer.get() > 10.5 && driveTimer.get() < 13.5){
       if(REncoder.getDistance() > 25){
         arcadeDrive.tankDrive(6, -.53);
