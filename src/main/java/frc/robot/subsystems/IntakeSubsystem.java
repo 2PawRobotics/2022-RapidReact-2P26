@@ -5,9 +5,13 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -20,6 +24,9 @@ public class IntakeSubsystem extends SubsystemBase {
   private final MotorControllerGroup intakeMotors = new MotorControllerGroup(lowIntakeMotor, topIntakeMotor);
   
   private final Timer intakeTimer = new Timer();
+
+  private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
+  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
 
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
@@ -111,7 +118,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
 //Autonomous Intake Paths
-  public void AutonIntake(int AutonPath, int lIntakeVolts, int tIntakeVolts, Double AutobothIntakeVolts) {
+  public void AutonIntake(int lIntakeVolts, int tIntakeVolts, Double AutobothIntakeVolts) {
+    double AutonPath = AutonPathChoice.getDouble(2.0);
     lowIntakeMotor.setInverted(true);
     topIntakeMotor.setInverted(false);
 

@@ -5,12 +5,15 @@
 package frc.robot.subsystems;
 
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -23,6 +26,9 @@ public class ShooterSubsystem extends SubsystemBase {
   public final static MotorControllerGroup shooter = new MotorControllerGroup(rightShooterMotor, leftShooterMotor);
 
   private final Timer shooterTimer = new Timer();
+
+  private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
+  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
 
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
@@ -70,7 +76,8 @@ public void ShooterinitTimer() {
 }
 
 //Autonomous Shooter Paths
-public void AutonShooter(int AutonPath, double shooterVolts){
+public void AutonShooter(double shooterVolts){
+  double AutonPath = AutonPathChoice.getDouble(2.0);
   leftShooterMotor.setInverted(false);
   rightShooterMotor.setInverted(true);
 

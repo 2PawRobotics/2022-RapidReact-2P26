@@ -10,14 +10,16 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 //import com.kauailabs.navx.frc.AHRS;
 //import edu.wpi.first.wpilibj.Encoder;
 //import edu.wpi.first.wpilibj.SerialPort;
@@ -42,6 +44,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final Timer driveTimer = new Timer();
   private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.RampRateLimit);
 
+  private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
+  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
+
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
 
@@ -55,7 +60,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void FullDrive(XboxController XCont, double speedX, double RspeedY){
     
-    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, XCont.getRightY());
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, XCont.getLeftY());
   }
 
 //Autonomous Drive Timer & Encoder
@@ -67,7 +72,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
 //Autonomous Drive Paths
-  public void AutonDrive(int AutonPath){
+  public void AutonDrive(){
+    double AutonPath = AutonPathChoice.getDouble(2.0);
 
     LEncoder.setDistancePerPulse(1./76.);
     REncoder.setDistancePerPulse(1./76.);

@@ -27,7 +27,7 @@ public class AutonShootCommand extends CommandBase {
   @Override
   public void execute() {
 
-    shooterSubsystem.AutonShooter(Constants.AutonPath, Constants.shooterVolts);
+    shooterSubsystem.AutonShooter(Constants.shooterVolts);
 
   }
 

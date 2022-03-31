@@ -78,10 +78,6 @@ public final class Constants {
         public static final int tIntakeVolts = 3;
         public static final double bothIntakeVolts = 5.0;
         public static final double AutobothIntakeVolts = 4.0;
-    
-    
-    //Auton Paths
-        public static int AutonPath = 2;
 
     //Command Booleans
         public static boolean intakeActive = false;
