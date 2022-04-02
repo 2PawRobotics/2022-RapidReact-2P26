@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 
 
+import java.sql.Time;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -46,6 +48,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
   private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
+
+  private int AutonSection = 1;
+  private double TimeCheck = 0;
 
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
@@ -163,58 +168,56 @@ public class DriveSubsystem extends SubsystemBase {
 //Autonomous Path 5
   if(AutonPath == 5){
     //Forward to first Cargo
-    if(driveTimer.get() < 2){
-      if(REncoder.getDistance() < 3){
+    if(AutonSection == 1){
+      while(REncoder.getDistance() < 3){
         arcadeDrive.tankDrive(-.6, .6);
       }
-      else if(REncoder.getDistance() < 10){
+      while(REncoder.getDistance() < 10){
         arcadeDrive.tankDrive(-.8, .8);
       }
-      else if (REncoder.getDistance() < 12){
+      while(REncoder.getDistance() < 12){
         arcadeDrive.tankDrive(-.6, .6);
       }
-      if(REncoder.getDistance() >= 12){
-        arcadeDrive.tankDrive(0, 0);
-      }
+      arcadeDrive.tankDrive(0, 0);
+      AutonSection = 2;
+      TimeCheck = driveTimer.get();
     }
     //Backwards w/ Slight Angle to Align With Scoring Hub to Shoot Cargo
-    if(driveTimer.get() > 3 && driveTimer.get() < 4.5){
-      if(REncoder.getDistance() > 8){
+    if(AutonSection == 2 && driveTimer.get() >= TimeCheck + 1){//3-4.5
+      while(REncoder.getDistance() > 8){
         arcadeDrive.tankDrive(.65, -.6);
       }
-      if(REncoder.getDistance() <= 8){
-        arcadeDrive.tankDrive(0, 0);
-      }
+      arcadeDrive.tankDrive(0, 0);
+      AutonSection = 3;
+      TimeCheck = driveTimer.get();
     }
     //Forward S-Curve Towards Human Player Station, grab 3rd & 4th Cargo
-    if(driveTimer.get() > 6 && driveTimer.get() < 9){
-      if(REncoder.getDistance() < 10){
+    if(AutonSection == 3 && driveTimer.get() > TimeCheck + 1.5){//6-9
+      while(REncoder.getDistance() < 10){
         arcadeDrive.tankDrive(-.67, .65);
       }
-      else if(REncoder.getDistance() < 25){
+      while(REncoder.getDistance() < 25){
         arcadeDrive.tankDrive(-.87, .85);
       }
-      else if(REncoder.getDistance() < 28){
+      while(REncoder.getDistance() < 28){
         arcadeDrive.tankDrive(-.53, 6);
       }
-      else if (REncoder.getDistance() > 28){
-        arcadeDrive.tankDrive(0, 0);
-      }
+      arcadeDrive.tankDrive(0, 0);
+      AutonSection = 4;
+      TimeCheck = driveTimer.get();
     }
     //Backwards S-Curve Towards Human Player Station, Shoot 3rd & 4th Cargo
-    if(driveTimer.get() > 10.5 && driveTimer.get() < 13.5){
-      if(REncoder.getDistance() > 25){
+    if(AutonSection == 4 && driveTimer.get() > TimeCheck + 1.5){//10.5-13.5
+      while(REncoder.getDistance() > 25){
         arcadeDrive.tankDrive(6, -.53);
       }
-      else if(REncoder.getDistance() > 10){
+      while(REncoder.getDistance() > 10){
         arcadeDrive.tankDrive(.85, -.87);
       }
-      else if(REncoder.getDistance() > 8){
+      while(REncoder.getDistance() > 8){
         arcadeDrive.tankDrive(.65, -.67);
       }
-      if(REncoder.getDistance() <= 8){
         arcadeDrive.tankDrive(0, 0);
-      }
     }
   }
 
