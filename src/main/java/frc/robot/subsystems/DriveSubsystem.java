@@ -197,6 +197,44 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
+// Auton Path 5
+  if(AutonPath == 5){
+    if(driveTimer.get() <= 3){
+      if(REncoder.getDistance() < 10.7){ 
+        arcadeDrive.tankDrive(-.6, .6);
+      }
+      if(REncoder.getDistance() >= 10.7){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() >= 4 && driveTimer.get() <= 5.5){
+      if(REncoder.getDistance() > 8){
+        arcadeDrive.tankDrive(.6, -.6);
+      }
+      if(REncoder.getDistance() <= 8){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() >= 7 && driveTimer.get() <= 10){
+      while(REncoder.getDistance() >= 6.5){
+        arcadeDrive.tankDrive(-.6, -.6);
+      }
+      while(REncoder.getDistance() < 18){
+        arcadeDrive.tankDrive(-.6, .6);
+      }
+      if(REncoder.getDistance() >= 18){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+    if(driveTimer.get() >= 11){
+      if(REncoder.getDistance() > 12.8){
+        arcadeDrive.tankDrive(.58, -.68);
+      }
+      if(REncoder.getDistance() <= 12.8){
+        arcadeDrive.tankDrive(0, 0);
+      }
+    }
+  }
 }
 
    public void resetGyro(){

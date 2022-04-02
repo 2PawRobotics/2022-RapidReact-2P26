@@ -125,6 +125,16 @@ public void AutonShooter(double shooterVolts){
       shooter.setVoltage(shooterVolts);
     }
   }
+
+//Autonomous Path 5
+  if(AutonPath == 5){
+    if(shooterTimer.get() > 5.5 && shooterTimer.get() < 7){
+      shooter.setVoltage(shooterVolts);
+    }
+    if(shooterTimer.get() >13){
+      shooter.setVoltage(shooterVolts);
+    }
+  }
 }
 
 }

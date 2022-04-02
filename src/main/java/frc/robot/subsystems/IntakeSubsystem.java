@@ -198,8 +198,31 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
+//Auton Path 5
+  if(AutonPath == 5){
+    if(intakeTimer.get() > 3.3 && intakeTimer.get() <= 3.7){
+      lowIntakeMotor.setVoltage(lIntakeVolts);
+    }
+    if(intakeTimer.get() > 3.7 && intakeTimer.get() <= 5.8){
+      intakeMotors.setVoltage(0);
+    }
+    if(intakeTimer.get() > 5.8 && intakeTimer.get() <= 6.8){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    if(intakeTimer.get() > 6.8 && intakeTimer.get() <= 10.3){
+      intakeMotors.setVoltage(0);
+    }
+    if(intakeTimer.get() > 10.3 && intakeTimer.get() <= 10.7){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+    if(intakeTimer.get() > 10.7 && intakeTimer.get() <= 13){
+      intakeMotors.setVoltage(0);
+    }
+    if(intakeTimer.get() > 13.5){
+      intakeMotors.setVoltage(AutobothIntakeVolts);
+    }
+  }
 }
-
 }
 
 
