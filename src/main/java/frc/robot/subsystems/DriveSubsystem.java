@@ -4,10 +4,6 @@
 
 package frc.robot.subsystems;
 
-
-
-import java.sql.Time;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -47,7 +43,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.RampRateLimit);
 
   private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
-  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
+  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 1).getEntry();
 
   private int AutonSection = 1;
   private double TimeCheck = 0;
@@ -78,34 +74,14 @@ public class DriveSubsystem extends SubsystemBase {
 
 //Autonomous Drive Paths
   public void AutonDrive(){
-    double AutonPath = AutonPathChoice.getDouble(2.0);
+    double AutonPath = AutonPathChoice.getDouble(1);
 
     LEncoder.setDistancePerPulse(1./76.);
     REncoder.setDistancePerPulse(1./76.);
     Constants.LEncoderCorrection = LEncoder.getDistance() + 20;
-
+ 
 //Autonomous Path 1
   if(AutonPath == 1){
-    if(driveTimer.get() <= 4){
-      if(REncoder.getDistance() < 20){
-        arcadeDrive.tankDrive(-.6, .6);
-      }
-      if(REncoder.getDistance() >= 20){
-        arcadeDrive.tankDrive(0, 0);
-      }
-    }
-    if(driveTimer.get() >= 5){
-      if(REncoder.getDistance() > 18){
-        arcadeDrive.tankDrive(.6, -.65);
-      }
-      if(REncoder.getDistance() <= 18){
-        arcadeDrive.tankDrive(0, 0);
-      }
-    }
-  }
-
-//Autonomous Path 2
-  if(AutonPath == 2){
     if(driveTimer.get() <= 3){
       if(REncoder.getDistance() < 10.7){ 
         arcadeDrive.tankDrive(-.6, .6);
@@ -124,8 +100,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
-//Autonomous Path 3
-  if(AutonPath == 3){
+//Autonomous Path 2
+  if(AutonPath == 2){
     if(driveTimer.get() <= 3.5){
       if(REncoder.getDistance() < 14){
         arcadeDrive.tankDrive(-.6, .6);
@@ -144,8 +120,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
-//Autonomous Path 4
-  if(AutonPath == 4){
+//Autonomous Path 3
+  if(AutonPath == 3){
     if(driveTimer.get() <= 4){
       if(REncoder.getDistance() < 8){
         arcadeDrive.tankDrive(-.6, .6);
@@ -165,8 +141,8 @@ public class DriveSubsystem extends SubsystemBase {
     
   }
 
-//Autonomous Path 5
-  if(AutonPath == 5){
+//Autonomous Path 4
+  if(AutonPath == 4){
     //Forward to first Cargo
     if(AutonSection == 1){
       while(REncoder.getDistance() < 3){

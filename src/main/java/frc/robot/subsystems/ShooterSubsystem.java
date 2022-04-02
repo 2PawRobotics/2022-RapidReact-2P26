@@ -83,16 +83,6 @@ public void AutonShooter(double shooterVolts){
 
 //Autonomous Path 1
   if(AutonPath == 1){
-    if(shooterTimer.get() >= 7.5 && shooterTimer.get() <= 10){
-      shooter.setVoltage(shooterVolts);
-    }
-    if(shooterTimer.get() >= 10){
-      shooter.setVoltage(0);
-    }
-  }
-
-//Autonomous Path 2
-  if(AutonPath == 2){
     if(shooterTimer.get() >= 5.5 && shooterTimer.get() <= 8){
       shooter.setVoltage(shooterVolts);
     }
@@ -101,8 +91,8 @@ public void AutonShooter(double shooterVolts){
     }
   }
 
-//Autonomous Path 3
-  if(AutonPath == 3){
+//Autonomous Path 2
+  if(AutonPath == 2){
     if(shooterTimer.get() >= 6.5 && shooterTimer.get() <= 8.5){
       shooter.setVoltage(shooterVolts);
     }
@@ -111,8 +101,8 @@ public void AutonShooter(double shooterVolts){
     }
   }
 
-//Autonomous Path 4
-  if(AutonPath == 4){
+//Autonomous Path 3
+  if(AutonPath == 3){
     if(shooterTimer.get() >= 5.5 && shooterTimer.get() <= 7.5){
       shooter.setVoltage(shooterVolts);
     }
@@ -121,8 +111,8 @@ public void AutonShooter(double shooterVolts){
     }
   }
 
-//Autonomous Path 5
-  if(AutonPath == 5){
+//Autonomous Path 4
+  if(AutonPath == 4){
     //Shoot 1st & 2nd Cargo
     if(shooterTimer.get() > 4 && shooterTimer.get() < 6.5){
       shooter.setVoltage(shooterVolts);

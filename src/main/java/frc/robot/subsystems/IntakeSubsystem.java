@@ -125,22 +125,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
 //Autonomous Path 1
   if(AutonPath == 1){
-    if(intakeTimer.get() > 3.2 && intakeTimer.get() <= 3.75){
-      lowIntakeMotor.setVoltage(lIntakeVolts);
-    }
-    if(intakeTimer.get() >3.75 && intakeTimer.get() <= 8.5){
-      intakeMotors.setVoltage(0);
-    }
-    if(intakeTimer.get() > 8.5 && intakeTimer.get() <= 10){
-      intakeMotors.setVoltage(AutobothIntakeVolts);
-    }
-    if(intakeTimer.get() >10){
-      intakeMotors.setVoltage(0);
-    }
-  }
-
-//Autonomous Path 2
-  if(AutonPath == 2){
     if(intakeTimer.get() > 2.2 && intakeTimer.get() <= 2.6){
       lowIntakeMotor.setVoltage(lIntakeVolts);
     }
@@ -155,8 +139,8 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
-//Autonomous Path 3
-  if(AutonPath == 3){
+//Autonomous Path 2
+  if(AutonPath == 2){
     if(intakeTimer.get() >= 2.5 && intakeTimer.get() <= 2.9){
       lowIntakeMotor.setVoltage(lIntakeVolts);
     }
@@ -171,8 +155,8 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
-//Autonomous Path 4
-  if(AutonPath == 4){
+//Autonomous Path 3
+  if(AutonPath == 3){
     if(intakeTimer.get() >= 6 && intakeTimer.get() <= 7){
       intakeMotors.setVoltage(AutobothIntakeVolts);
     }
@@ -181,8 +165,8 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
-//Autonomous Path 5
-  if(AutonPath == 5){
+//Autonomous Path 4
+  if(AutonPath == 4){
     //Intake First Cargo
     if(intakeTimer.get() > 2.3 && intakeTimer.get() < 2.7){
       lowIntakeMotor.setVoltage(lIntakeVolts);
