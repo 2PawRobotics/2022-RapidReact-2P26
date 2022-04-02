@@ -213,7 +213,7 @@ public class IntakeSubsystem extends SubsystemBase {
       intakeMotors.setVoltage(0);
     }
     if(intakeTimer.get() > 10.3 && intakeTimer.get() <= 10.7){
-      intakeMotors.setVoltage(AutobothIntakeVolts);
+      lowIntakeMotor.setVoltage(lIntakeVolts);
     }
     if(intakeTimer.get() > 10.7 && intakeTimer.get() <= 13){
       intakeMotors.setVoltage(0);
