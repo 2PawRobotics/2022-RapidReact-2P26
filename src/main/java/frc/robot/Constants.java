@@ -79,6 +79,9 @@ public final class Constants {
         public static final double bothIntakeVolts = 5.0;
         public static final double AutobothIntakeVolts = 4.0;
 
+    //AutonPath
+        public static final int AutonPath = 2;
+
     //Command Booleans
         public static boolean intakeActive = false;
         public static boolean reverseIntakeActive = false;

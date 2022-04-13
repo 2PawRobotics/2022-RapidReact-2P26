@@ -27,9 +27,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private final Timer shooterTimer = new Timer();
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
-  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
-
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
 
@@ -76,8 +73,7 @@ public void ShooterinitTimer() {
 }
 
 //Autonomous Shooter Paths
-public void AutonShooter(double shooterVolts){
-  double AutonPath = AutonPathChoice.getDouble(2.0);
+public void AutonShooter(double shooterVolts, int AutonPath){
   leftShooterMotor.setInverted(false);
   rightShooterMotor.setInverted(true);
 
@@ -114,16 +110,16 @@ public void AutonShooter(double shooterVolts){
 //Autonomous Path 4
   if(AutonPath == 4){
     //Shoot 1st & 2nd Cargo
-    if(shooterTimer.get() > 4 && shooterTimer.get() < 6.5){
+    if(shooterTimer.get() > 4 && shooterTimer.get() <= 6.3){
       shooter.setVoltage(shooterVolts);
     }
-    else {
+    if(shooterTimer.get() > 6.3 && shooterTimer.get() < 10){
       shooter.setVoltage(0);
     }
     //Shoot 3rd & 4th Cargo
-    if(shooterTimer.get() > 13){
-      shooter.setVoltage(shooterVolts);
-    }
+    //if(shooterTimer.get() > 13.5){
+    //  shooter.setVoltage(shooterVolts);
+    //}
   }
 
 //Autonomous Path 5

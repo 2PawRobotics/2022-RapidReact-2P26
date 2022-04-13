@@ -42,11 +42,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final Timer driveTimer = new Timer();
   private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(Constants.RampRateLimit);
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
-  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 1).getEntry();
-
   private int AutonSection = 1;
   private double TimeCheck = 0;
+
 
 
   //private AHRS navXGyro = new AHRS(SerialPort.Port.kUSB);
@@ -57,6 +55,8 @@ public class DriveSubsystem extends SubsystemBase {
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
     arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY())*speedY);
+    System.out.println(leftCims.get() + " Left");
+    System.out.println(rightCims.get() + " Right");
   }
 
   public void FullDrive(XboxController XCont, double speedX, double RspeedY){
@@ -66,16 +66,18 @@ public class DriveSubsystem extends SubsystemBase {
 
 //Autonomous Drive Timer & Encoder
   public void DriveinitTimer() {
+    //leftCims.setInverted(true);
+    //rightCims.setInverted(false);
     driveTimer.reset();
     driveTimer.start();
     LEncoder.reset();
     REncoder.reset();
+    AutonSection = 1;
+    TimeCheck = 0;
   }
 
 //Autonomous Drive Paths
-  public void AutonDrive(){
-    double AutonPath = AutonPathChoice.getDouble(1);
-
+  public void AutonDrive(int AutonPath){
     LEncoder.setDistancePerPulse(1./76.);
     REncoder.setDistancePerPulse(1./76.);
     Constants.LEncoderCorrection = LEncoder.getDistance() + 20;
@@ -131,7 +133,7 @@ public class DriveSubsystem extends SubsystemBase {
       }
     }
     if(driveTimer.get() >= 8){
-      if(LEncoder.getDistance() <= 18){
+      if(LEncoder.getDistance() <= 14){
         arcadeDrive.tankDrive(-.6, 0.7);
       }
       if(LEncoder.getDistance() >= 18){
@@ -143,79 +145,131 @@ public class DriveSubsystem extends SubsystemBase {
 
 //Autonomous Path 4
   if(AutonPath == 4){
+    //37, 50.5, 52
     //Forward to first Cargo
-    if(AutonSection == 1){
-      while(REncoder.getDistance() < 3){
+    if(driveTimer.get() < 2.5){
+      if(REncoder.getDistance() < 11){
+        //for(int i=1; i<2; i++){
+        //  leftCims.setVoltage(5);
+        //  rightCims.setVoltage(5);
+       // }
         arcadeDrive.tankDrive(-.6, .6);
       }
-      while(REncoder.getDistance() < 10){
-        arcadeDrive.tankDrive(-.8, .8);
+      if(REncoder.getDistance() >= 11){
+        //leftCims.setVoltage(0);
+        //rightCims.setVoltage(0);
+        //leftCims.setInverted(false);
+        //rightCims.setInverted(true);
+        arcadeDrive.tankDrive(0, 0);
+        
       }
-      while(REncoder.getDistance() < 12){
-        arcadeDrive.tankDrive(-.6, .6);
-      }
-      arcadeDrive.tankDrive(0, 0);
-      AutonSection = 2;
-      TimeCheck = driveTimer.get();
+      //AutonSection = 2;
+      //TimeCheck = driveTimer.get();
     }
+    
     //Backwards w/ Slight Angle to Align With Scoring Hub to Shoot Cargo
-    if(AutonSection == 2 && driveTimer.get() >= TimeCheck + 1){//3-4.5
-      while(REncoder.getDistance() > 8){
-        arcadeDrive.tankDrive(.65, -.6);
+    if(driveTimer.get() > 3 && driveTimer.get() < 4.5){//3-4.5
+      if(REncoder.getDistance() > 8){
+        //for(int i=1; i<2; i++){
+         // leftCims.setVoltage(6.5);
+         // rightCims.setVoltage(5.);
+        //}
+        arcadeDrive.tankDrive(.6, -.5);
       }
-      arcadeDrive.tankDrive(0, 0);
-      AutonSection = 3;
-      TimeCheck = driveTimer.get();
+      if(REncoder.getDistance() <= 8){
+        //leftCims.setVoltage(0);
+        //rightCims.setVoltage(0);
+        //leftCims.setInverted(true);
+        //rightCims.setInverted(false);
+        arcadeDrive.tankDrive(0, 0);
+        
+      }
+      //AutonSection = 3;
+      //TimeCheck = driveTimer.get();
     }
     //Forward S-Curve Towards Human Player Station, grab 3rd & 4th Cargo
-    if(AutonSection == 3 && driveTimer.get() > TimeCheck + 1.5){//6-9
-      while(REncoder.getDistance() < 10){
-        arcadeDrive.tankDrive(-.67, .65);
+    if(driveTimer.get() > 6 && driveTimer.get() < 9){//6-9
+      if(REncoder.getDistance() < 31){
+        //for(int i=1; i<2; i++){
+          //leftCims.setVoltage(11.5);
+          //rightCims.setVoltage(8.);
+        //}
+        arcadeDrive.tankDrive(-.9, .7);
       }
-      while(REncoder.getDistance() < 25){
-        arcadeDrive.tankDrive(-.87, .85);
+      if(REncoder.getDistance() < 57. && REncoder.getDistance() > 31){
+        //for(int i=1; i<2; i++){
+        //  leftCims.setVoltage(4.5);
+        //  rightCims.setVoltage(8.);
+        //}
+        arcadeDrive.tankDrive(-.555, .855);
       }
-      while(REncoder.getDistance() < 28){
-        arcadeDrive.tankDrive(-.53, 6);
-      }
-      arcadeDrive.tankDrive(0, 0);
-      AutonSection = 4;
-      TimeCheck = driveTimer.get();
-    }
-    //Backwards S-Curve Towards Human Player Station, Shoot 3rd & 4th Cargo
-    if(AutonSection == 4 && driveTimer.get() > TimeCheck + 1.5){//10.5-13.5
-      while(REncoder.getDistance() > 25){
-        arcadeDrive.tankDrive(6, -.53);
-      }
-      while(REncoder.getDistance() > 10){
-        arcadeDrive.tankDrive(.85, -.87);
-      }
-      while(REncoder.getDistance() > 8){
-        arcadeDrive.tankDrive(.65, -.67);
-      }
+      if(REncoder.getDistance() >= 57.){
+        //leftCims.setVoltage(0);
+        //rightCims.setVoltage(0);
+        //leftCims.setInverted(false);
+        //rightCims.setInverted(true);
         arcadeDrive.tankDrive(0, 0);
+        
+      }
+      //AutonSection = 4;
+      //TimeCheck = driveTimer.get();
+    }
+    //Backwards S-Curve Towards Scoring Hub, Shoot 3rd & 4th Cargo
+    if(driveTimer.get() > 11 && driveTimer.get() < 14){//10.5-13.5
+      if(REncoder.getDistance() > 45){
+        //for(int i=1; i<2; i++){
+        //  leftCims.setVoltage(7.15);
+        //  rightCims.setVoltage(10.753);
+        //}
+        arcadeDrive.tankDrive(.57, -.85);
+      }
+      if(REncoder.getDistance() > 20 && REncoder.getDistance() < 45){
+        //for(int i=1; i<2; i++){
+        //  leftCims.setVoltage(11.385);
+        //  rightCims.setVoltage(8.412);
+        //}
+        arcadeDrive.tankDrive(.9, -.665);
+      }
+      if(REncoder.getDistance() > 13.6 && REncoder.getDistance() < 20){
+        //for(int i=1; i<2; i++){
+        //  leftCims.setVoltage(9.11);
+        //  rightCims.setVoltage(7.211);
+        //}
+        arcadeDrive.tankDrive(.72, -.57);
+      }
+      if(REncoder.getDistance() <= 13.6){
+        //leftCims.setInverted(false);
+        //rightCims.setInverted(false);
+        //leftCims.setVoltage(0);
+        //rightCims.setVoltage(0);
+        arcadeDrive.tankDrive(0, 0);
+      }
     }
   }
 
 // Auton Path 5
   if(AutonPath == 5){
-    if(driveTimer.get() <= 3){
-      if(REncoder.getDistance() < 10.7){ 
+    if(AutonSection == 1){//0-3
+      while(REncoder.getDistance() < 10.7){ 
         arcadeDrive.tankDrive(-.6, .6);
       }
       if(REncoder.getDistance() >= 10.7){
         arcadeDrive.tankDrive(0, 0);
       }
+      AutonSection = 2;
+      TimeCheck = driveTimer.get();
     }
-    if(driveTimer.get() >= 4 && driveTimer.get() <= 5.5){
-      if(REncoder.getDistance() > 8){
+    if(AutonSection == 2 && driveTimer.get() >= TimeCheck+1){//4-5.5
+      while(REncoder.getDistance() > 8){
         arcadeDrive.tankDrive(.6, -.6);
       }
       if(REncoder.getDistance() <= 8){
         arcadeDrive.tankDrive(0, 0);
       }
+      AutonSection = 3;
+      TimeCheck = driveTimer.get();
     }
-    if(driveTimer.get() >= 7 && driveTimer.get() <= 10){
+    if(AutonSection == 3 && driveTimer.get() >= TimeCheck+1.5){//7-10
       while(REncoder.getDistance() >= 6.5){
         arcadeDrive.tankDrive(-.6, -.6);
       }
@@ -225,9 +279,11 @@ public class DriveSubsystem extends SubsystemBase {
       if(REncoder.getDistance() >= 18){
         arcadeDrive.tankDrive(0, 0);
       }
+      AutonSection = 4;
+      TimeCheck = driveTimer.get();
     }
-    if(driveTimer.get() >= 11){
-      if(REncoder.getDistance() > 12.8){
+    if(AutonSection == 4 && driveTimer.get() >= TimeCheck+1){//11-~
+      while(REncoder.getDistance() > 12.8){
         arcadeDrive.tankDrive(.58, -.68);
       }
       if(REncoder.getDistance() <= 12.8){
@@ -235,6 +291,45 @@ public class DriveSubsystem extends SubsystemBase {
       }
     }
   }
+
+//Auton Path 6
+if(AutonPath == 6){
+  if(driveTimer.get() <= 3){
+    if(LEncoder.getDistance() < 10.7){ 
+      arcadeDrive.tankDrive(-.6, .6);
+    }
+    if(LEncoder.getDistance() >= 10.7){
+      arcadeDrive.tankDrive(0, 0);
+    }
+  }
+  if(driveTimer.get() >= 4 && driveTimer.get() <= 5.5){
+    if(LEncoder.getDistance() > 8){
+      arcadeDrive.tankDrive(.6, -.6);
+    }
+    if(LEncoder.getDistance() <= 8){
+      arcadeDrive.tankDrive(0, 0);
+    }
+  }
+  if(driveTimer.get() >= 7 && driveTimer.get() <= 10){
+    while(LEncoder.getDistance() >= 6.5){
+      arcadeDrive.tankDrive(-.6, -.6);
+    }
+    while(LEncoder.getDistance() < 18){
+      arcadeDrive.tankDrive(-.6, .6);
+    }
+    if(LEncoder.getDistance() >= 18){
+      arcadeDrive.tankDrive(0, 0);
+    }
+  }
+  if(driveTimer.get() >= 11){
+    if(LEncoder.getDistance() > 12.8){
+      arcadeDrive.tankDrive(.58, -.68);
+    }
+    if(LEncoder.getDistance() <= 12.8){
+      arcadeDrive.tankDrive(0, 0);
+    }
+  }
+}
 }
 
    public void resetGyro(){

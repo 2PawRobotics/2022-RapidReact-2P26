@@ -25,9 +25,6 @@ public class IntakeSubsystem extends SubsystemBase {
   
   private final Timer intakeTimer = new Timer();
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("AutonPath");
-  private NetworkTableEntry AutonPathChoice = tab.add("AutonPath", 2).getEntry();
-
   //--------------------------------------------------------------------------------------------//
   // Make Methods Here
 
@@ -118,8 +115,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
 //Autonomous Intake Paths
-  public void AutonIntake(int lIntakeVolts, int tIntakeVolts, Double AutobothIntakeVolts) {
-    double AutonPath = AutonPathChoice.getDouble(2.0);
+  public void AutonIntake(int lIntakeVolts, int tIntakeVolts, Double AutobothIntakeVolts, int AutonPath) {
     lowIntakeMotor.setInverted(true);
     topIntakeMotor.setInverted(false);
 
@@ -171,31 +167,40 @@ public class IntakeSubsystem extends SubsystemBase {
     if(intakeTimer.get() > 2.3 && intakeTimer.get() < 2.7){
       lowIntakeMotor.setVoltage(lIntakeVolts);
     }
-    else {
+    if(intakeTimer.get() >= 2.7 && intakeTimer.get() < 4.5){
       lowIntakeMotor.setVoltage(0);
     }
     //Shoot First Two Cargo
     if(intakeTimer.get() > 4.5 && intakeTimer.get() < 6){
       intakeMotors.setVoltage(AutobothIntakeVolts);
     }
-    else {
+    if(intakeTimer.get() >= 6 && intakeTimer.get() < 9){
       intakeMotors.setVoltage(0);
     }
     //Intake 3rd & 4th Cargo and Index Appropriately 
-    if(intakeTimer.get() > 9 && intakeTimer.get() < 10.5){
+    if(intakeTimer.get() > 9 && intakeTimer.get() < 11){
       lowIntakeMotor.setVoltage(lIntakeVolts);
-      if(intakeTimer.get() > 9.7 && intakeTimer.get() < 10.3){
+      if(intakeTimer.get() > 9.7 && intakeTimer.get() < 10.2){
         topIntakeMotor.setVoltage(tIntakeVolts);
       }
     }
-    else {
-      lowIntakeMotor.setVoltage(0);
+    if(intakeTimer.get() >= 10.2 && intakeTimer.get() < 12){
       topIntakeMotor.setVoltage(0);
     }
-    //Shoot 3rd & 4th Cargo
-    if(intakeTimer.get() > 13.5){
-      intakeMotors.setVoltage(AutobothIntakeVolts);
+    if(intakeTimer.get() > 11 && intakeTimer.get() < 12){
+      lowIntakeMotor.setVoltage(0);
     }
+    if(intakeTimer.get() > 12 && intakeTimer.get() < 12.4){
+      intakeMotors.set(-.15);
+    }
+    if(intakeTimer.get() > 12.4 && intakeTimer.get() < 13){
+      intakeMotors.setVoltage(0);
+    }
+    
+    //Shoot 3rd & 4th Cargo
+    //if(intakeTimer.get() > 14){
+    //  intakeMotors.setVoltage(AutobothIntakeVolts);
+    //}
   }
 
 //Auton Path 5

@@ -27,7 +27,7 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    driveSubsystem.AutonDrive();
+    driveSubsystem.AutonDrive(Constants.AutonPath);
 
   }
 
