@@ -13,35 +13,46 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    //Motors
-        //Drive Motors
+// |----------Motors----------|
+
+    //Drive Motors
         public static final int leftCimPort1 = 1;
         public static final int leftCimPort2 = 3;
         public static final int rightCimPort1 = 2;
         public static final int rightCimPort2 = 4;
-        //Other Motors
+
+    //Other Motors
         public static final int actuatorport = 5;
         public static final int intakelowport = 6;
         public static final int intakehighport = 7;
         public static final int leftshooterport = 8;
         public static final int rightshooterport = 9;
 
-    //Encoder Stuff
-        //Encoder Ports THIS IS NEW STUFF
+
+// |----------Encoder Stuff----------|
+
+    //Encoder Ports THIS IS NEW STUFF
         public static final int[] kLeftEncoderPorts = new int[] {0, 1};
         public static final int[] krightEncoderPorts = new int[] {2, 3};
         public static final boolean kLeftEncoderReversed = true;
         public static final boolean kRightEncoderReversed = true;
-        //Other Encoder Stuff
+
+    //Other Encoder Stuff
         public static final int kEncoderCPR = 720;
         public static final double kWheelDiameterMeters = 0.15;
         public static final double kEncoderDistancePerPulse = (kWheelDiameterMeters * Math.PI) / (kEncoderCPR);
 
-    //Controllers and Various Ports
-        //Controllers 
+    //Encoder Motor Correction
+        public static double LEncoderCorrection = 0;
+
+
+// |----------Controllers and Button Ports----------|
+
+    //Controllers 
         public static final int XContPort = 1;
         public static final int ButtonPanelPort = 0;
-        //Button Panel Ports
+
+    //Button Panel Ports
         public static final int ButtonPort1 = 1;
         public static final int ButtonPort2 = 2;
         public static final int ButtonPort3 = 3;
@@ -56,42 +67,52 @@ public final class Constants {
         public static final int ButtonPort14 = 14;
         public static final int RightBumper = 6;
         public static final int LeftBumper = 5;
-        //DIO Ports
+
+    // RoboRio-DIO Ports
         public static final int topLimitSwitchPort = 4;
         public static final int lowLimitSwitchPort = 5;
 
-    //Speeds and Voltages
-        //Drive Speeds
-        public static final double speedY = .965;
-        public static final double speedX = -0.78;
-        public static final double FullspeedX = -0.85;
-        public static final double RspeedY = -0.83;
-        public static final double SlowspeedY = 0.50;
-        public static final double RampRateLimit = 2.2;
-        //Speed Constants
-        public static final double actuatorSpeed = 0.7;
-        public static final double RactuatorSpeed = -0.7;
-        public static final int zeroSpeed = 0;
-        //Voltage Constants
-        public static final double shooterVolts = 10.5;
-        public static final double AutonShooterVolts = 11.5;
-        public static final int RshooterVolts = 4;
-        public static final int lshooterVolts = 6;
-        public static final int lIntakeVolts = 6;
-        public static final int tIntakeVolts = 3;
-        public static final double bothIntakeVolts = 5.0;
-        public static final double AutobothIntakeVolts = 4.0;
 
-    //AutonPath
+// |----------Speeds and Voltages----------|
+
+    // ~Speeds~
+
+        //Drive Speeds
+            public static final double speedY = .965;
+            public static final double speedX = -0.78;
+            public static final double FullspeedX = -0.85;
+            public static final double RspeedY = -0.83;
+            public static final double SlowspeedY = 0.50;
+            public static final double RampRateLimit = 2.2;
+        //Other Speed
+            public static final double actuatorSpeed = 0.7;
+            public static final double RactuatorSpeed = -0.7;
+            public static final int zeroSpeed = 0;
+
+    // ~Voltages~
+
+        //Intake
+            public static final int lshooterVolts = 6;
+            public static final int lIntakeVolts = 6;
+            public static final int tIntakeVolts = 3;
+            public static final double bothIntakeVolts = 5.0;
+            public static final double AutobothIntakeVolts = 4.0;
+
+        //Shooter
+            public static final double shooterVolts = 10.5;
+            public static final double AutonShooterVolts = 11.5;
+            public static final int RshooterVolts = 4;
+        
+
+// |----------AutonPath----------|
+
         public static final int AutonPath = 1;
 
-    //Command Booleans
+
+// |----------Command Booleans----------|
+
         public static boolean intakeActive = false;
         public static boolean reverseIntakeActive = false;
         public static boolean reverseDrive = false;
-
-    //Encoder Motor Correction
-        public static double LEncoderCorrection = 0;
-        //public static double LEncoderCorrection = .5;
 
 }
