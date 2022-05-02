@@ -59,9 +59,18 @@ public class DriveSubsystem extends SubsystemBase {
     System.out.println(rightCims.get() + " Right");
   }
 
-  public void FullDrive(XboxController XCont, double speedX, double RspeedY){
+  public void FullDrive(XboxController XCont, double speedX, double RspeedY, double FullspeedX){
     
-    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, XCont.getLeftY());
+    arcadeDrive.arcadeDrive(XCont.getRightX()*FullspeedX, XCont.getLeftY());
+    System.out.println(leftCims.get() + " Left");
+    System.out.println(rightCims.get() + " Right");
+  }
+
+  public void HalfDrive(XboxController XCont, double speedX, double RspeedY, double FullspeedX, double SlowspeedY){
+    
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, XCont.getLeftY()*SlowspeedY);
+    System.out.println(leftCims.get() + " Left");
+    System.out.println(rightCims.get() + " Right");
   }
 
 //Autonomous Drive Timer & Encoder
@@ -114,7 +123,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
     if(driveTimer.get() >= 4){
       if(LEncoder.getDistance() > 9){
-        arcadeDrive.tankDrive(.64, -.6);
+        arcadeDrive.tankDrive(.66, -.555);
       }
       if(LEncoder.getDistance() <= 9){
         arcadeDrive.tankDrive(0, 0);
@@ -125,18 +134,18 @@ public class DriveSubsystem extends SubsystemBase {
 //Autonomous Path 3
   if(AutonPath == 3){
     if(driveTimer.get() <= 4){
-      if(REncoder.getDistance() < 8){
+      if(REncoder.getDistance() < 9){
         arcadeDrive.tankDrive(-.6, .6);
       }
-      if(REncoder.getDistance() > 8){
+      if(REncoder.getDistance() > 9){
         arcadeDrive.tankDrive(0, 0);
       }
     }
     if(driveTimer.get() >= 8){
       if(LEncoder.getDistance() <= 14){
-        arcadeDrive.tankDrive(-.6, 0.7);
+        arcadeDrive.tankDrive(-0.8, 0.8);
       }
-      if(LEncoder.getDistance() >= 18){
+      if(LEncoder.getDistance() >= 14){
         arcadeDrive.tankDrive(0, 0);
       }
     }

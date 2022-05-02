@@ -55,16 +55,19 @@ public final class Constants {
         public static final int ButtonPort13 = 13;
         public static final int ButtonPort14 = 14;
         public static final int RightBumper = 6;
+        public static final int LeftBumper = 5;
         //DIO Ports
         public static final int topLimitSwitchPort = 4;
         public static final int lowLimitSwitchPort = 5;
 
     //Speeds and Voltages
         //Drive Speeds
-        public static final double speedY = 0.93;
+        public static final double speedY = .965;
         public static final double speedX = -0.78;
+        public static final double FullspeedX = -0.85;
         public static final double RspeedY = -0.83;
-        public static final double RampRateLimit = 1.8;
+        public static final double SlowspeedY = 0.50;
+        public static final double RampRateLimit = 2.2;
         //Speed Constants
         public static final double actuatorSpeed = 0.7;
         public static final double RactuatorSpeed = -0.7;
@@ -80,7 +83,7 @@ public final class Constants {
         public static final double AutobothIntakeVolts = 4.0;
 
     //AutonPath
-        public static final int AutonPath = 2;
+        public static final int AutonPath = 1;
 
     //Command Booleans
         public static boolean intakeActive = false;

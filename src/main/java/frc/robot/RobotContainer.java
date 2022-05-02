@@ -19,6 +19,7 @@ import frc.robot.commands.Climb.SlowSolenoidCommand;
 import frc.robot.commands.Climb.SolenoidCommand;
 import frc.robot.commands.Drive.DriveCommand;
 import frc.robot.commands.Drive.FullDriveCommand;
+import frc.robot.commands.Drive.HalfDriveCommand;
 import frc.robot.commands.Intake.EasterEgg;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeOffCommand;
@@ -56,6 +57,7 @@ public class RobotContainer {
   //Name Commands Here
   private final DriveCommand driveCommand;
   private final FullDriveCommand fullDriveCommand;
+  private final HalfDriveCommand halfDriveCommand;
   private final ShooterCommand shooterCommand;
   private final ShooterOffCommand shooterOffCommand;
   private final ShooterLowCommand shooterLowCommand;
@@ -92,6 +94,7 @@ public class RobotContainer {
     //Instantilize Commands Here
     driveCommand = new DriveCommand(driveSubsystem);
     fullDriveCommand = new FullDriveCommand(driveSubsystem);
+    halfDriveCommand = new HalfDriveCommand(driveSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
     shooterOffCommand = new ShooterOffCommand(shooterSubsystem);
     shooterLowCommand = new ShooterLowCommand(shooterSubsystem);
@@ -115,6 +118,7 @@ public class RobotContainer {
     //Add Requirements Here
     driveCommand.addRequirements(driveSubsystem);
     fullDriveCommand.addRequirements(driveSubsystem);
+    halfDriveCommand.addRequirements(driveSubsystem);
     shooterCommand.addRequirements(shooterSubsystem);
     shooterOffCommand.addRequirements(shooterSubsystem);
     shooterLowCommand.addRequirements(shooterSubsystem);
@@ -165,6 +169,7 @@ public class RobotContainer {
     JoystickButton Button13 = new JoystickButton(ButtonPanel, Constants.ButtonPort13);
     JoystickButton Button14 = new JoystickButton(ButtonPanel, Constants.ButtonPort14);
     JoystickButton Bumper1 = new JoystickButton(XCont, Constants.RightBumper);
+    JoystickButton Bumper2 = new JoystickButton(XCont, Constants.LeftBumper);
     JoystickButton Start = new JoystickButton(XCont, 8);
 
     //Bind buttons to Commands and Subsystems 
@@ -182,6 +187,7 @@ public class RobotContainer {
     Button13.whileHeld(new ArmDownCommand(armSubsystem));
     Button14.whileHeld(new ArmUpCommand(armSubsystem));
     Bumper1.whileHeld(new FullDriveCommand(driveSubsystem));
+    Bumper2.whileHeld(new HalfDriveCommand(driveSubsystem));
     Start.whileHeld(new EasterEgg(intakeSubsystem));
     
 
