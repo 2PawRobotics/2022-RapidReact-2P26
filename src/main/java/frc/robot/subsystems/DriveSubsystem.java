@@ -50,7 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void ArcadeDrive(XboxController XCont, double speedX, double speedY, double RspeedY/*, double XContY*/){
 
-    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()));
+    arcadeDrive.arcadeDrive(XCont.getRightX()*speedX, slewRateLimiter.calculate(XCont.getLeftY()*speedY));
     System.out.println(LEncoder.getRate() + "Left Encoder");
     System.out.println(REncoder.getRate() + "Right Encoder");
     //System.out.println(XContY);

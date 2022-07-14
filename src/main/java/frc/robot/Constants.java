@@ -61,10 +61,10 @@ public final class Constants {
 
     //Speeds and Voltages
         //Drive Speeds
-        public static final double speedY = 0.40; //slowed for demonstration at Van Buren Fair
-        public static final double speedX = -0.40;
-        public static final double RspeedY = -0.40;
-        public static final double rateLimit = 3.5;
+        public static final double speedY = 0.55; //slowed for demonstration at Van Buren Fair
+        public static final double speedX = -0.60;
+        public static final double RspeedY = -0.4;
+        public static final double rateLimit = 2.7;
        // public static final double speedX = RobotContainer.XCont.getRightX();
         //public static final double speedY = Math.pow(RobotContainer.XCont.getRightX(), 2)*0.83;
         //public static final double speedX = Math.pow(RobotContainer.XCont.getLeftY(), 2)*-0.83;
