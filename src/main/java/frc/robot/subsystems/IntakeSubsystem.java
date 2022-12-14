@@ -102,7 +102,6 @@ public class IntakeSubsystem extends SubsystemBase {
     System.out.println(" ");
     System.out.println("Our Mentors:");
     System.out.println(" ");
-    System.out.println(" ");
     System.out.println("Lead Mentor - Mr.Tomlinson");
     System.out.println(" ");
     System.out.println("Arthur Keene, Bruce Mackeller, Clayton Meyers, Sherri Keene");

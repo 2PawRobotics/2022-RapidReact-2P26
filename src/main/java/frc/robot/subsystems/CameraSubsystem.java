@@ -15,7 +15,4 @@ public class CameraSubsystem extends SubsystemBase {
   public static void Camera(){
     CameraServer.startAutomaticCapture();
   }
-
-   
-  
 }

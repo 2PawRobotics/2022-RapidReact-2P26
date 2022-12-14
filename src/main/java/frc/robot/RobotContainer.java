@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Arm.ArmDownCommand;
 import frc.robot.commands.Arm.ArmUpCommand;
 import frc.robot.commands.Arm.ArmZeroCommand;
@@ -151,6 +152,8 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+
+    SmartDashboard.putData(autoCommandGroup);
   }
 
   private void configureButtonBindings() {
