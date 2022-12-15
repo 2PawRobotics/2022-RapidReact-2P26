@@ -78,7 +78,7 @@ public final class Constants {
     // ~Speeds~
 
         //Drive Speeds
-            public static final double speedY = .965;
+            public static final double speedY = .75;
             public static final double speedX = -0.78;
             public static final double FullspeedX = -0.85;
             public static final double RspeedY = -0.83;
